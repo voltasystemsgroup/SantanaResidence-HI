@@ -1,0 +1,530 @@
+/***********************************************************************************
+  SIMPL+ Module Information
+  (Fill in comments below)
+***********************************************************************************/
+/*
+Dealer Name:		Crestron Electronics
+System Name:
+System Number:
+Programmer:			PAC
+Comments:
+*/
+/***********************************************************************************
+  Compiler Directives
+  (Uncomment and declare compiler directives as needed)
+***********************************************************************************/
+#SYMBOL_NAME "GE Interlogix Networx Set User v4.1"
+// #HINT ""
+#DEFINE_CONSTANT	csREPLACECHAR		"*"
+#DEFINE_CONSTANT	csENDCHAR				"\xFF\x01"
+
+#DEFINE_CONSTANT	ciPASSWORDLEN		6
+#DEFINE_CONSTANT	ciUSERNUMLEN		3
+
+#DEFINE_CONSTANT	ciUSEROFFSET		10
+#DEFINE_CONSTANT	ciUSERNUMOFFSET	20
+
+#CATEGORY "21" // Security
+#DEFAULT_VOLATILE
+
+#HELP_BEGIN
+	For use inside the GE Interlogix Networx Set User Information v2.0 module only.
+#HELP_END
+/***********************************************************************************
+  DIGITAL, ANALOG and SERIAL INPUTS and OUTPUTS
+  (Uncomment and declare inputs and outputs as needed)
+***********************************************************************************/
+DIGITAL_INPUT	master_clear, master_backspace, user_clear, user_backspace,
+							num_clear, num_backspace, key[30];
+ANALOG_INPUT	pin_digits, authority_byte_6, authority_byte_7;
+BUFFER_INPUT	command$[10], from_processor$[200];
+
+DIGITAL_OUTPUT	timed_out;
+ANALOG_OUTPUT	authority_byte_6_in, authority_byte_7_in;
+STRING_OUTPUT	master_password_replaced$, user_number$, user_password$,
+							to_processor_module$;
+/***********************************************************************************
+  Global Variables
+  (Uncomment and declare global variables as needed)
+***********************************************************************************/
+INTEGER	iCount, iKey, a, iTemp, iFlag2,
+				iMasterTempPassChr, iMasterTempPassChr1,
+				iMasterTemp1, iMasterTemp2,
+				iMasterTempPassChr2, iMasterTempPassChr3,
+				iUserTempPassChr, iUserTempPassChr1,
+				iUserTemp1, iUserTemp2,
+				iUserTempPassChr2, iUserTempPassChr3,
+				iUserNum, iByte6, iByte7,
+				iTempPassCodeByte1In, iTempPassCodeByte2In, iTempPassCodeByte3In,
+				iTempByte6In, iTempByte7In, iTempDigit1, iTempDigit2, iTempDigit3,
+				iTempDigit4, iTempDigit5, iTempDigit6,
+				iPinDigits;
+STRING	sMasterPin[ciPASSWORDLEN], sMasterReplaced[ciPASSWORDLEN],
+				sUserPin[ciPASSWORDLEN], sUserNum[ciUSERNUMLEN], sTempMaster[6],
+				sTemp[30], sMasterPass[3], sUserPass[3], sTemp2[30], sTempUser[6];
+/***********************************************************************************
+  Functions
+  (Uncomment and declare additional Functions as needed)
+***********************************************************************************/
+FUNCTION fWait()
+{
+	wait(6000, wTimeOut)
+	{
+		timed_out = 1;
+		processlogic();
+		timed_out = 0;
+		sTemp = "";
+		sTemp2 = "";
+		sUserNum = "";
+		user_number$ = sUserNum;
+		iUserNum = 0;
+		sMasterPass = "";
+		iMasterTempPassChr = 0;
+		iMasterTempPassChr1 = 0;
+		sMasterPin = "";
+		sMasterReplaced = "";
+		master_password_replaced$ = sMasterReplaced;
+		sUserPass = "";
+		iUserTempPassChr = 0;
+		iUserTempPassChr1 = 0;
+		sUserPin = "";
+		sTempMaster = "";
+		user_password$ = sUserPin;
+	}
+}
+/***********************************************************************************
+  Event Handlers
+  (Uncomment and declare additional event handlers as needed)
+***********************************************************************************/
+PUSH key
+{
+	cancelwait(wTimeOut);
+	call fWait();
+	if(getlastmodifiedarrayindex() <= ciUSEROFFSET)
+	{
+		iKey = getlastmodifiedarrayindex() - 1;
+		if(len(sMasterPin) < iPinDigits)
+		{
+			makestring(sMasterPin, "%s%d", sMasterPin, iKey);
+			sMasterReplaced = sMasterReplaced + csREPLACECHAR;
+			master_password_replaced$ = sMasterReplaced;
+		}
+	}
+	else if(getlastmodifiedarrayindex() <= ciUSERNUMOFFSET)
+	{
+		iKey = getlastmodifiedarrayindex() - 1 - ciUSEROFFSET;
+		if(len(sUserPin) < iPinDigits)
+		{
+			makestring(sUserPin, "%s%d", sUserPin, iKey);
+			user_password$ = sUserPin;
+		}
+	}
+	else
+	{
+		iKey = getlastmodifiedarrayindex() - 1 - ciUSERNUMOFFSET;
+		if(len(sUserNum) < ciUSERNUMLEN)
+		{
+			makestring(sUserNum, "%s%d", sUserNum, iKey);
+			iUserNum = atoi(sUserNum);
+			user_number$ = sUserNum;
+		}
+	}
+}
+
+PUSH master_clear
+{
+	cancelwait(wTimeOut);
+	sMasterPin = "";
+	sMasterReplaced = "";
+	master_password_replaced$ = sMasterReplaced;
+}
+
+PUSH master_backspace
+{
+	cancelwait(wTimeOut);
+	call fWait();
+	if(len(sMasterPin) > 0)
+	{
+		sMasterPin = left(sMasterPin, (len(sMasterPin) - 1));
+		if(len(sMasterReplaced) > len(sMasterPin))
+		{
+			sMasterReplaced = left(sMasterReplaced, (len(sMasterReplaced) - 1));
+			master_password_replaced$ = sMasterReplaced;
+		}
+		else if(len(sMasterReplaced) < len(sMasterPin))
+		{
+			sMasterReplaced = "";
+			for(a = 1 to len(sMasterPin))
+			{
+				sMasterReplaced = sMasterReplaced + csREPLACECHAR;
+			}
+			master_password_replaced$ = sMasterReplaced;
+		}	
+	}
+}
+
+PUSH user_clear
+{
+	sUserPin = "";
+	user_password$ = sUserPin;
+}
+
+PUSH user_backspace
+{
+	cancelwait(wTimeOut);
+	call fWait();
+	if(len(sUserPin) > 0)
+	{
+		sUserPin = left(sUserPin, (len(sUserPin) - 1));
+		user_password$ = sUserPin;
+	}
+}
+
+PUSH num_clear
+{
+	iUserNum = 0;
+	sUserNum = "";
+	user_number$ = sUserNum;
+}
+
+PUSH num_backspace
+{
+	cancelwait(wTimeOut);
+	call fWait();
+	if(len(sUserNum) > 0)
+	{
+		sUserNum = left(sUserNum, (len(sUserNum) - 1));
+		iUserNum = atoi(sUserNum);
+		user_number$ = sUserNum;
+	}
+}
+
+CHANGE pin_digits
+{
+	if((pin_digits = 4) || (pin_digits = 6))
+	{
+		iPinDigits = pin_digits;
+	}
+	else
+	{
+		iPinDigits = ciPASSWORDLEN;
+	}
+}
+
+CHANGE authority_byte_6
+{
+	cancelwait(wTimeOut);
+	call fWait();
+	iByte6 = authority_byte_6;
+}
+
+CHANGE authority_byte_7
+{
+	cancelwait(wTimeOut);
+	call fWait();
+	iByte7 = authority_byte_7;
+}
+
+CHANGE command$
+{
+	while(len(command$) > 0)
+	{
+		iTemp = getc(command$);
+		if(iTemp = 0x34)
+		{
+			cancelwait(wTimeOut);
+			if(len(sMasterPin) = 4)
+			{
+				iMasterTempPassChr = 0;
+				iMasterTempPassChr1 = 0;
+				sMasterPass = "";
+				for(a = 1 to 3 step 2)
+				{
+					iMasterTemp1 = getc(sMasterPin);
+					iMasterTemp2 = getc(sMasterPin);
+					iMasterTempPassChr1 = atoi(chr(iMasterTemp1));
+					iMasterTempPassChr2 = atoi(chr(iMasterTemp2));
+					iMasterTempPassChr3 = (iMasterTempPassChr2 << 4) | iMasterTempPassChr1;
+					sMasterPass = sMasterPass + chr(iMasterTempPassChr3);
+					if(a = 3)
+					{
+						sMasterPass = sMasterPass + "\x00";
+					}
+				}
+				sTemp = chr(iTemp) + sMasterPass;	
+			}
+			else if(len(sMasterPin) = 6)
+			{
+				iMasterTempPassChr = 0;
+				iMasterTempPassChr1 = 0;
+				sMasterPass = "";
+				for(a = 1 to 5 step 2)
+				{
+					iMasterTemp1 = getc(sMasterPin);
+					iMasterTemp2 = getc(sMasterPin);
+					iMasterTempPassChr1 = atoi(chr(iMasterTemp1));
+					iMasterTempPassChr2 = atoi(chr(iMasterTemp2));
+					iMasterTempPassChr3 = (iMasterTempPassChr2 << 4) | iMasterTempPassChr1;
+					sMasterPass = sMasterPass + chr(iMasterTempPassChr3);
+				}
+				sTemp = chr(iTemp) + sMasterPass;
+			}
+			else
+			{
+				sTemp = "";
+			}
+			if((len(sTemp) > 0) && (iUserNum <= 255))
+			{
+				sTemp = sTemp + chr(iUserNum);
+			}
+			if((len(sUserPin) = 4) && (len(sTemp) > 0))
+			{
+				iUserTempPassChr = 0;
+				iUserTempPassChr1 = 0;
+				sUserPass = "";
+				for(a = 1 to 3 step 2)
+				{
+					iUserTemp1 = getc(sUserPin);
+					iUserTemp2 = getc(sUserPin);
+					iUserTempPassChr1 = atoi(chr(iUserTemp1));
+					iUserTempPassChr2 = atoi(chr(iUserTemp2));
+					iUserTempPassChr3 = (iUserTempPassChr2 << 4) | iUserTempPassChr1;
+					sUserPass = sUserPass + chr(iUserTempPassChr3);
+					if(a = 3)
+					{
+						sUserPass = sUserPass + "\x00";
+					}
+				}
+				sTemp = sTemp + sUserPass;	
+			}
+			else if(len(sUserPin) = 6)
+			{
+				iUserTempPassChr = 0;
+				iUserTempPassChr1 = 0;
+				sUserPass = "";
+				for(a = 1 to 5 step 2)
+				{
+					iUserTemp1 = getc(sUserPin);
+					iUserTemp2 = getc(sUserPin);
+					iUserTempPassChr1 = atoi(chr(iUserTemp1));
+					iUserTempPassChr2 = atoi(chr(iUserTemp2));
+					iUserTempPassChr3 = (iUserTempPassChr2 << 4) | iUserTempPassChr1;
+					sUserPass = sUserPass + chr(iUserTempPassChr3);
+				}
+				sTemp = chr(iTemp) + sUserPass;
+			}
+			else
+			{
+				sTemp = "";
+			}
+			if(len(sTemp) > 0)
+			{
+				to_processor_module$ = sTemp + csENDCHAR;
+				sTemp = "";
+				iUserNum = 0;
+				sMasterPass = "";
+				iMasterTempPassChr = 0;
+				iMasterTempPassChr1 = 0;
+				sMasterPin = "";
+				sMasterReplaced = "";
+				master_password_replaced$ = sMasterReplaced;
+				sUserPass = "";
+				iUserTempPassChr = 0;
+				iUserTempPassChr1 = 0;
+				sUserPin = "";
+				sTempMaster = "";
+				user_password$ = sUserPin;
+			}
+		}
+		else if(iTemp = 0x36)
+		{
+			cancelwait(wTimeOut);
+			if(len(sMasterPin) = 4)
+			{
+				iMasterTempPassChr = 0;
+				iMasterTempPassChr1 = 0;
+				sMasterPass = "";
+				for(a = 1 to 3 step 2)
+				{
+					iMasterTemp1 = getc(sMasterPin);
+					iMasterTemp2 = getc(sMasterPin);
+					iMasterTempPassChr1 = atoi(chr(iMasterTemp1));
+					iMasterTempPassChr2 = atoi(chr(iMasterTemp2));
+					iMasterTempPassChr3 = (iMasterTempPassChr2 << 4) | iMasterTempPassChr1;
+					sMasterPass = sMasterPass + chr(iMasterTempPassChr3);
+					if(a = 3)
+					{
+						sMasterPass = sMasterPass + "\x00";
+					}
+				}
+				sTemp = chr(iTemp) + sMasterPass;	
+			}
+			else if(len(sMasterPin) = 6)
+			{
+				iMasterTempPassChr = 0;
+				iMasterTempPassChr1 = 0;
+				sMasterPass = "";
+				for(a = 1 to 5 step 2)
+				{
+					iMasterTemp1 = getc(sMasterPin);
+					iMasterTemp2 = getc(sMasterPin);
+					iMasterTempPassChr1 = atoi(chr(iMasterTemp1));
+					iMasterTempPassChr2 = atoi(chr(iMasterTemp2));
+					iMasterTempPassChr3 = (iMasterTempPassChr2 << 4) | iMasterTempPassChr1;
+					sMasterPass = sMasterPass + chr(iMasterTempPassChr3);
+				}
+				sTemp = chr(iTemp) + sMasterPass;
+			}
+			else
+			{
+				sTemp = "";
+			}
+			if((len(sTemp) > 0) && (iUserNum <= 255))
+			{
+				sTemp = sTemp + chr(iUserNum);
+			}
+			to_processor_module$ = sTemp + chr(iByte6) + chr(iByte7) + csENDCHAR;
+			sUserNum = "";
+			user_number$ = sUserNum;
+			sTemp = "";
+			iUserNum = 0;
+			sMasterPass = "";
+			iMasterTempPassChr = 0;
+			iMasterTempPassChr1 = 0;
+			sMasterPin = "";
+			sMasterReplaced = "";
+			sTempMaster = "";
+			master_password_replaced$ = sMasterReplaced;
+		}
+		else if(iTemp = 0x32)
+		{
+			cancelwait(wTimeOut);
+			call fWait();
+			if(len(sMasterPin) = 4)
+			{
+				iMasterTempPassChr = 0;
+				iMasterTempPassChr1 = 0;
+				sMasterPass = "";
+				sTempMaster = sMasterPin;
+				for(a = 1 to 3 step 2)
+				{
+					iMasterTemp1 = getc(sTempMaster);
+					iMasterTemp2 = getc(sTempMaster);
+					iMasterTempPassChr1 = atoi(chr(iMasterTemp1));
+					iMasterTempPassChr2 = atoi(chr(iMasterTemp2));
+					iMasterTempPassChr3 = (iMasterTempPassChr2 << 4) | iMasterTempPassChr1;
+					sMasterPass = sMasterPass + chr(iMasterTempPassChr3);
+					if(a = 3)
+					{
+						sMasterPass = sMasterPass + "\x00";
+					}
+				}
+				sTemp = chr(iTemp) + sMasterPass;	
+			}
+			else if(len(sMasterPin) = 6)
+			{
+				iMasterTempPassChr = 0;
+				iMasterTempPassChr1 = 0;
+				sMasterPass = "";
+				sTempMaster = sMasterPin;
+				for(a = 1 to 5 step 2)
+				{
+					iMasterTemp1 = getc(sTempMaster);
+					iMasterTemp2 = getc(sTempMaster);
+					iMasterTempPassChr1 = atoi(chr(iMasterTemp1));
+					iMasterTempPassChr2 = atoi(chr(iMasterTemp2));
+					iMasterTempPassChr3 = (iMasterTempPassChr2 << 4) | iMasterTempPassChr1;
+					sMasterPass = sMasterPass + chr(iMasterTempPassChr3);
+				}
+				sTemp = chr(iTemp) + sMasterPass;
+			}
+			else
+			{
+				sTemp = "";
+			}
+			if((len(sTemp) > 0) && (iUserNum <= 255))
+			{
+				sTemp = sTemp + chr(iUserNum);
+			}
+			to_processor_module$ = sTemp + csENDCHAR;
+		}
+	}
+}
+
+CHANGE from_processor$
+{
+	if(iFlag2 = 0)
+	{
+		iFlag2 = 1;
+		while(find(csENDCHAR, from_processor$) > 0)
+		{
+			sTemp2 = remove(csENDCHAR, from_processor$);
+			if(byte(sTemp2, 2) = 0x12)
+			{
+				if(byte(sTemp2, 3) = iUserNum)
+				{
+					iTempPassCodeByte1In = byte(sTemp2, 4);
+					iTempPassCodeByte2In = byte(sTemp2, 5);
+					iTempPassCodeByte3In = byte(sTemp2, 6);
+					iTempByte6In = byte(sTemp2, 7);
+					iTempByte7In = byte(sTemp2, 8);
+					authority_byte_6_in = iTempByte6In;
+					authority_byte_7_in = iTempByte7In;
+					iTempDigit2 = iTempPassCodeByte1In >> 4;
+					iTempDigit1 = iTempPassCodeByte1In ^ (iTempDigit2 << 4);
+					iTempDigit4 = iTempPassCodeByte2In >> 4;
+					iTempDigit3 = iTempPassCodeByte2In ^ (iTempDigit4 << 4);
+					iTempDigit6 = iTempPassCodeByte3In >> 4;
+					iTempDigit5 = iTempPassCodeByte3In ^ (iTempDigit6 << 4);
+					if(iPinDigits = 4)
+					{
+						makestring(sTempUser, "%s%s%s%s", itoa(iTempDigit1), itoa(iTempDigit2),
+											itoa(iTempDigit3), itoa(iTempDigit4));
+					}
+					else if(iPinDigits = 6)
+					{
+						makestring(sTempUser, "%s%s%s%s%s%s", itoa(iTempDigit1),
+											itoa(iTempDigit2), itoa(iTempDigit3), itoa(iTempDigit4),
+											itoa(iTempDigit5), itoa(iTempDigit6));
+					}
+					if(len(sTempUser) > 0)
+					{
+						sUserPin = sTempUser;
+						user_password$ = sUserPin;
+					}
+					sTempUser = "";
+					iTempDigit1 = 0;
+					iTempDigit2 = 0;
+					iTempDigit3 = 0;
+					iTempDigit4 = 0;
+					iTempDigit5 = 0;
+					iTempDigit6 = 0;
+				}
+			}
+		}
+		iFlag2 = 0;
+	}
+}
+
+FUNCTION Main()
+{
+	sTemp = "";
+	sTemp2 = "";
+	iFlag2 = 0;
+	sUserNum = "";
+	user_number$ = sUserNum;
+	iUserNum = 0;
+	sMasterPass = "";
+	iMasterTempPassChr = 0;
+	iMasterTempPassChr1 = 0;
+	sMasterPin = "";
+	sMasterReplaced = "";
+	master_password_replaced$ = sMasterReplaced;
+	sUserPass = "";
+	iUserTempPassChr = 0;
+	iUserTempPassChr1 = 0;
+	sUserPin = "";
+	user_password$ = sUserPin;
+	sTempMaster = "";
+	iPinDigits = ciPASSWORDLEN;
+}

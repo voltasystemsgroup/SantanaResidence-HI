@@ -1,0 +1,1339 @@
+[
+Version=1
+]
+[
+ObjTp=FSgntr
+Sgntr=UserMacro
+RelVrs=1.51.08
+IntStrVrs=2
+SavedBy=SMW1.51.08
+]
+[
+ObjTp=Hd
+S0Nd=1
+S1Nd=2
+SLNd=3
+PrNm=CrestronHome Device Favorites 32.umc
+CmVr=1.00.28
+DbVr=v14.3.2
+OpVr=Version 5.04.10-x   5/06/99
+PgmNm=Crestron Electronics
+CltNm=Provides a generic interface between CrestronHome logic and device drivers
+SmVr=104
+DvVr=104
+TpN1=1
+TpN2=2
+TpN3=3
+TpN4=4
+TpN5=5
+Cmn1=MODULE VERSION: 2.0\\CRESTRONHOME PACKAGE VERSION: 2.0\\\\SUMMARY:
+Cmn2=||1Provides preset functionality for devices that do not have built-
+Cmn3=in support for\\         them.\\\\MODULE DESCRIPTION:\\This module||1
+Cmn4=is designed to work in conjunction with the Device Interface module.
+Cmn5=||1It allows\\preset functionality for any device that provides direct||1
+Cmn6=access via a keypad (i.e. digits 0\\through 9). Note that this module||1
+Cmn7=is not appropriate for devices that do not have such\\direct access,||1
+Cmn8=and may not be necessary/appropriate for devices that have built-
+Cmn9=in preset\\support.\\\\CRESTRON HARDWARE REQUIRED: CNX-series or||1
+Cmn10=ST-CP control processor, CNX-PAD8\\\\INPUT DESCRIPTIONS: \\\\Name||1
+Cmn11=||<Type Description\\---------------------------------\\favorite_x||1
+Cmn12=||6D    Selects favorite x. This sets the analog output of the||1
+Cmn13=module to the\\                      appropriate value and pulses||1
+Cmn14=the send_favorite output. The value for\\                      this||1
+Cmn15=preset is determined by the parameter "favorite_x". See Parameter\\||1
+Cmn16=||EDescriptions below.\\next_favorite    D||4
+Cmn17=Iterates to the next favorite in the list, based on the last one||1
+Cmn18=that\\                      was selected. This is useful for interfaces||1
+Cmn19=like the CNWP-12F which do\\                      not have enough||1
+Cmn20=buttons for individual preset selection. Instead, they\\||8
+Cmn21=||>use next and previous to navigate though the selections.
+Cmn22=\\prev_favorite    D    Moves to the previous favorite in the list.
+Cmn23=||1See "next_favorite" above.                      \\\\OUTPUT DESCRIPTIONS:
+Cmn24=||1\\\\Name                Type Description\\---------------------
+Cmn25=------------\\favorite_value>>DEV A    Contains the value of the||1
+Cmn26=selected preset. Connect to the input of\\||F
+Cmn27=||3the Device Interface module.\\send_favorite>>DEV  D    A digital||1
+Cmn28=signal which indicates that the preset command should be\\||6
+Cmn29=||Csent. Connect to the input of the Device Interface||1
+Cmn30=module.\\favorite_x_fb       D    Feedback signals showing which||1
+Cmn31=preset is currently selected. Connect\\||I
+Cmn32=these signals to the feedback signals of the user-interfaces (e.
+Cmn33=g.\\                         touchpanels). Note that this module||1
+Cmn34=does not clear the preset\\                         feedback if||1
+Cmn35=the device is adjust manually (e.g. channel up/down).\\\\\\\\PARAMETER||1
+Cmn36=DESCRIPTIONS: \\\\Name                Type     Description\\----
+Cmn37=------------------------------------\\"favorite x"        DECIMAL||1
+Cmn38=||1The actual channel/station/disc number that you want the device\\||1
+Cmn39=||Lto go to when favorite x is selected.
+Cmn40=\\\\\\OPS USED FOR TESTING: 5.10.11x\\\\COMPILER USED FOR TESTING:
+Cmn41=||11.00.34\\\\SAMPLE PROGRAM: CrestronHome v2 demo\\\\REVISION HISTORY:
+Cmn42=||1\\\\v1.0      -Initial release\\\\v2.0      -added "favorite_value"||1
+Cmn43=and "send_favorite" inputs to support presets via the Device\\||2
+Cmn44=||9Favorites module\\          -simplified the parameters||1
+Cmn45=by specifying a single "digit delay" time.
+]
+[
+ObjTp=Bk
+Nm1=\
+Sx1=0
+Sy1=0
+Mx1=0
+]
+[
+ObjTp=Bw
+H=1
+Lx=80
+Ly=54
+Rx=652
+Ry=368
+Ym=-1
+SH=6
+Z=75
+Ht=4
+Hi=3
+]
+[
+ObjTp=Symbol
+Name=CrestronHome Device Favorites 32
+Code=1
+SmplCName=CrestronHome Device Favorites 32.umc
+Smpl-C=3
+CompilerTimePrecision=Single_Or_Double_Precision
+Hint=Provides a generic interface between CrestronHome logic and device drivers
+HelpID=1055
+NumFixedInputs=34
+NumFixedOutputs=34
+NumFixedParams=32
+MinVariableInputs=0
+MinVariableInputsList2=0
+MinVariableInputsList3=0
+MinVariableOutputs=0
+MinVariableOutputsList2=0
+MinVariableOutputsList3=0
+MinVariableParams=0
+SymbolTree=32
+OutputSigType1=Analog
+OutputSigType2=Digital
+ParamSigType1=Time|Percent|Constant|String|FileName|HexAddress|Any
+InputCue1=favorite_1
+InputCue2=favorite_2
+InputCue3=favorite_3
+InputCue4=favorite_4
+InputCue5=favorite_5
+InputCue6=favorite_6
+InputCue7=favorite_7
+InputCue8=favorite_8
+InputCue9=favorite_9
+InputCue10=favorite_10
+InputCue11=favorite_11
+InputCue12=favorite_12
+InputCue13=favorite_13
+InputCue14=favorite_14
+InputCue15=favorite_15
+InputCue16=favorite_16
+InputCue17=favorite_17
+InputCue18=favorite_18
+InputCue19=favorite_19
+InputCue20=favorite_20
+InputCue21=favorite_21
+InputCue22=favorite_22
+InputCue23=favorite_23
+InputCue24=favorite_24
+InputCue25=favorite_25
+InputCue26=favorite_26
+InputCue27=favorite_27
+InputCue28=favorite_28
+InputCue29=favorite_29
+InputCue30=favorite_30
+InputCue31=favorite_31
+InputCue32=favorite_32
+InputCue33=next_favorite
+InputCue34=prev_favorite
+OutputCue1=favorite_value>>DEV
+OutputCue2=send_favorite>>DEV
+OutputCue3=favorite_1_fb
+OutputCue4=favorite_2_fb
+OutputCue5=favorite_3_fb
+OutputCue6=favorite_4_fb
+OutputCue7=favorite_5_fb
+OutputCue8=favorite_6_fb
+OutputCue9=favorite_7_fb
+OutputCue10=favorite_8_fb
+OutputCue11=favorite_9_fb
+OutputCue12=favorite_10_fb
+OutputCue13=favorite_11_fb
+OutputCue14=favorite_12_fb
+OutputCue15=favorite_13_fb
+OutputCue16=favorite_14_fb
+OutputCue17=favorite_15_fb
+OutputCue18=favorite_16_fb
+OutputCue19=favorite_17_fb
+OutputCue20=favorite_18_fb
+OutputCue21=favorite_19_fb
+OutputCue22=favorite_20_fb
+OutputCue23=favorite_21_fb
+OutputCue24=favorite_22_fb
+OutputCue25=favorite_23_fb
+OutputCue26=favorite_24_fb
+OutputCue27=favorite_25_fb
+OutputCue28=favorite_26_fb
+OutputCue29=favorite_27_fb
+OutputCue30=favorite_28_fb
+OutputCue31=favorite_29_fb
+OutputCue32=favorite_30_fb
+OutputCue33=favorite_31_fb
+OutputCue34=favorite_32_fb
+ParamCue1=favorite 1
+ParamCue2=favorite 2
+ParamCue3=favorite 3
+ParamCue4=favorite 4
+ParamCue5=favorite 5
+ParamCue6=favorite 6
+ParamCue7=favorite 7
+ParamCue8=favorite 8
+ParamCue9=favorite 9
+ParamCue10=favorite 10
+ParamCue11=favorite 11
+ParamCue12=favorite 12
+ParamCue13=favorite 13
+ParamCue14=favorite 14
+ParamCue15=favorite 15
+ParamCue16=favorite 16
+ParamCue17=favorite 17
+ParamCue18=favorite 18
+ParamCue19=favorite 19
+ParamCue20=favorite 20
+ParamCue21=favorite 21
+ParamCue22=favorite 22
+ParamCue23=favorite 23
+ParamCue24=favorite 24
+ParamCue25=favorite 25
+ParamCue26=favorite 26
+ParamCue27=favorite 27
+ParamCue28=favorite 28
+ParamCue29=favorite 29
+ParamCue30=favorite 30
+ParamCue31=favorite 31
+ParamCue32=favorite 32
+]
+[
+ObjTp=Sm
+H=1
+SmC=157
+Nm=Central Control Modules
+CF=2
+n1I=1
+n1O=1
+mI=1
+mO=1
+tO=1
+mP=1
+P1=
+]
+[
+ObjTp=Sm
+H=2
+SmC=157
+Nm=Network Modules
+CF=2
+n1I=1
+n1O=1
+mI=1
+mO=1
+tO=1
+mP=1
+P1=
+]
+[
+ObjTp=Sm
+H=3
+SmC=157
+Nm=Ethernet
+CF=2
+n1I=1
+n1O=1
+mI=1
+mO=1
+tO=1
+mP=1
+P1=
+]
+[
+ObjTp=Sm
+H=4
+SmC=156
+Nm=Logic
+CF=2
+mC=1
+C1=12
+]
+[
+ObjTp=Sm
+H=5
+SmC=157
+Nm=DefineArguments
+CF=2
+n1I=1
+n1O=1
+mC=1
+C1=6
+mI=1
+mO=1
+tO=1
+mP=1
+P1=
+]
+[
+ObjTp=Sm
+H=6
+SmC=55
+PrH=5
+CF=2
+n1I=34
+n1O=34
+mI=34
+I1=92
+I2=93
+I3=94
+I4=95
+I5=96
+I6=97
+I7=98
+I8=99
+I9=33
+I10=34
+I11=35
+I12=36
+I13=38
+I14=39
+I15=40
+I16=41
+I17=42
+I18=44
+I19=45
+I20=46
+I21=47
+I22=48
+I23=49
+I24=50
+I25=51
+I26=54
+I27=55
+I28=56
+I29=57
+I30=58
+I31=59
+I32=60
+I33=14
+I34=15
+mO=34
+tO=34
+O1=5
+O2=37
+O3=76
+O4=77
+O5=78
+O6=79
+O7=80
+O8=81
+O9=82
+O10=83
+O11=4
+O12=6
+O13=7
+O14=8
+O15=9
+O16=10
+O17=11
+O18=12
+O19=13
+O20=16
+O21=17
+O22=18
+O23=19
+O24=20
+O25=21
+O26=22
+O27=25
+O28=26
+O29=27
+O30=28
+O31=29
+O32=30
+O33=31
+O34=32
+mP=32
+P1=favorite 1
+P2=favorite 2
+P3=favorite 3
+P4=favorite 4
+P5=favorite 5
+P6=favorite 6
+P7=favorite 7
+P8=favorite 8
+P9=favorite 9
+P10=favorite 10
+P11=favorite 11
+P12=favorite 12
+P13=favorite 13
+P14=favorite 14
+P15=favorite 15
+P16=favorite 16
+P17=favorite 17
+P18=favorite 18
+P19=favorite 19
+P20=favorite 20
+P21=favorite 21
+P22=favorite 22
+P23=favorite 23
+P24=favorite 24
+P25=favorite 25
+P26=favorite 26
+P27=favorite 27
+P28=favorite 28
+P29=favorite 29
+P30=favorite 30
+P31=favorite 31
+P32=favorite 32
+]
+[
+ObjTp=Sm
+H=7
+SmC=20
+PrH=12
+CF=2
+n1I=33
+n1O=32
+Cmn1=trigger favorite on preset selection\\
+mI=33
+I1=2
+I2=92
+I3=93
+I4=94
+I5=95
+I6=96
+I7=97
+I8=98
+I9=99
+I10=33
+I11=34
+I12=35
+I13=36
+I14=38
+I15=39
+I16=40
+I17=41
+I18=42
+I19=44
+I20=45
+I21=46
+I22=47
+I23=48
+I24=49
+I25=50
+I26=51
+I27=54
+I28=55
+I29=56
+I30=57
+I31=58
+I32=59
+I33=60
+mO=32
+tO=32
+O1=37
+O2=37
+O3=37
+O4=37
+O5=37
+O6=37
+O7=37
+O8=37
+O9=37
+O10=37
+O11=37
+O12=37
+O13=37
+O14=37
+O15=37
+O16=37
+O17=37
+O18=37
+O19=37
+O20=37
+O21=37
+O22=37
+O23=37
+O24=37
+O25=37
+O26=37
+O27=37
+O28=37
+O29=37
+O30=37
+O31=37
+O32=37
+]
+[
+ObjTp=Sm
+H=12
+SmC=156
+PrH=4
+CF=2
+Cmn1=favorites\\
+mC=4
+C1=14
+C2=16
+C3=7
+C4=18
+]
+[
+ObjTp=Sm
+H=14
+SmC=38
+PrH=12
+CF=2
+n1I=2
+n1O=32
+Cmn1=favorite button feedback
+mI=2
+I1=5
+mO=32
+tO=32
+O1=76
+O2=77
+O3=78
+O4=79
+O5=80
+O6=81
+O7=82
+O8=83
+O9=4
+O10=6
+O11=7
+O12=8
+O13=9
+O14=10
+O15=11
+O16=12
+O17=13
+O18=16
+O19=17
+O20=18
+O21=19
+O22=20
+O23=21
+O24=22
+O25=25
+O26=26
+O27=27
+O28=28
+O29=29
+O30=30
+O31=31
+O32=32
+mP=32
+P1=#favorite 1
+P2=#favorite 2
+P3=#favorite 3
+P4=#favorite 4
+P5=#favorite 5
+P6=#favorite 6
+P7=#favorite 7
+P8=#favorite 8
+P9=#favorite 9
+P10=#favorite 10
+P11=#favorite 11
+P12=#favorite 12
+P13=#favorite 13
+P14=#favorite 14
+P15=#favorite 15
+P16=#favorite 16
+P17=#favorite 17
+P18=#favorite 18
+P19=#favorite 19
+P20=#favorite 20
+P21=#favorite 21
+P22=#favorite 22
+P23=#favorite 23
+P24=#favorite 24
+P25=#favorite 25
+P26=#favorite 26
+P27=#favorite 27
+P28=#favorite 28
+P29=#favorite 29
+P30=#favorite 30
+P31=#favorite 31
+P32=#favorite 32
+]
+[
+ObjTp=Sm
+H=16
+SmC=32
+PrH=12
+CF=2
+n1I=32
+n1O=1
+Cmn1=set keypad value
+mI=32
+I1=92
+I2=93
+I3=94
+I4=95
+I5=96
+I6=97
+I7=98
+I8=99
+I9=33
+I10=34
+I11=35
+I12=36
+I13=38
+I14=39
+I15=40
+I16=41
+I17=42
+I18=44
+I19=45
+I20=46
+I21=47
+I22=48
+I23=49
+I24=50
+I25=51
+I26=54
+I27=55
+I28=56
+I29=57
+I30=58
+I31=59
+I32=60
+mO=1
+tO=1
+O1=5
+mP=32
+P1=#favorite 1
+P2=#favorite 2
+P3=#favorite 3
+P4=#favorite 4
+P5=#favorite 5
+P6=#favorite 6
+P7=#favorite 7
+P8=#favorite 8
+P9=#favorite 9
+P10=#favorite 10
+P11=#favorite 11
+P12=#favorite 12
+P13=#favorite 13
+P14=#favorite 14
+P15=#favorite 15
+P16=#favorite 16
+P17=#favorite 17
+P18=#favorite 18
+P19=#favorite 19
+P20=#favorite 20
+P21=#favorite 21
+P22=#favorite 22
+P23=#favorite 23
+P24=#favorite 24
+P25=#favorite 25
+P26=#favorite 26
+P27=#favorite 27
+P28=#favorite 28
+P29=#favorite 29
+P30=#favorite 30
+P31=#favorite 31
+P32=#favorite 32
+]
+[
+ObjTp=Sm
+H=18
+SmC=156
+PrH=12
+CF=2
+Cmn1=next/previous logic\\
+mC=4
+C1=20
+C2=22
+C3=23
+C4=24
+]
+[
+ObjTp=Sm
+H=20
+SmC=20
+PrH=18
+CF=2
+n1I=4
+n1O=3
+Cmn1=map xsig outputs to ring counter
+mI=4
+I1=2
+I2=14
+I3=15
+I4=15
+mO=3
+tO=3
+O1=23
+O2=24
+O3=23
+]
+[
+ObjTp=Sm
+H=22
+SmC=9
+PrH=18
+CF=2
+n1I=3
+n1O=2
+Cmn1=pulse on ring change
+mI=3
+I1=23
+mO=2
+tO=2
+O1=43
+mP=1
+P1=0.1s
+]
+[
+ObjTp=Sm
+H=23
+SmC=17
+PrH=18
+CF=2
+n1I=3
+n1O=32
+Cmn1=cycle through presets
+mI=3
+I1=23
+I2=1
+I3=24
+mO=32
+tO=32
+O1=52
+O2=53
+O3=64
+O4=65
+O5=66
+O6=67
+O7=68
+O8=69
+O9=61
+O10=62
+O11=63
+O12=70
+O13=71
+O14=72
+O15=73
+O16=74
+O17=75
+O18=84
+O19=85
+O20=86
+O21=87
+O22=88
+O23=89
+O24=90
+O25=91
+O26=100
+O27=101
+O28=102
+O29=103
+O30=104
+O31=105
+O32=106
+]
+[
+ObjTp=Sm
+H=24
+SmC=20
+PrH=18
+CF=2
+n1I=33
+n1O=32
+Cmn1=pulse ring outputs
+mI=33
+I1=43
+I2=52
+I3=53
+I4=64
+I5=65
+I6=66
+I7=67
+I8=68
+I9=69
+I10=61
+I11=62
+I12=63
+I13=70
+I14=71
+I15=72
+I16=73
+I17=74
+I18=75
+I19=84
+I20=85
+I21=86
+I22=87
+I23=88
+I24=89
+I25=90
+I26=91
+I27=100
+I28=101
+I29=102
+I30=103
+I31=104
+I32=105
+I33=106
+mO=32
+tO=32
+O1=92
+O2=93
+O3=94
+O4=95
+O5=96
+O6=97
+O7=98
+O8=99
+O9=33
+O10=34
+O11=35
+O12=36
+O13=38
+O14=39
+O15=40
+O16=41
+O17=42
+O18=44
+O19=45
+O20=46
+O21=47
+O22=48
+O23=49
+O24=50
+O25=51
+O26=54
+O27=55
+O28=56
+O29=57
+O30=58
+O31=59
+O32=60
+]
+[
+ObjTp=Sg
+H=4
+Nm=favorite_9_fb
+]
+[
+ObjTp=Sg
+H=5
+Nm=favorite_value>>DEV
+SgTp=2
+]
+[
+ObjTp=Sg
+H=6
+Nm=favorite_10_fb
+]
+[
+ObjTp=Sg
+H=7
+Nm=favorite_11_fb
+]
+[
+ObjTp=Sg
+H=8
+Nm=favorite_12_fb
+]
+[
+ObjTp=Sg
+H=9
+Nm=favorite_13_fb
+]
+[
+ObjTp=Sg
+H=10
+Nm=favorite_14_fb
+]
+[
+ObjTp=Sg
+H=11
+Nm=favorite_15_fb
+]
+[
+ObjTp=Sg
+H=12
+Nm=favorite_16_fb
+]
+[
+ObjTp=Sg
+H=13
+Nm=favorite_17_fb
+]
+[
+ObjTp=Sg
+H=14
+Nm=next_favorite
+]
+[
+ObjTp=Sg
+H=15
+Nm=prev_favorite
+]
+[
+ObjTp=Sg
+H=16
+Nm=favorite_18_fb
+]
+[
+ObjTp=Sg
+H=17
+Nm=favorite_19_fb
+]
+[
+ObjTp=Sg
+H=18
+Nm=favorite_20_fb
+]
+[
+ObjTp=Sg
+H=19
+Nm=favorite_21_fb
+]
+[
+ObjTp=Sg
+H=20
+Nm=favorite_22_fb
+]
+[
+ObjTp=Sg
+H=21
+Nm=favorite_23_fb
+]
+[
+ObjTp=Sg
+H=22
+Nm=favorite_24_fb
+]
+[
+ObjTp=Sg
+H=23
+Nm=ring_clock
+]
+[
+ObjTp=Sg
+H=24
+Nm=ring_reverse
+]
+[
+ObjTp=Sg
+H=25
+Nm=favorite_25_fb
+]
+[
+ObjTp=Sg
+H=26
+Nm=favorite_26_fb
+]
+[
+ObjTp=Sg
+H=27
+Nm=favorite_27_fb
+]
+[
+ObjTp=Sg
+H=28
+Nm=favorite_28_fb
+]
+[
+ObjTp=Sg
+H=29
+Nm=favorite_29_fb
+]
+[
+ObjTp=Sg
+H=30
+Nm=favorite_30_fb
+]
+[
+ObjTp=Sg
+H=31
+Nm=favorite_31_fb
+]
+[
+ObjTp=Sg
+H=32
+Nm=favorite_32_fb
+]
+[
+ObjTp=Sg
+H=33
+Nm=favorite_9
+]
+[
+ObjTp=Sg
+H=34
+Nm=favorite_10
+]
+[
+ObjTp=Sg
+H=35
+Nm=favorite_11
+]
+[
+ObjTp=Sg
+H=36
+Nm=favorite_12
+]
+[
+ObjTp=Sg
+H=37
+Nm=send_favorite>>DEV
+]
+[
+ObjTp=Sg
+H=38
+Nm=favorite_13
+]
+[
+ObjTp=Sg
+H=39
+Nm=favorite_14
+]
+[
+ObjTp=Sg
+H=40
+Nm=favorite_15
+]
+[
+ObjTp=Sg
+H=41
+Nm=favorite_16
+]
+[
+ObjTp=Sg
+H=42
+Nm=favorite_17
+]
+[
+ObjTp=Sg
+H=43
+Nm=ring_change_p
+]
+[
+ObjTp=Sg
+H=44
+Nm=favorite_18
+]
+[
+ObjTp=Sg
+H=45
+Nm=favorite_19
+]
+[
+ObjTp=Sg
+H=46
+Nm=favorite_20
+]
+[
+ObjTp=Sg
+H=47
+Nm=favorite_21
+]
+[
+ObjTp=Sg
+H=48
+Nm=favorite_22
+]
+[
+ObjTp=Sg
+H=49
+Nm=favorite_23
+]
+[
+ObjTp=Sg
+H=50
+Nm=favorite_24
+]
+[
+ObjTp=Sg
+H=51
+Nm=favorite_25
+]
+[
+ObjTp=Sg
+H=52
+Nm=favorite_1_ring
+]
+[
+ObjTp=Sg
+H=53
+Nm=favorite_2_ring
+]
+[
+ObjTp=Sg
+H=54
+Nm=favorite_26
+]
+[
+ObjTp=Sg
+H=55
+Nm=favorite_27
+]
+[
+ObjTp=Sg
+H=56
+Nm=favorite_28
+]
+[
+ObjTp=Sg
+H=57
+Nm=favorite_29
+]
+[
+ObjTp=Sg
+H=58
+Nm=favorite_30
+]
+[
+ObjTp=Sg
+H=59
+Nm=favorite_31
+]
+[
+ObjTp=Sg
+H=60
+Nm=favorite_32
+]
+[
+ObjTp=Sg
+H=61
+Nm=favorite_9_ring
+]
+[
+ObjTp=Sg
+H=62
+Nm=favorite_10_ring
+]
+[
+ObjTp=Sg
+H=63
+Nm=favorite_11_ring
+]
+[
+ObjTp=Sg
+H=64
+Nm=favorite_3_ring
+]
+[
+ObjTp=Sg
+H=65
+Nm=favorite_4_ring
+]
+[
+ObjTp=Sg
+H=66
+Nm=favorite_5_ring
+]
+[
+ObjTp=Sg
+H=67
+Nm=favorite_6_ring
+]
+[
+ObjTp=Sg
+H=68
+Nm=favorite_7_ring
+]
+[
+ObjTp=Sg
+H=69
+Nm=favorite_8_ring
+]
+[
+ObjTp=Sg
+H=70
+Nm=favorite_12_ring
+]
+[
+ObjTp=Sg
+H=71
+Nm=favorite_13_ring
+]
+[
+ObjTp=Sg
+H=72
+Nm=favorite_14_ring
+]
+[
+ObjTp=Sg
+H=73
+Nm=favorite_15_ring
+]
+[
+ObjTp=Sg
+H=74
+Nm=favorite_16_ring
+]
+[
+ObjTp=Sg
+H=75
+Nm=favorite_17_ring
+]
+[
+ObjTp=Sg
+H=76
+Nm=favorite_1_fb
+]
+[
+ObjTp=Sg
+H=77
+Nm=favorite_2_fb
+]
+[
+ObjTp=Sg
+H=78
+Nm=favorite_3_fb
+]
+[
+ObjTp=Sg
+H=79
+Nm=favorite_4_fb
+]
+[
+ObjTp=Sg
+H=80
+Nm=favorite_5_fb
+]
+[
+ObjTp=Sg
+H=81
+Nm=favorite_6_fb
+]
+[
+ObjTp=Sg
+H=82
+Nm=favorite_7_fb
+]
+[
+ObjTp=Sg
+H=83
+Nm=favorite_8_fb
+]
+[
+ObjTp=Sg
+H=84
+Nm=favorite_18_ring
+]
+[
+ObjTp=Sg
+H=85
+Nm=favorite_19_ring
+]
+[
+ObjTp=Sg
+H=86
+Nm=favorite_20_ring
+]
+[
+ObjTp=Sg
+H=87
+Nm=favorite_21_ring
+]
+[
+ObjTp=Sg
+H=88
+Nm=favorite_22_ring
+]
+[
+ObjTp=Sg
+H=89
+Nm=favorite_23_ring
+]
+[
+ObjTp=Sg
+H=90
+Nm=favorite_24_ring
+]
+[
+ObjTp=Sg
+H=91
+Nm=favorite_25_ring
+]
+[
+ObjTp=Sg
+H=92
+Nm=favorite_1
+]
+[
+ObjTp=Sg
+H=93
+Nm=favorite_2
+]
+[
+ObjTp=Sg
+H=94
+Nm=favorite_3
+]
+[
+ObjTp=Sg
+H=95
+Nm=favorite_4
+]
+[
+ObjTp=Sg
+H=96
+Nm=favorite_5
+]
+[
+ObjTp=Sg
+H=97
+Nm=favorite_6
+]
+[
+ObjTp=Sg
+H=98
+Nm=favorite_7
+]
+[
+ObjTp=Sg
+H=99
+Nm=favorite_8
+]
+[
+ObjTp=Sg
+H=100
+Nm=favorite_26_ring
+]
+[
+ObjTp=Sg
+H=101
+Nm=favorite_27_ring
+]
+[
+ObjTp=Sg
+H=102
+Nm=favorite_28_ring
+]
+[
+ObjTp=Sg
+H=103
+Nm=favorite_29_ring
+]
+[
+ObjTp=Sg
+H=104
+Nm=favorite_30_ring
+]
+[
+ObjTp=Sg
+H=105
+Nm=favorite_31_ring
+]
+[
+ObjTp=Sg
+H=106
+Nm=favorite_32_ring
+]

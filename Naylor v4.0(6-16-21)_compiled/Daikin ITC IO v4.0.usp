@@ -1,0 +1,600 @@
+/*******************************************************************************************
+  SIMPL+ Module Information
+  (Fill in comments below)
+*******************************************************************************************/
+/*
+Dealer Name:
+System Name:
+System Number:
+Programmer: Christophe Hombrouck
+Comments:
+*/
+
+/*******************************************************************************************
+  Compiler Directives
+  (Uncomment and declare compiler directives as needed)
+*******************************************************************************************/
+// #ENABLE_DYNAMIC
+// #SYMBOL_NAME ""
+// #HINT ""
+#DEFINE_CONSTANT MAXOBJECTS			128
+//#CATEGORY "0" //Invisible
+// #DEFAULT_VOLATILE
+// #PRINT_TO_TRACE
+// #DIGITAL_EXPAND 
+// #ANALOG_SERIAL_EXPAND 
+#OUTPUT_SHIFT 2                                     
+// #HELP_PDF_FILE ""
+#DEFAULT_NONVOLATILE
+#ENABLE_STACK_CHECKING
+#ENABLE_TRACE
+
+/*******************************************************************************************
+  DIGITAL, ANALOG and SERIAL INPUTS and OUTPUTS
+  (Uncomment and declare inputs and outputs as needed)
+*******************************************************************************************/
+DIGITAL_INPUT _SKIP_,_SKIP_,Poll_All_Units,Get_Units_Info;
+DIGITAL_INPUT Poll_Unit[MAXOBJECTS];
+STRING_INPUT Command$[190];
+DIGITAL_OUTPUT Busy;
+STRING_OUTPUT Feedback$[MAXOBJECTS];
+
+/*******************************************************************************************
+  SOCKETS
+  (Uncomment and define socket definitions as needed)
+*******************************************************************************************/
+TCP_CLIENT TCPClient[20000];
+// TCP_SERVER
+// UDP_SOCKET
+
+
+/*******************************************************************************************
+  Parameters
+  (Uncomment and declare parameters as needed)
+*******************************************************************************************/
+STRING_PARAMETER IP_Address[15];
+INTEGER_PARAMETER Port;
+// SIGNED_INTEGER_PARAMETER
+// LONG_INTEGER_PARAMETER
+// SIGNED_LONG_INTEGER_PARAMETER
+// STRING_PARAMETER
+
+/*******************************************************************************************
+  Parameter Properties
+  (Uncomment and declare parameter properties as needed)
+*******************************************************************************************/
+/*
+#BEGIN_PARAMETER_PROPERTIES parameter_variable, parameter_variable, ...
+   // propValidUnits = // unitString or unitDecimal|unitHex|unitPercent|unitCharacter|unitTime|unitTicks;
+   // propDefaultUnit = // unitString, unitDecimal, unitHex, unitPercent, unitCharacter, unitTime or unitTicks;
+   // propBounds = lower_bound , upper_bound;
+   // propDefaultValue = ;  // or, propDefaultValue = "";
+   // propList = // { "value" , "label" } , { "value" , "label" } , ... ;
+   // propShortDescription = "status_bar_hint_text";
+   // #BEGIN_PROP_FULL_DESCRIPTION  line_1...  line_2...  line_n  #END_PROP_FULL_DESCRIPTION
+   // #BEGIN_PROP_NOTES line_1...  line_2...  line_n  #END_PROP_NOTES
+#END_PARAMETER_PROPERTIES
+*/
+/*******************************************************************************************
+  Structure Definitions
+  (Uncomment and define structure definitions as needed)
+  Note:  Be sure to initialize all declared STRING variables as needed
+         For example, in Function Main: struct.myString = "";
+*******************************************************************************************/
+
+STRUCTURE UnitStatus
+{
+	Integer Connected; // 0:Not Connected, 1:Connected 
+	String ShortName[16];
+	String LongName[64];
+	Integer Type; // 0: Unknown, 1:Di(D3), 2:Dio(D3), 3:D3 inner
+	Integer InnerType; // 0:Unknown or Not Inner, 1:VRV, 2:HRV
+};
+
+UnitStatus Units[128];
+
+
+/*******************************************************************************************
+  Global Variables
+  (Uncomment and declare global variables as needed)
+  Note:  Be sure to initialize all declared STRING variables as needed
+         For example, in Function Main: myString = "";
+*******************************************************************************************/
+INTEGER TxOK,Sending,StatSending;
+STRING  commandString[20000],CommandToBeSend[15000],StatusString[10000];       
+
+INTEGER RxOK;
+Integer RX_Marker1,RX_Marker2,RX_Marker3,RX_Length,RX_i,RX_Num;
+INTEGER Send_marker1,Send_error;
+String Responsetemp[1000],data[11000],type[4];
+                                                                
+
+/*******************************************************************************************
+  Functions
+  (Uncomment and declare additional event handlers as needed)
+*******************************************************************************************/
+
+Function Send()
+{
+	Send_marker1 = find("\x0D\x0D\x0A",CommandString);
+ 	if(Send_marker1)
+ 	{
+ 		CommandToBeSend = remove("\x0D\x0D\x0A",CommandString);
+ 		CommandToBeSend = left(CommandToBeSend,len(CommandToBeSend)-3);
+	 	if(TCPClient.SocketStatus = 2)
+	 	{
+	 	 	Send_error = SocketDisConnectClient(TCPClient);
+	 	}
+	 	Send_error = SocketConnectClient(TCPClient,IP_Address,Port,0);	 	
+	 	Busy = on;  
+	 	wait(500, WaitForResponse)
+		{            
+			Print("\nDaikin IO Message Timeout"); 
+			sending = 0;
+			CommandString = "";
+			clearbuffer(TCPClient.SocketRxBuf);
+			RxOK = 1;
+			Busy = off;		
+		}
+	}
+	else
+	{
+		commandString = "";
+	}
+}
+
+Function PollAllUnits()
+{
+	String temp[200];
+	
+	temp = "POST /cmd/ HTTP/1.1\x0D\x0A"
+			  + "Content-Length:32\x0D\x0A"
+			  + "Content-Type: application/octet-stream\x0D\x0A\x0D\x0A"
+			  + "\x20\x00\x00\x00" + "\x74\x11\x01\x00" + "\x00\x00\x00\x00"	
+              + "\x00\x00\x00\x00" + "\xFF\xFF\xFF\xFF" + "\xFF\xFF\xFF\xFF"
+              + "\xFF\xFF\xFF\xFF" + "\xFF\xFF\xFF\xFF" + "\x0D\x0D\x0A";
+              
+	CommandString = CommandString +	temp;
+	if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}	
+}
+
+Function PollUnit(Integer num)
+{
+	Integer ByteNum,rest,i,val;
+	String temp[200],temp2[20];
+	
+	temp = "POST /cmd/ HTTP/1.1\x0D\x0A"
+			  + "Content-Length:32\x0D\x0A"
+			  + "Content-Type: application/octet-stream\x0D\x0A\x0D\x0A"
+			  + "\x20\x00\x00\x00" + "\x74\x11\x01\x00" + "\x00\x00\x00\x00"	
+              + "\x00\x00\x00\x00";
+    ByteNum = num/8; 
+    rest = num mod 8;
+    temp2 = "\x00\x00\x00\x00" + "\x00\x00\x00\x00"                                                      
+              + "\x00\x00\x00\x00" + "\x00\x00\x00\x00";
+    
+    if(rest = 0)
+    {
+   		val = 128;
+   		ByteNum = ByteNum - 1;  	
+    }
+    else
+    {
+	    val = 1;
+	    i=1;
+	    while(i < rest)
+	    {
+	     	val = val<<1;
+	     	i = i+1;
+	    }
+	}
+              
+    SetByte(temp2,ByteNum+1,val);
+    temp = temp + temp2 + "\x0D\x0D\x0A";          
+	CommandString = CommandString +	temp;
+	if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}	
+}                                            
+
+
+Function GetConnectionStatus()
+{
+	String temp[200];
+	
+	temp = "POST /cmd/ HTTP/1.1\x0D\x0A"
+			  + "Content-Length:32\x0D\x0A"
+			  + "Content-Type: application/octet-stream\x0D\x0A\x0D\x0A"
+			  + "\x20\x00\x00\x00" + "\x70\x11\x01\x00" + "\x00\x00\x00\x00"	
+              + "\x00\x00\x00\x00" + "\x00\x00\x00\x00" + "\x00\x00\x00\x00"
+              + "\x00\x00\x00\x00" + "\x00\x00\x00\x00" + "\x0D\x0D\x0A";
+              
+	CommandString = CommandString +	temp;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+Function GetACProperty()
+{
+	String temp[200];
+	
+	temp = "POST /cmd/ HTTP/1.1\x0D\x0A"
+			  + "Content-Length:32\x0D\x0A"
+			  + "Content-Type: application/octet-stream\x0D\x0A\x0D\x0A"
+			  + "\x20\x00\x00\x00" + "\x72\x11\x01\x00" + "\x00\x00\x00\x00"	
+              + "\x00\x00\x00\x00" + "\x00\x00\x00\x00" + "\x00\x00\x00\x00"
+              + "\x00\x00\x00\x00" + "\x00\x00\x00\x00" + "\x0D\x0D\x0A";
+              
+	CommandString = CommandString +	temp;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+Function SetNewStatus()
+{
+	String temp[3200],temp2[3200],tempStatus[3200];
+	Integer num,amount;
+
+	delay(100);
+	
+    num = len(StatusString)/24;
+    amount = num*24;
+    if(amount != 0)
+    {
+	    temp2 = RemoveByLength(amount,StatusString);
+	    
+	    temp = 	  "\x00\x00\x00\x00" + "\x76\x11\x01\x00" + "\x00\x00\x00\x00" + "\x00\x00\x00\x00"	
+	              + "\x00\x00\x00\x00" + "\x00\x00\x00\x00" + "\x00\x00\x00\x00"
+	              + "\x00\x00\x00\x00" + temp2;
+	    
+	    setByte(temp,9,low(num));
+	    num = (num*24)+32;
+	    setByte(temp,1,low(num));
+	    setByte(temp,2,high(num));
+	    
+	    temp = "POST /cmd/ HTTP/1.1\x0D\x0A"
+				  + "Content-Length:" + itoa(num) + "\x0D\x0A"
+				  + "Content-Type: application/octet-stream\x0D\x0A\x0D\x0A" + temp + "\x0D\x0D\x0A";
+	              
+		CommandString = CommandString +	temp;
+	    if(!sending)
+	 	{    
+	 		sending = 1;
+	 	 	send();
+	 	}
+	 }
+}
+
+Function Startup()
+{
+	GetConnectionStatus();   
+	GetACProperty();     
+}
+
+Function ProcessConnectionStatus(String Con)
+{
+	Integer i,tempByte;
+	for(i = 1 to 16)
+	{
+		tempByte = Byte(Con,i+20);
+		if(bit(con,i+20,0))
+		{
+		 	Units[((i-1)*8+1)].Connected = 1;
+		}
+		else
+		{
+			Units[((i-1)*8+1)].Connected = 0;
+		}
+		if(bit(con,i+20,1))
+		{
+		 	Units[((i-1)*8+2)].Connected = 1;
+		}
+		else
+		{
+			Units[((i-1)*8+2)].Connected = 0;
+		}
+		if(bit(con,i+20,2))
+		{
+		 	Units[((i-1)*8+3)].Connected = 1;
+		}
+		else
+		{
+			Units[((i-1)*8+3)].Connected = 0;
+		}
+		if(bit(con,i+20,3))
+		{
+		 	Units[((i-1)*8+4)].Connected = 1;
+		}
+		else
+		{
+			Units[((i-1)*8+4)].Connected = 0;
+		}
+		if(bit(con,i+20,4))
+		{
+		 	Units[((i-1)*8+5)].Connected = 1;
+		}
+		else
+		{
+			Units[((i-1)*8+5)].Connected = 0;
+		}
+		if(bit(con,i+20,5))
+		{
+		 	Units[((i-1)*8+6)].Connected = 1;
+		}
+		else
+		{
+			Units[((i-1)*8+6)].Connected = 0;
+		}
+		if(bit(con,i+20,6))
+		{
+		 	Units[((i-1)*8+7)].Connected = 1;
+		}
+		else
+		{
+			Units[((i-1)*8+7)].Connected = 0;
+		}
+		if(bit(con,i+20,7))
+		{
+		 	Units[((i-1)*8+8)].Connected = 1;
+		}
+		else
+		{
+			Units[((i-1)*8+8)].Connected = 0;
+		}
+				 	
+	}
+}
+
+Function ProcessACProperty(String Prop)
+{
+	Integer i,tempValue;
+	for(i = 1 to 128)
+	{
+	 	Units[i].ShortName = mid(Prop,((i-1)*84+33),16);
+	 	Units[i].LongName = mid(Prop,((i-1)*84+49),64);
+	 	TempValue = Byte(Prop,((i-1)*84+113)) + (Byte(Prop,((i-1)*84+114))<<8);
+	 	Switch(TempValue)
+	 	{
+	 	 	case(0):
+	 	 	{
+	 	 		Units[i].Type = 0;
+	 	 	}
+	 	 	case(6):
+	 	 	{
+	 	 		Units[i].Type = 1;
+	 	 	}
+	 	 	case(7):
+	 	 	{
+	 	 		Units[i].Type = 2;
+	 	 	}
+	 	 	case(9):
+	 	 	{
+	 	 	 	Units[i].Type = 3;
+	 	 	}
+	 	}
+	 	
+	 	TempValue = Byte(Prop,(i-1)*84+115) + (Byte(Prop,(i-1)*84+116)<<8);
+	 	Switch(TempValue)
+	 	{
+	 	 	case(0):
+	 	 	{
+	 	 		Units[i].InnerType = 0;
+	 	 	}
+	 	 	case(6):
+	 	 	{
+	 	 		Units[i].InnerType = 1;
+	 	 	}
+	 	 	case(7):
+	 	 	{
+	 	 		Units[i].InnerType = 2;
+	 	 	}
+	 	}
+	 	Feedback$[i] = "INFO:" + chr(low(i-1)) + ";:" + Units[i].ShortName + ";:" + Units[i].LongName + ";:" + itoa(Units[i].Type) + ";:" + itoa(Units[i].InnerType) + ";:\x0D\x0D\x0A";
+	}	                        
+}
+
+/*******************************************************************************************
+  Event Handlers
+  (Uncomment and declare additional event handlers as needed)
+*******************************************************************************************/
+
+PUSH Get_Units_Info
+{
+	Startup(); 	
+}
+
+PUSH Poll_All_Units
+{
+	PollAllUnits();			
+}
+
+PUSH Poll_Unit
+{
+	integer i;
+	i = getlastmodifiedarrayindex();
+	PollUnit(i); 				
+}
+
+
+CHANGE Command$
+{	
+	StatusString = StatusString + Command$;     
+	
+ 	if(!StatSending)
+ 	{    
+ 		StatSending = 1;
+ 	 	SetNewStatus();
+ 	}
+}    
+
+SOCKETCONNECT TCPClient
+{
+	Socketsend(TCPClient,CommandToBeSend);   
+}
+
+
+SOCKETRECEIVE TCPClient
+{
+	
+	
+	if (RxOK)
+	{
+		RxOK = 0;
+		if(find("\x0D\x0A\x0D\x0A",TCPClient.SocketRxBuf))         
+		{
+		 	
+		 	RX_Marker1 = findnocase("content-length:",TCPClient.SocketRxBuf)+15;
+		 	RX_Marker2 = find("\x0D\x0A",TCPClient.SocketRxBuf,RX_Marker1);
+		 	RX_Length = atoi(mid(TCPClient.SocketRxBuf,RX_Marker1,RX_Marker2-RX_Marker1));
+		 	RX_Marker3 = find("\x0D\x0A\x0D\x0A",TCPClient.SocketRxBuf);
+
+		 	
+		 	if(len(TCPClient.SocketRxBuf) >= RX_Length + RX_Marker3 + 3)
+		 	{
+		 	 	Responsetemp = remove("\x0D\x0A\x0D\x0A",TCPClient.SocketRxBuf);
+		 	 	data = RemoveByLength(RX_Length,TCPClient.SocketRxBuf);
+		 	 	type = mid(data,5,4);
+		 	 	
+	 	 		if(type = "\x71\x11\x01\x00")    // Connection Status response 
+	 	 		{        
+					cancelWait(WaitForResponse);   
+					ProcessConnectionStatus(data);
+					Responsetemp = "";
+					data = ""; 
+					Busy = off;
+					if(len(CommandString))
+					{
+						send();
+					}
+					else
+					{
+						Sending = 0;
+					} 
+	 				
+	 	 		}
+	 	 		else if(type = "\x73\x11\x01\x00")    // A/C Property response   
+	 	 		{  						            
+	 	 			cancelWait(WaitForResponse);
+	 	 			ProcessACProperty(data);
+ 	        		Responsetemp = "";
+	 			  	data = "";
+	 			  	Busy = off;
+ 	 		   	  	if(len(CommandString))
+ 				  	{
+ 	 			  		send();
+ 				  	}
+ 				  	else
+ 				  	{
+ 				   		Sending = 0;
+ 				  	}
+  	
+	 	 		}
+	 	 		else if(type = "\x75\x11\x01\x00")    // Get A/C Status response   
+	 	 		{  						            
+	 	 			cancelWait(WaitForResponse);
+	 	 			RX_Num = Byte(data,29);
+	 	 			for(RX_i = 1 to RX_Num)
+	 	 			{
+	 	 			 	Feedback$[Byte(data,(32*(RX_i-1))+33)+1 ] = "DATA UPDATE:" + mid(data,(32*(RX_i-1))+33,32) + "\x0D\x0D\x0A";
+	 	 			}
+	 	 				 	 			
+ 	        		Responsetemp = "";
+	 			  	data = "";
+	 			  	Busy = off;
+ 	 		   	  	if(len(CommandString))
+ 				  	{
+ 	 			  		send();
+ 				  	}
+ 				  	else
+ 				  	{
+ 				   		Sending = 0;
+ 				  	}
+  	
+	 	 		}
+	 	 		else if(type = "\x77\x11\x01\x00")    // Set A/C Status response   
+	 	 		{  						            
+	 	 			cancelWait(WaitForResponse);
+	 	 			for(RX_i = 1 to 128)
+	 	 			{
+	 	 			 	RX_Num = RX_i mod 8;
+	 	 			 	if(RX_Num = 0)
+	 	 			 	{
+	 	 			 		if(bit(data,(RX_i/8)+20,7))
+							{
+								Feedback$[RX_i] = "CHANGE: OK\x0D\x0D\x0A";
+							}	 	
+	 	 			 	}
+	 	 			 	else
+	 	 			 	{
+							if(bit(data,(RX_i/8)+21,RX_Num-1))
+							{
+								Feedback$[RX_i] = "CHANGE: OK\x0D\x0D\x0A";
+							}
+	 	 			 	}                        	 	 			 		 	
+	 	 			}
+	 	 				 	 			
+ 	        		Responsetemp = "";
+	 			  	data = "";
+	 			  	Busy = off;
+ 	 		   	  	if(len(StatusString))
+ 				  	{
+ 	 			  		SetNewStatus();
+ 	 			  		send();
+ 				  	}
+ 				  	else
+ 				  	{
+ 				   		StatSending = 0;
+ 				   		if(len(CommandString))
+ 				   		{
+ 				   			send();
+ 				   		}
+ 				   		else
+ 				   		{
+ 				   		    Sending = 0;
+ 				   		}
+ 				  	}
+  	
+	 	 		}
+	 	 	    else
+	 	 	    {
+	 	 	   		Responsetemp = "";
+	 	 	   		data = "";	 	 	   		  	
+	 	 	    }
+		 	 	  
+		 	}
+		}		
+		RxOK = 1;
+	}    
+}
+
+
+/*******************************************************************************************
+  Main()
+  Uncomment and place one-time startup code here
+  (This code will get called when the system starts up)
+*******************************************************************************************/
+
+Function Main()
+{                   
+    StatSending = 0;
+    Sending = 0;
+	TxOK = 1;
+	RxOK = 1;
+	CommandString = "";
+	StatusString = ""; 
+
+	
+	WaitForInitializationComplete();                                                     
+}          

@@ -1,0 +1,549 @@
+#symbol_name "GE Interlogix Networx Processor v4.1_Mod"
+
+#define_constant TERMINATOR	"\x0D"
+
+#define_constant csPOLLSYSTEM		"\x28"
+#define_constant csPOLLPART1		"\x26\x00"
+#define_constant csPOLLPART2		"\x26\x01"
+#define_constant csPOLLPART3		"\x26\x02"
+#define_constant csPOLLPART4		"\x26\x03"
+#define_constant csPOLLPART5		"\x26\x04"
+#define_constant csPOLLPART6		"\x26\x05"
+#define_constant csPOLLPART7		"\x26\x06"
+#define_constant csPOLLPART8		"\x26\x07"
+#define_constant csPOLLZONE16		"\x25\x00"
+#define_constant csPOLLZONE32		"\x25\x01"
+#define_constant csPOLLZONE48		"\x25\x02"
+#define_constant csPOLLZONE64		"\x25\x03"
+#define_constant csPOLLZONE80		"\x25\x04"
+#define_constant csPOLLZONE96		"\x25\x05"
+#define_constant csPOLLZONE112	"\x25\x06"
+#define_constant csPOLLZONE128	"\x25\x07"
+#define_constant csPOLLZONE144	"\x25\x08"
+#define_constant csPOLLZONE160	"\x25\x09"
+#define_constant csPOLLZONE176	"\x25\x0A"
+#define_constant csPOLLZONE192	"\x25\x0B"
+#define_constant csENDCHAR			"\xFF\x01"
+
+#define_constant ciZONES					192
+#define_constant ciQUEUESIZE			30
+#define_constant ciPOLLSIZE				21
+#define_constant ciPARTPOLLSTART	2
+#define_constant ciZONEPOLLSTART	10
+#define_constant ciPARTPOLLEND		9
+#define_constant ciPARTBYTE				12
+
+#CATEGORY "21" // Security
+#DEFAULT_NONVOLATILE
+
+#HELP_BEGIN
+	For use inside the GE Interlogix Networx Processor module only.
+#HELP_END
+
+digital_input	poll, send, resend;
+DIGITAL_INPUT	dataLost;
+analog_input	number_of_zones;
+string_input	from_modules$[25];
+buffer_input	from_device$[150];
+
+digital_output	Time_Out;
+string_output 	to_modules$, to_device$;
+analog_output		zone_status[ciZONES];
+
+integer i, sum1, sum2, char, iZones[ciZONES], iOffset, iTemp, a, iSent,
+				iNextStore, iNextSend, iNextPoll, iMaxPoll, iFlag1, iSendCount,
+				b, iPartPollMax, iFlag2;
+string	temp1$[32], temp$[52], sTemp[32], packet$[50], unenc$[50],
+				sQueue[ciQUEUESIZE][100], sPoll[ciPOLLSIZE][50];
+
+function fTimeOut()
+{
+	wait(300, wTimeOut)
+	{
+		iSent = 0;
+		Time_Out = 1;
+	}
+}
+/*
+This will create a string for the CADDX system.
+
+The input is a string of bytes that excludes the Start Character, Message Length,
+Fletcher Sum1, Fletcher Sum2, and Stop Character.
+
+This module does several things, in order:
+1.  Compute the length of the string.
+2.  Preface the string with the length.
+3.  Compute the 2 byte Fletcher Sum of the new string.
+4.  Suffix the string with the checksum.
+5.  Convert each byte of the string to ASCII (i.e. \x7B = "7B")
+6.  Preface the string with \x0A, suffix it with \x0D.
+
+Ex:
+
+Input (coming from a SEND, TXA, etc.):
+\x84\x09\x7E\x10\x58\x01\x00
+
+Output:
+\x0A0784097E105801007CD1\x0D
+
+*/
+integer_function fhextoi(string msg)
+{
+	integer value, i, thebyte;
+
+	value=0;
+	msg = upper(msg);
+	for(i = 1 to len(msg))
+	{
+		thebyte = byte(msg,i);
+		if((thebyte >= '0') && (thebyte <= '9'))
+			thebyte = thebyte - '0';
+		else
+			thebyte = thebyte - 55;
+		switch(len(msg) - i)
+		{
+			case(0):
+			{
+				value = value + thebyte;
+			}
+			case(1):
+			{
+				value = value + thebyte * 16;
+			}
+			case(2):
+			{
+				value = value + thebyte * 256;
+			}
+			case(3):
+			{
+				value = value + thebyte * 4096;
+			}
+		}
+	}
+	return(value);		
+}
+
+change from_device$
+{
+	if(iFlag2 = 0)
+	{
+		iFlag2 = 1;
+		do
+		{
+			cancelwait(wTimeOut);
+			packet$ = remove(TERMINATOR, from_device$);
+			char = 0;
+			unenc$ = "";
+			if(len(packet$) > 0)
+			{
+				// ============== PROCESS PACKET START ==========================
+				// Check to see if START character is valid.
+				if(left(packet$,1) <> "\x0A")
+				{
+				//	print("Invalid CADDEX Packet:  Invalid START.\n");
+					break;
+				}
+				// Is the packet too short to have a Length?
+				if(len(packet$) < 3)
+				{
+				//	print("Invalid CADDEX Packet:  Packet Too Short.\n");
+					break;
+				}
+				// Count internal to packet doesn't match packet size.
+				if(fhextoi(mid(packet$, 2, 2)) <> (len(packet$) - 8)/2)
+				{
+				//	print("Invalid CADDEX Packet:  Internal Count Doesn't Match Received Packet Size.\n");
+					break;
+				}
+				// Decode the data.
+				// Modification made to the output = the first byte is the Command Type.
+				// Bit 7 = Ack Type, Bit 6 = Unused, Bit 5-0 = Command Type.
+				// I split these up into two bytes.
+				// Ex:  If 0x84 is the Command Type, I spit out 0x01 0x04
+				// Ex:  If 0x04 is the Command Type, I spit out 0x00 0x04
+				// The first byte can then be EQU'd or something in Logic to determine if
+				// this command needs to be ACK'd.
+				for(i = 4 to (len(packet$) - 5) step 2)
+				{
+					char = fhextoi(mid(packet$, i, 2));
+					if(i = 4)
+					{
+						unenc$ = unenc$ + chr((char & 0x80) >> 7);
+						unenc$ = unenc$ + chr(char & 0x3F);
+					}
+					else
+					{
+						unenc$ = unenc$ + chr(char);
+					}
+				}
+				// Here we could compute the Fletcher sum and check it against the one in the
+				// packet.  Maybe later...
+				// ============== PROCESS PACKET END ==========================
+				//			to_modules$ = unenc$ + "*";
+				if ((bit(unenc$, 1, 7) = 1) || (byte(unenc$, 1) = 01))
+				{
+					sum1 = 0;
+					sum2 = 0;
+				  sTemp = "\x1D";
+					// Preface the string with it's length
+					temp1$ = chr(len(sTemp)) + sTemp;
+					// Find the Fletcher Sum
+					for(i = 1 to len(temp1$))
+					{
+						if((255 - sum1) < byte(temp1$, i))
+			  			sum1 = low(sum1 + 1);
+						sum1 = low(sum1 + byte(temp1$, i));
+						if(sum1 = 255)
+							sum1 = 0;
+						if((255 - sum2) < sum1)
+							sum2 = low(sum2 + 1);
+						sum2 = low(sum2 + sum1);
+						if(sum2 = 255)
+							sum2 = 0;
+					}
+					// Suffix the Fletcher sum to the string
+					temp1$ = temp1$ + chr(sum1) + chr(sum2);
+					// ASCII-fy the string
+					temp$ = "";
+					for(i = 1 to len(temp1$))
+						makestring(temp$, "%s%02X", temp$, byte(temp1$, i));
+					// Add the Start and End characters
+					to_device$ = "\x0A" + temp$ + "\x0D";
+					processlogic();
+				}
+				if(byte(unenc$, 2) = 0x05)
+				{
+					iOffset = byte(unenc$, 3) * 16;
+					for(a = 2 to 16 step 2)
+					{
+						iTemp = ((byte(unenc$, ((a / 2)) + 3) >> 4) << 4);
+						iZones[iOffset + a - 1] = byte(unenc$, ((a / 2) + 3)) ^ iTemp;
+						if(issignaldefined(zone_status[iOffset + a - 1]))
+						{
+							zone_status[iOffset + a - 1] = iZones[iOffset + a - 1];
+						}
+						iZones[iOffset + a] = byte(unenc$, ((a / 2) + 3)) >> 4;
+						if(issignaldefined(zone_status[iOffset + a]))
+						{
+							zone_status[iOffset + a] = iZones[iOffset + a];
+						}
+					}
+				}
+				else if(byte(unenc$, 2) = 0x07)
+				{
+					to_modules$ = unenc$ + csENDCHAR;
+				}
+				else if(byte(unenc$, 2) = 0x06)
+				{
+					to_modules$ = unenc$ + csENDCHAR;
+				}
+				else if(byte(unenc$, 2) = 0x0A)
+				{
+					to_modules$ = unenc$ + csENDCHAR;
+				}
+				else if(byte(unenc$, 2) = 0x08)
+				{
+					for(b = 8 to 1 step -1)
+					{
+						if(bit(unenc$, ciPARTBYTE, (b - 1)) = 1)
+						{
+							iPartPollMax = b + ciPARTPOLLSTART - 1;
+							break;
+						}
+					}
+					to_modules$ = unenc$ + csENDCHAR;
+				}
+				else if(byte(unenc$, 2) = 0x12)
+				{
+					to_modules$ = unenc$ + csENDCHAR;
+				}
+				else if(byte(unenc$, 2) = 0x03)
+				{
+					to_modules$ = unenc$ + csENDCHAR;
+				}
+				delay(5);
+				if(iNextStore <> iNextSend)
+				{
+					to_device$ = sQueue[iNextSend];
+					call fTimeOut();
+					iSent = 1;
+					iNextSend = iNextSend + 1;
+					if(iNextSend > ciQUEUESIZE)
+					{
+						iNextSend = 1;
+					}
+				}
+				else if((poll = 1) && (iNextPoll <> 0))
+				{
+					sum1 = 0;
+					sum2 = 0;
+				  sTemp = sPoll[iNextPoll];
+				  iNextPoll = iNextPoll + 1;
+				  if((iNextPoll > iPartPollMax) && (iNextPoll < ciZONEPOLLSTART))
+				  {
+				  	iNextPoll = ciZONEPOLLSTART;
+				  }
+				  else if(iNextPoll > ciPOLLSIZE)
+				  {
+				  	iNextPoll = 0;
+				  }
+					// Preface the string with it's length
+					temp1$ = chr(len(sTemp)) + sTemp;
+					// Find the Fletcher Sum
+					for(i = 1 to len(temp1$))
+					{
+						if((255 - sum1) < byte(temp1$, i))
+			  			sum1 = low(sum1 + 1);
+						sum1 = low(sum1 + byte(temp1$, i));
+						if(sum1 = 255)
+							sum1 = 0;
+						if((255 - sum2) < sum1)
+							sum2 = low(sum2 + 1);
+						sum2 = low(sum2 + sum1);
+						if(sum2 = 255)
+							sum2 = 0;
+					}
+					// Suffix the Fletcher sum to the string
+					temp1$ = temp1$ + chr(sum1) + chr(sum2);
+					// ASCII-fy the string
+					temp$ = "";
+					for(i = 1 to len(temp1$))
+						makestring(temp$, "%s%02X", temp$, byte(temp1$, i));
+					// Add the Start and End characters
+					to_device$ = "\x0A" + temp$ + "\x0D";
+					call fTimeOut();
+					iSent = 1;
+				}
+				else
+				{
+					iSent = 0;
+				}
+			}
+		} until (len(packet$) = 0 || len(from_device$) = 0);
+		iFlag2 = 0;
+	}
+}
+
+PUSH send
+{ 
+	if((poll = 1) && (iNextPoll = 0))
+	{
+		iNextPoll = 1;
+		if(iSent = 0)
+		{
+			sum1 = 0;
+			sum2 = 0;
+			sTemp = sPoll[iNextPoll];
+			// Preface the string with it's length
+			temp1$ = chr(len(sTemp)) + sTemp;
+			// Find the Fletcher Sum
+			for(i = 1 to len(temp1$))
+			{
+				if((255 - sum1) < byte(temp1$, i))
+	  			sum1 = low(sum1 + 1);
+				sum1 = low(sum1 + byte(temp1$, i));
+				if(sum1 = 255)
+					sum1 = 0;
+				if((255 - sum2) < sum1)
+					sum2 = low(sum2 + 1);
+				sum2 = low(sum2 + sum1);
+				if(sum2 = 255)
+					sum2 = 0;
+			}
+			// Suffix the Fletcher sum to the string
+			temp1$ = temp1$ + chr(sum1) + chr(sum2);
+			// ASCII-fy the string
+			temp$ = "";
+			for(i = 1 to len(temp1$))
+				makestring(temp$, "%s%02X", temp$, byte(temp1$, i));
+			// Add the Start and End characters
+			to_device$ = "\x0A" + temp$ + "\x0D";
+			call fTimeOut();
+			iSent = 1;
+			iNextPoll = iNextPoll + 1;
+		  if((iNextPoll > iPartPollMax) && (iNextPoll < ciZONEPOLLSTART))
+		  {
+		  	iNextPoll = ciZONEPOLLSTART;
+		  }
+	  	else if(iNextPoll > iMaxPoll)
+			{
+				iNextPoll = 0;
+			}
+		}
+	}
+}
+PUSH dataLost
+{
+	packet$ = "";
+	from_device$ = "";
+	iNextStore = 1;
+	iNextSend = 1;
+	iNextPoll = 0;
+	iFlag1 = 0;
+	iFlag2 = 0;
+	iSent = 0;
+	iSendCount = 0;
+	iMaxPoll = ciPOLLSIZE;
+	iPartPollMax = ciPARTPOLLEND;
+}
+PUSH resend, dataLost
+{
+	delay(1);
+	Time_Out = 0;
+	if(iNextStore <> iNextSend)
+	{
+		to_device$ = sQueue[iNextSend];
+		call fTimeOut();
+		iSent = 1;
+		iNextSend = iNextSend + 1;
+		if(iNextSend > ciQUEUESIZE)
+		{
+			iNextSend = 1;
+		}
+	}
+	else if((poll = 1) && (iNextPoll <> 0))
+	{
+		sum1 = 0;
+		sum2 = 0;
+	  sTemp = sPoll[iNextPoll];
+	  iNextPoll = iNextPoll + 1;
+	  if((iNextPoll > iPartPollMax) && (iNextPoll < ciZONEPOLLSTART))
+	  {
+	  	iNextPoll = ciZONEPOLLSTART;
+	  }
+	  else if(iNextPoll > ciPOLLSIZE)
+	  {
+	  	iNextPoll = 0;
+	  }
+		// Preface the string with it's length
+		temp1$ = chr(len(sTemp)) + sTemp;
+		// Find the Fletcher Sum
+		for(i = 1 to len(temp1$))
+		{
+			if((255 - sum1) < byte(temp1$, i))
+  			sum1 = low(sum1 + 1);
+			sum1 = low(sum1 + byte(temp1$, i));
+			if(sum1 = 255)
+				sum1 = 0;
+			if((255 - sum2) < sum1)
+				sum2 = low(sum2 + 1);
+			sum2 = low(sum2 + sum1);
+			if(sum2 = 255)
+				sum2 = 0;
+		}
+		// Suffix the Fletcher sum to the string
+		temp1$ = temp1$ + chr(sum1) + chr(sum2);
+		// ASCII-fy the string
+		temp$ = "";
+		for(i = 1 to len(temp1$))
+			makestring(temp$, "%s%02X", temp$, byte(temp1$, i));
+		// Add the Start and End characters
+		to_device$ = "\x0A" + temp$ + "\x0D";
+		call fTimeOut();
+	}
+	else
+	{
+		iSent = 0;
+	}
+}
+
+CHANGE number_of_zones
+{
+	iTemp = number_of_zones;
+	if((iTemp mod 16) > 0)
+	{
+		iMaxPoll = (iTemp / 16) + 3;
+	}
+	else
+	{
+		iMaxPoll = (iTemp / 16) + 2;
+	}
+}
+
+change from_modules$
+{
+	if(iFlag1 = 0)
+	{
+		iFlag1 = 1;
+		while(find(csENDCHAR, from_modules$) > 0)
+		{
+			sum1 = 0;
+			sum2 = 0;
+		  sTemp = remove(csENDCHAR, from_modules$);
+		  sTemp = left(sTemp, (len(sTemp) - 2));
+			// Preface the string with it's length
+			temp1$ = chr(len(sTemp)) + sTemp;
+			// Find the Fletcher Sum
+			for(i = 1 to len(temp1$))
+			{
+				if((255 - sum1) < byte(temp1$, i))
+				  sum1 = low(sum1 + 1);
+				sum1 = low(sum1 + byte(temp1$, i));
+				if(sum1 = 255)
+					sum1 = 0;
+				if((255 - sum2) < sum1)
+					sum2 = low(sum2 + 1);
+				sum2 = low(sum2 + sum1);
+				if(sum2 = 255)
+					sum2 = 0;
+			}
+			// Suffix the Fletcher sum to the string
+			temp1$ = temp1$ + chr(sum1) + chr(sum2);
+			// ASCII-fy the string
+			temp$ = "";
+			for(i = 1 to len(temp1$))
+				makestring(temp$, "%s%02X", temp$, byte(temp1$, i));
+			// Add the Start and End characters
+			if(iSent = 0)
+			{
+				to_device$ = "\x0A" + temp$ + "\x0D";
+				call fTimeOut();
+				iSent = 1;
+			}
+			else
+			{
+				sQueue[iNextStore] = "\x0A" + temp$ + "\x0D";
+				iNextStore = iNextStore + 1;
+				if(iNextStore > ciQUEUESIZE)
+				{
+					iNextStore = 1;
+				}
+			}
+		}
+		iFlag1 = 0;
+	}
+}
+
+Function Main()
+{
+	iNextStore = 1;
+	iNextSend = 1;
+	iNextPoll = 0;
+	iFlag1 = 0;
+	iFlag2 = 0;
+	iSent = 0;
+	iSendCount = 0;
+	iMaxPoll = ciPOLLSIZE;
+	iPartPollMax = ciPARTPOLLEND;
+	sPoll[1] = csPOLLSYSTEM;
+	sPoll[2] = csPOLLPART1;
+	sPoll[3] = csPOLLPART2;
+	sPoll[4] = csPOLLPART3;
+	sPoll[5] = csPOLLPART4;
+	sPoll[6] = csPOLLPART5;
+	sPoll[7] = csPOLLPART6;
+	sPoll[8] = csPOLLPART7;
+	sPoll[9] = csPOLLPART8;
+	sPoll[10] = csPOLLZONE16;
+	sPoll[11] = csPOLLZONE32;
+	sPoll[12] = csPOLLZONE48;
+	sPoll[13] = csPOLLZONE64;
+	sPoll[14] = csPOLLZONE80;
+	sPoll[15] = csPOLLZONE96;
+	sPoll[16] = csPOLLZONE112;
+	sPoll[17] = csPOLLZONE128;
+	sPoll[18] = csPOLLZONE144;
+	sPoll[19] = csPOLLZONE160;
+	sPoll[20] = csPOLLZONE176;
+	sPoll[21] = csPOLLZONE192;
+}

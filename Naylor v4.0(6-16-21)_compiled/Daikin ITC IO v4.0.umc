@@ -1,0 +1,5910 @@
+[
+Version=1
+]
+[
+ObjTp=FSgntr
+Sgntr=UserMacro
+RelVrs=3.01.22
+IntStrVrs=2
+MinSMWVrs=2.02.05
+MinTIOVrs=0
+SavedBy=SMW3.01.22
+]
+[
+ObjTp=Hd
+S0Nd=1
+S1Nd=2
+SLNd=3
+PrNm=Daikin ITC IO v4.0.umc
+DbVr=24.00.039.00
+DvcDbVr=32.00.019.00
+PgmNm=Christophe Hombrouck
+DlrNm=Crestron International
+CltNm=Daikin ITC
+Incl=362,378,380,405,407,408,409,478,522,537,554,586,590,611,624,767,830,883,1032,1062,1079,1134,1157,1199,1220,1222,1299,1348,1439,1472,1473,1499,1746,1803,1975,2229,2354,2514,2523,2532,
+McNm=Daikin ITC IO v4.0
+SmVr=708
+DvVr=708
+TpN1=1
+TpN2=2
+TpN3=3
+TpN4=4
+TpN5=5
+PdfHelp=Daikin ITC IO v4.0 Help.pdf
+DT=HVAC
+DST=Multi-zone HVAC
+Mfg=Daikin
+NumMdl=1
+Mdl1=Intelligent Touch Controller
+APg=1
+StdCmd=0
+FltTmp=1
+FpCS=0
+EnType=3
+ZeroOnIoOk=0
+]
+[
+ObjTp=Bk
+Nm1=\
+Sx1=0
+Sy1=0
+Mx1=0
+]
+[
+ObjTp=Symbol
+Name=Daikin ITC IO v4.0
+Code=1
+SmplCName=Daikin ITC IO v4.0.umc
+Smpl-C=3
+CompilerTimePrecision=Single_Or_Double_Precision
+Exclusions=1,19,20,21,88,89,167,168,179,213,214,215,216,217,225,226,248,249,266,267,310,718,756,854,1766,2567,2574,2590,2651,2655,
+Hint=Daikin ITC
+SMWRev=2.02.05
+TIORev=0
+S+=1
+HelpID=1055
+PdfHelp=Daikin ITC IO v4.0 Help.pdf
+DT=HVAC
+DST=Multi-zone HVAC
+Mfg=Daikin
+NumMdl=1
+Mdl1=Intelligent Touch Controller
+APg=1
+StdCmd=0
+FltTmp=1
+FpCS=0
+NumFixedInputs=143
+NumFixedOutputs=143
+NumFixedParams=2
+MinVariableInputs=0
+MinVariableInputsList2=0
+MinVariableInputsList3=0
+MinVariableOutputs=0
+MinVariableOutputsList2=0
+MinVariableOutputsList3=0
+MinVariableParams=0
+SymbolTree=22
+InputSigType1=Digital
+InputSigType2=Digital
+InputSigType3=Digital
+InputSigType4=Digital|Analog|Serial|String
+InputSigType5=Serial
+InputSigType6=Digital|Analog|Serial|String
+InputSigType7=Digital
+InputSigType8=Digital
+InputSigType9=Digital
+InputSigType10=Digital
+InputSigType11=Digital
+InputSigType12=Digital
+InputSigType13=Digital
+InputSigType14=Digital
+InputSigType15=Digital
+InputSigType16=Digital
+InputSigType17=Digital
+InputSigType18=Digital
+InputSigType19=Digital
+InputSigType20=Digital
+InputSigType21=Digital
+InputSigType22=Digital
+InputSigType23=Digital|Analog|Serial|String
+InputSigType24=Digital
+InputSigType25=Digital
+InputSigType26=Digital
+InputSigType27=Digital
+InputSigType28=Digital
+InputSigType29=Digital
+InputSigType30=Digital
+InputSigType31=Digital
+InputSigType32=Digital
+InputSigType33=Digital
+InputSigType34=Digital
+InputSigType35=Digital
+InputSigType36=Digital
+InputSigType37=Digital
+InputSigType38=Digital
+InputSigType39=Digital
+InputSigType40=Digital|Analog|Serial|String
+InputSigType41=Digital
+InputSigType42=Digital
+InputSigType43=Digital
+InputSigType44=Digital
+InputSigType45=Digital
+InputSigType46=Digital
+InputSigType47=Digital
+InputSigType48=Digital
+InputSigType49=Digital
+InputSigType50=Digital
+InputSigType51=Digital
+InputSigType52=Digital
+InputSigType53=Digital
+InputSigType54=Digital
+InputSigType55=Digital
+InputSigType56=Digital
+InputSigType57=Digital|Analog|Serial|String
+InputSigType58=Digital
+InputSigType59=Digital
+InputSigType60=Digital
+InputSigType61=Digital
+InputSigType62=Digital
+InputSigType63=Digital
+InputSigType64=Digital
+InputSigType65=Digital
+InputSigType66=Digital
+InputSigType67=Digital
+InputSigType68=Digital
+InputSigType69=Digital
+InputSigType70=Digital
+InputSigType71=Digital
+InputSigType72=Digital
+InputSigType73=Digital
+InputSigType74=Digital|Analog|Serial|String
+InputSigType75=Digital|Analog|Serial|String
+InputSigType76=Digital|Analog|Serial|String
+InputSigType77=Digital
+InputSigType78=Digital
+InputSigType79=Digital
+InputSigType80=Digital
+InputSigType81=Digital
+InputSigType82=Digital
+InputSigType83=Digital
+InputSigType84=Digital
+InputSigType85=Digital
+InputSigType86=Digital
+InputSigType87=Digital
+InputSigType88=Digital
+InputSigType89=Digital
+InputSigType90=Digital
+InputSigType91=Digital
+InputSigType92=Digital
+InputSigType93=Digital|Analog|Serial|String
+InputSigType94=Digital
+InputSigType95=Digital
+InputSigType96=Digital
+InputSigType97=Digital
+InputSigType98=Digital
+InputSigType99=Digital
+InputSigType100=Digital
+InputSigType101=Digital
+InputSigType102=Digital
+InputSigType103=Digital
+InputSigType104=Digital
+InputSigType105=Digital
+InputSigType106=Digital
+InputSigType107=Digital
+InputSigType108=Digital
+InputSigType109=Digital
+InputSigType110=Digital|Analog|Serial|String
+InputSigType111=Digital
+InputSigType112=Digital
+InputSigType113=Digital
+InputSigType114=Digital
+InputSigType115=Digital
+InputSigType116=Digital
+InputSigType117=Digital
+InputSigType118=Digital
+InputSigType119=Digital
+InputSigType120=Digital
+InputSigType121=Digital
+InputSigType122=Digital
+InputSigType123=Digital
+InputSigType124=Digital
+InputSigType125=Digital
+InputSigType126=Digital
+InputSigType127=Digital|Analog|Serial|String
+InputSigType128=Digital
+OutputSigType1=Digital|Analog|Serial|String
+OutputSigType2=Digital|Analog|Serial|String
+OutputSigType3=Digital
+OutputSigType4=Digital|Analog|Serial|String
+OutputSigType5=Digital|Analog|Serial|String
+OutputSigType6=Digital|Analog|Serial|String
+OutputSigType7=Serial
+OutputSigType8=Serial
+OutputSigType9=Serial
+OutputSigType10=Serial
+OutputSigType11=Serial
+OutputSigType12=Serial
+OutputSigType13=Serial
+OutputSigType14=Serial
+OutputSigType15=Serial
+OutputSigType16=Serial
+OutputSigType17=Serial
+OutputSigType18=Serial
+OutputSigType19=Serial
+OutputSigType20=Serial
+OutputSigType21=Serial
+OutputSigType22=Serial
+OutputSigType23=Digital|Analog|Serial|String
+OutputSigType24=Serial
+OutputSigType25=Serial
+OutputSigType26=Serial
+OutputSigType27=Serial
+OutputSigType28=Serial
+OutputSigType29=Serial
+OutputSigType30=Serial
+OutputSigType31=Serial
+OutputSigType32=Serial
+OutputSigType33=Serial
+OutputSigType34=Serial
+OutputSigType35=Serial
+OutputSigType36=Serial
+OutputSigType37=Serial
+OutputSigType38=Serial
+OutputSigType39=Serial
+OutputSigType40=Digital|Analog|Serial|String
+OutputSigType41=Serial
+OutputSigType42=Serial
+OutputSigType43=Serial
+OutputSigType44=Serial
+OutputSigType45=Serial
+OutputSigType46=Serial
+OutputSigType47=Serial
+OutputSigType48=Serial
+OutputSigType49=Serial
+OutputSigType50=Serial
+OutputSigType51=Serial
+OutputSigType52=Serial
+OutputSigType53=Serial
+OutputSigType54=Serial
+OutputSigType55=Serial
+OutputSigType56=Serial
+OutputSigType57=Digital|Analog|Serial|String
+OutputSigType58=Serial
+OutputSigType59=Serial
+OutputSigType60=Serial
+OutputSigType61=Serial
+OutputSigType62=Serial
+OutputSigType63=Serial
+OutputSigType64=Serial
+OutputSigType65=Serial
+OutputSigType66=Serial
+OutputSigType67=Serial
+OutputSigType68=Serial
+OutputSigType69=Serial
+OutputSigType70=Serial
+OutputSigType71=Serial
+OutputSigType72=Serial
+OutputSigType73=Serial
+OutputSigType74=Digital|Analog|Serial|String
+OutputSigType75=Digital|Analog|Serial|String
+OutputSigType76=Digital|Analog|Serial|String
+OutputSigType77=Serial
+OutputSigType78=Serial
+OutputSigType79=Serial
+OutputSigType80=Serial
+OutputSigType81=Serial
+OutputSigType82=Serial
+OutputSigType83=Serial
+OutputSigType84=Serial
+OutputSigType85=Serial
+OutputSigType86=Serial
+OutputSigType87=Serial
+OutputSigType88=Serial
+OutputSigType89=Serial
+OutputSigType90=Serial
+OutputSigType91=Serial
+OutputSigType92=Serial
+OutputSigType93=Digital|Analog|Serial|String
+OutputSigType94=Serial
+OutputSigType95=Serial
+OutputSigType96=Serial
+OutputSigType97=Serial
+OutputSigType98=Serial
+OutputSigType99=Serial
+OutputSigType100=Serial
+OutputSigType101=Serial
+OutputSigType102=Serial
+OutputSigType103=Serial
+OutputSigType104=Serial
+OutputSigType105=Serial
+OutputSigType106=Serial
+OutputSigType107=Serial
+OutputSigType108=Serial
+OutputSigType109=Serial
+OutputSigType110=Digital|Analog|Serial|String
+OutputSigType111=Serial
+OutputSigType112=Serial
+OutputSigType113=Serial
+OutputSigType114=Serial
+OutputSigType115=Serial
+OutputSigType116=Serial
+OutputSigType117=Serial
+OutputSigType118=Serial
+OutputSigType119=Serial
+OutputSigType120=Serial
+OutputSigType121=Serial
+OutputSigType122=Serial
+OutputSigType123=Serial
+OutputSigType124=Serial
+OutputSigType125=Serial
+OutputSigType126=Serial
+OutputSigType127=Digital|Analog|Serial|String
+OutputSigType128=Serial
+ParamSigType1=String
+ParamSigType2=Constant
+InputCue1=[Service]
+InputCue2=[Poll_All_Module_Info]
+InputCue3=[Poll_All_Units]
+InputCue4=[~UNUSED~]
+InputCue5=Command
+InputCue6=[~UNUSED~]
+InputCue7=[Poll_Unit_1-1-00]
+InputCue8=[Poll_Unit_1-1-01]
+InputCue9=[Poll_Unit_1-1-02]
+InputCue10=[Poll_Unit_1-1-03]
+InputCue11=[Poll_Unit_1-1-04]
+InputCue12=[Poll_Unit_1-1-05]
+InputCue13=[Poll_Unit_1-1-06]
+InputCue14=[Poll_Unit_1-1-07]
+InputCue15=[Poll_Unit_1-1-08]
+InputCue16=[Poll_Unit_1-1-09]
+InputCue17=[Poll_Unit_1-1-10]
+InputCue18=[Poll_Unit_1-1-11]
+InputCue19=[Poll_Unit_1-1-12]
+InputCue20=[Poll_Unit_1-1-13]
+InputCue21=[Poll_Unit_1-1-14]
+InputCue22=[Poll_Unit_1-1-15]
+InputCue23=[~UNUSED~]
+InputCue24=[Poll_Unit_1-2-00]
+InputCue25=[Poll_Unit_1-2-01]
+InputCue26=[Poll_Unit_1-2-02]
+InputCue27=[Poll_Unit_1-2-03]
+InputCue28=[Poll_Unit_1-2-04]
+InputCue29=[Poll_Unit_1-2-05]
+InputCue30=[Poll_Unit_1-2-06]
+InputCue31=[Poll_Unit_1-2-07]
+InputCue32=[Poll_Unit_1-2-08]
+InputCue33=[Poll_Unit_1-2-09]
+InputCue34=[Poll_Unit_1-2-10]
+InputCue35=[Poll_Unit_1-2-11]
+InputCue36=[Poll_Unit_1-2-12]
+InputCue37=[Poll_Unit_1-2-13]
+InputCue38=[Poll_Unit_1-2-14]
+InputCue39=[Poll_Unit_1-2-15]
+InputCue40=[~UNUSED~]
+InputCue41=[Poll_Unit_1-3-00]
+InputCue42=[Poll_Unit_1-3-01]
+InputCue43=[Poll_Unit_1-3-02]
+InputCue44=[Poll_Unit_1-3-03]
+InputCue45=[Poll_Unit_1-3-04]
+InputCue46=[Poll_Unit_1-3-05]
+InputCue47=[Poll_Unit_1-3-06]
+InputCue48=[Poll_Unit_1-3-07]
+InputCue49=[Poll_Unit_1-3-08]
+InputCue50=[Poll_Unit_1-3-09]
+InputCue51=[Poll_Unit_1-3-10]
+InputCue52=[Poll_Unit_1-3-11]
+InputCue53=[Poll_Unit_1-3-12]
+InputCue54=[Poll_Unit_1-3-13]
+InputCue55=[Poll_Unit_1-3-14]
+InputCue56=[Poll_Unit_1-3-15]
+InputCue57=[~UNUSED~]
+InputCue58=[Poll_Unit_1-4-00]
+InputCue59=[Poll_Unit_1-4-01]
+InputCue60=[Poll_Unit_1-4-02]
+InputCue61=[Poll_Unit_1-4-03]
+InputCue62=[Poll_Unit_1-4-04]
+InputCue63=[Poll_Unit_1-4-05]
+InputCue64=[Poll_Unit_1-4-06]
+InputCue65=[Poll_Unit_1-4-07]
+InputCue66=[Poll_Unit_1-4-08]
+InputCue67=[Poll_Unit_1-4-09]
+InputCue68=[Poll_Unit_1-4-10]
+InputCue69=[Poll_Unit_1-4-11]
+InputCue70=[Poll_Unit_1-4-12]
+InputCue71=[Poll_Unit_1-4-13]
+InputCue72=[Poll_Unit_1-4-14]
+InputCue73=[Poll_Unit_1-4-15]
+InputCue74=[~UNUSED~]
+InputCue75=[~UNUSED~]
+InputCue76=[~UNUSED~]
+InputCue77=[Poll_Unit_2-1-00]
+InputCue78=[Poll_Unit_2-1-01]
+InputCue79=[Poll_Unit_2-1-02]
+InputCue80=[Poll_Unit_2-1-03]
+InputCue81=[Poll_Unit_2-1-04]
+InputCue82=[Poll_Unit_2-1-05]
+InputCue83=[Poll_Unit_2-1-06]
+InputCue84=[Poll_Unit_2-1-07]
+InputCue85=[Poll_Unit_2-1-08]
+InputCue86=[Poll_Unit_2-1-09]
+InputCue87=[Poll_Unit_2-1-10]
+InputCue88=[Poll_Unit_2-1-11]
+InputCue89=[Poll_Unit_2-1-12]
+InputCue90=[Poll_Unit_2-1-13]
+InputCue91=[Poll_Unit_2-1-14]
+InputCue92=[Poll_Unit_2-1-15]
+InputCue93=[~UNUSED~]
+InputCue94=[Poll_Unit_2-2-00]
+InputCue95=[Poll_Unit_2-2-01]
+InputCue96=[Poll_Unit_2-2-02]
+InputCue97=[Poll_Unit_2-2-03]
+InputCue98=[Poll_Unit_2-2-04]
+InputCue99=[Poll_Unit_2-2-05]
+InputCue100=[Poll_Unit_2-2-06]
+InputCue101=[Poll_Unit_2-2-07]
+InputCue102=[Poll_Unit_2-2-08]
+InputCue103=[Poll_Unit_2-2-09]
+InputCue104=[Poll_Unit_2-2-10]
+InputCue105=[Poll_Unit_2-2-11]
+InputCue106=[Poll_Unit_2-2-12]
+InputCue107=[Poll_Unit_2-2-13]
+InputCue108=[Poll_Unit_2-2-14]
+InputCue109=[Poll_Unit_2-2-15]
+InputCue110=[~UNUSED~]
+InputCue111=[Poll_Unit_2-3-00]
+InputCue112=[Poll_Unit_2-3-01]
+InputCue113=[Poll_Unit_2-3-02]
+InputCue114=[Poll_Unit_2-3-03]
+InputCue115=[Poll_Unit_2-3-04]
+InputCue116=[Poll_Unit_2-3-05]
+InputCue117=[Poll_Unit_2-3-06]
+InputCue118=[Poll_Unit_2-3-07]
+InputCue119=[Poll_Unit_2-3-08]
+InputCue120=[Poll_Unit_2-3-09]
+InputCue121=[Poll_Unit_2-3-10]
+InputCue122=[Poll_Unit_2-3-11]
+InputCue123=[Poll_Unit_2-3-12]
+InputCue124=[Poll_Unit_2-3-13]
+InputCue125=[Poll_Unit_2-3-14]
+InputCue126=[Poll_Unit_2-3-15]
+InputCue127=[~UNUSED~]
+InputCue128=[Poll_Unit_2-4-00]
+InputCue129=[Poll_Unit_2-4-01]
+InputCue130=[Poll_Unit_2-4-02]
+InputCue131=[Poll_Unit_2-4-03]
+InputCue132=[Poll_Unit_2-4-04]
+InputCue133=[Poll_Unit_2-4-05]
+InputCue134=[Poll_Unit_2-4-06]
+InputCue135=[Poll_Unit_2-4-07]
+InputCue136=[Poll_Unit_2-4-08]
+InputCue137=[Poll_Unit_2-4-09]
+InputCue138=[Poll_Unit_2-4-10]
+InputCue139=[Poll_Unit_2-4-11]
+InputCue140=[Poll_Unit_2-4-12]
+InputCue141=[Poll_Unit_2-4-13]
+InputCue142=[Poll_Unit_2-4-14]
+InputCue143=[Poll_Unit_2-4-15]
+OutputCue1=[~UNUSED~]
+OutputCue2=[~UNUSED~]
+OutputCue3=System_Is_Busy
+OutputCue4=[~UNUSED~]
+OutputCue5=[~UNUSED~]
+OutputCue6=[~UNUSED~]
+OutputCue7=[Unit_1-1-00]
+OutputCue8=[Unit_1-1-01]
+OutputCue9=[Unit_1-1-02]
+OutputCue10=[Unit_1-1-03]
+OutputCue11=[Unit_1-1-04]
+OutputCue12=[Unit_1-1-05]
+OutputCue13=[Unit_1-1-06]
+OutputCue14=[Unit_1-1-07]
+OutputCue15=[Unit_1-1-08]
+OutputCue16=[Unit_1-1-09]
+OutputCue17=[Unit_1-1-10]
+OutputCue18=[Unit_1-1-11]
+OutputCue19=[Unit_1-1-12]
+OutputCue20=[Unit_1-1-13]
+OutputCue21=[Unit_1-1-14]
+OutputCue22=[Unit_1-1-15]
+OutputCue23=[~UNUSED~]
+OutputCue24=[Unit_1-2-00]
+OutputCue25=[Unit_1-2-01]
+OutputCue26=[Unit_1-2-02]
+OutputCue27=[Unit_1-2-03]
+OutputCue28=[Unit_1-2-04]
+OutputCue29=[Unit_1-2-05]
+OutputCue30=[Unit_1-2-06]
+OutputCue31=[Unit_1-2-07]
+OutputCue32=[Unit_1-2-08]
+OutputCue33=[Unit_1-2-09]
+OutputCue34=[Unit_1-2-10]
+OutputCue35=[Unit_1-2-11]
+OutputCue36=[Unit_1-2-12]
+OutputCue37=[Unit_1-2-13]
+OutputCue38=[Unit_1-2-14]
+OutputCue39=[Unit_1-2-15]
+OutputCue40=[~UNUSED~]
+OutputCue41=[Unit_1-3-00]
+OutputCue42=[Unit_1-3-01]
+OutputCue43=[Unit_1-3-02]
+OutputCue44=[Unit_1-3-03]
+OutputCue45=[Unit_1-3-04]
+OutputCue46=[Unit_1-3-05]
+OutputCue47=[Unit_1-3-06]
+OutputCue48=[Unit_1-3-07]
+OutputCue49=[Unit_1-3-08]
+OutputCue50=[Unit_1-3-09]
+OutputCue51=[Unit_1-3-10]
+OutputCue52=[Unit_1-3-11]
+OutputCue53=[Unit_1-3-12]
+OutputCue54=[Unit_1-3-13]
+OutputCue55=[Unit_1-3-14]
+OutputCue56=[Unit_1-3-15]
+OutputCue57=[~UNUSED~]
+OutputCue58=[Unit_1-4-00]
+OutputCue59=[Unit_1-4-01]
+OutputCue60=[Unit_1-4-02]
+OutputCue61=[Unit_1-4-03]
+OutputCue62=[Unit_1-4-04]
+OutputCue63=[Unit_1-4-05]
+OutputCue64=[Unit_1-4-06]
+OutputCue65=[Unit_1-4-07]
+OutputCue66=[Unit_1-4-08]
+OutputCue67=[Unit_1-4-09]
+OutputCue68=[Unit_1-4-10]
+OutputCue69=[Unit_1-4-11]
+OutputCue70=[Unit_1-4-12]
+OutputCue71=[Unit_1-4-13]
+OutputCue72=[Unit_1-4-14]
+OutputCue73=[Unit_1-4-15]
+OutputCue74=[~UNUSED~]
+OutputCue75=[~UNUSED~]
+OutputCue76=[~UNUSED~]
+OutputCue77=[Unit_2-1-00]
+OutputCue78=[Unit_2-1-01]
+OutputCue79=[Unit_2-1-02]
+OutputCue80=[Unit_2-1-03]
+OutputCue81=[Unit_2-1-04]
+OutputCue82=[Unit_2-1-05]
+OutputCue83=[Unit_2-1-06]
+OutputCue84=[Unit_2-1-07]
+OutputCue85=[Unit_2-1-08]
+OutputCue86=[Unit_2-1-09]
+OutputCue87=[Unit_2-1-10]
+OutputCue88=[Unit_2-1-11]
+OutputCue89=[Unit_2-1-12]
+OutputCue90=[Unit_2-1-13]
+OutputCue91=[Unit_2-1-14]
+OutputCue92=[Unit_2-1-15]
+OutputCue93=[~UNUSED~]
+OutputCue94=[Unit_2-2-00]
+OutputCue95=[Unit_2-2-01]
+OutputCue96=[Unit_2-2-02]
+OutputCue97=[Unit_2-2-03]
+OutputCue98=[Unit_2-2-04]
+OutputCue99=[Unit_2-2-05]
+OutputCue100=[Unit_2-2-06]
+OutputCue101=[Unit_2-2-07]
+OutputCue102=[Unit_2-2-08]
+OutputCue103=[Unit_2-2-09]
+OutputCue104=[Unit_2-2-10]
+OutputCue105=[Unit_2-2-11]
+OutputCue106=[Unit_2-2-12]
+OutputCue107=[Unit_2-2-13]
+OutputCue108=[Unit_2-2-14]
+OutputCue109=[Unit_2-2-15]
+OutputCue110=[~UNUSED~]
+OutputCue111=[Unit_2-3-00]
+OutputCue112=[Unit_2-3-01]
+OutputCue113=[Unit_2-3-02]
+OutputCue114=[Unit_2-3-03]
+OutputCue115=[Unit_2-3-04]
+OutputCue116=[Unit_2-3-05]
+OutputCue117=[Unit_2-3-06]
+OutputCue118=[Unit_2-3-07]
+OutputCue119=[Unit_2-3-08]
+OutputCue120=[Unit_2-3-09]
+OutputCue121=[Unit_2-3-10]
+OutputCue122=[Unit_2-3-11]
+OutputCue123=[Unit_2-3-12]
+OutputCue124=[Unit_2-3-13]
+OutputCue125=[Unit_2-3-14]
+OutputCue126=[Unit_2-3-15]
+OutputCue127=[~UNUSED~]
+OutputCue128=[Unit_2-4-00]
+OutputCue129=[Unit_2-4-01]
+OutputCue130=[Unit_2-4-02]
+OutputCue131=[Unit_2-4-03]
+OutputCue132=[Unit_2-4-04]
+OutputCue133=[Unit_2-4-05]
+OutputCue134=[Unit_2-4-06]
+OutputCue135=[Unit_2-4-07]
+OutputCue136=[Unit_2-4-08]
+OutputCue137=[Unit_2-4-09]
+OutputCue138=[Unit_2-4-10]
+OutputCue139=[Unit_2-4-11]
+OutputCue140=[Unit_2-4-12]
+OutputCue141=[Unit_2-4-13]
+OutputCue142=[Unit_2-4-14]
+OutputCue143=[Unit_2-4-15]
+ParamCue1=IP_Address
+ParamCue2=Port
+MPi=143
+Pi1=2
+Pi2=262
+Pi3=3
+Pi5=4
+Pi7=6
+Pi8=7
+Pi9=8
+Pi10=9
+Pi11=10
+Pi12=11
+Pi13=12
+Pi14=13
+Pi15=14
+Pi16=15
+Pi17=16
+Pi18=17
+Pi19=18
+Pi20=19
+Pi21=20
+Pi22=21
+Pi24=22
+Pi25=23
+Pi26=24
+Pi27=25
+Pi28=26
+Pi29=27
+Pi30=28
+Pi31=29
+Pi32=30
+Pi33=31
+Pi34=32
+Pi35=33
+Pi36=34
+Pi37=35
+Pi38=36
+Pi39=37
+Pi41=38
+Pi42=39
+Pi43=40
+Pi44=41
+Pi45=42
+Pi46=43
+Pi47=44
+Pi48=45
+Pi49=46
+Pi50=47
+Pi51=48
+Pi52=49
+Pi53=50
+Pi54=51
+Pi55=52
+Pi56=53
+Pi58=54
+Pi59=55
+Pi60=56
+Pi61=57
+Pi62=58
+Pi63=59
+Pi64=60
+Pi65=61
+Pi66=62
+Pi67=63
+Pi68=64
+Pi69=65
+Pi70=66
+Pi71=67
+Pi72=68
+Pi73=69
+Pi77=70
+Pi78=71
+Pi79=72
+Pi80=73
+Pi81=74
+Pi82=75
+Pi83=76
+Pi84=77
+Pi85=78
+Pi86=79
+Pi87=80
+Pi88=81
+Pi89=82
+Pi90=83
+Pi91=84
+Pi92=85
+Pi94=86
+Pi95=87
+Pi96=88
+Pi97=89
+Pi98=90
+Pi99=91
+Pi100=92
+Pi101=93
+Pi102=94
+Pi103=95
+Pi104=96
+Pi105=97
+Pi106=98
+Pi107=99
+Pi108=100
+Pi109=101
+Pi111=102
+Pi112=103
+Pi113=104
+Pi114=105
+Pi115=106
+Pi116=107
+Pi117=108
+Pi118=109
+Pi119=110
+Pi120=111
+Pi121=112
+Pi122=113
+Pi123=114
+Pi124=115
+Pi125=116
+Pi126=117
+Pi128=118
+Pi129=119
+Pi130=120
+Pi131=121
+Pi132=122
+Pi133=123
+Pi134=124
+Pi135=125
+Pi136=126
+Pi137=127
+Pi138=128
+Pi139=129
+Pi140=130
+Pi141=131
+Pi142=132
+Pi143=133
+MPo=143
+Po7=134
+Po8=135
+Po9=136
+Po10=137
+Po11=138
+Po12=139
+Po13=140
+Po14=141
+Po15=142
+Po16=143
+Po17=144
+Po18=145
+Po19=146
+Po20=147
+Po21=148
+Po22=149
+Po24=150
+Po25=151
+Po26=152
+Po27=153
+Po28=154
+Po29=155
+Po30=156
+Po31=157
+Po32=158
+Po33=159
+Po34=160
+Po35=161
+Po36=162
+Po37=163
+Po38=164
+Po39=165
+Po41=166
+Po42=167
+Po43=168
+Po44=169
+Po45=170
+Po46=171
+Po47=172
+Po48=173
+Po49=174
+Po50=175
+Po51=176
+Po52=177
+Po53=178
+Po54=179
+Po55=180
+Po56=181
+Po58=182
+Po59=183
+Po60=184
+Po61=185
+Po62=186
+Po63=187
+Po64=188
+Po65=189
+Po66=190
+Po67=191
+Po68=192
+Po69=193
+Po70=194
+Po71=195
+Po72=196
+Po73=197
+Po77=198
+Po78=199
+Po79=200
+Po80=201
+Po81=202
+Po82=203
+Po83=204
+Po84=205
+Po85=206
+Po86=207
+Po87=208
+Po88=209
+Po89=210
+Po90=211
+Po91=212
+Po92=213
+Po94=214
+Po95=215
+Po96=216
+Po97=217
+Po98=218
+Po99=219
+Po100=220
+Po101=221
+Po102=222
+Po103=223
+Po104=224
+Po105=225
+Po106=226
+Po107=227
+Po108=228
+Po109=229
+Po111=230
+Po112=231
+Po113=232
+Po114=233
+Po115=234
+Po116=235
+Po117=236
+Po118=237
+Po119=238
+Po120=239
+Po121=240
+Po122=241
+Po123=242
+Po124=243
+Po125=244
+Po126=245
+Po128=246
+Po129=247
+Po130=248
+Po131=249
+Po132=250
+Po133=251
+Po134=252
+Po135=253
+Po136=254
+Po137=255
+Po138=256
+Po139=257
+Po140=258
+Po141=259
+Po142=260
+Po143=261
+MPp=2
+Pp1=1
+Pp2=5
+FileName=Daikin ITC IO v4.0.umc
+EncodingType=3
+ZeroOnIoOk=0
+]
+[
+ObjTp=Sm
+H=1
+SmC=157
+Nm=Central Control Modules
+ObjVer=1
+CF=2
+n1I=1
+n1O=1
+mI=1
+mO=1
+tO=1
+mP=1
+P1=
+]
+[
+ObjTp=Sm
+H=2
+SmC=157
+Nm=Network Modules
+ObjVer=1
+CF=2
+n1I=1
+n1O=1
+mI=1
+mO=1
+tO=1
+mP=1
+P1=
+]
+[
+ObjTp=Sm
+H=3
+SmC=157
+Nm=Ethernet
+ObjVer=1
+CF=2
+n1I=1
+n1O=1
+mI=1
+mO=1
+tO=1
+mP=1
+P1=
+]
+[
+ObjTp=Sm
+H=4
+SmC=156
+Nm=Logic
+ObjVer=1
+CF=2
+mC=2
+C1=7
+C2=8
+]
+[
+ObjTp=Sm
+H=5
+SmC=157
+Nm=DefineArguments
+ObjVer=1
+CF=2
+n1I=1
+n1O=1
+mC=1
+C1=6
+mI=1
+mO=1
+tO=1
+mP=1
+P1=
+]
+[
+ObjTp=Sm
+H=6
+SmC=55
+ObjVer=1
+PrH=5
+CF=2
+n1I=143
+n1O=143
+mI=143
+I1=265
+I2=8
+I3=4
+I4=6
+I5=7
+I6=6
+I7=136
+I8=137
+I9=138
+I10=139
+I11=140
+I12=141
+I13=142
+I14=143
+I15=144
+I16=145
+I17=146
+I18=147
+I19=148
+I20=149
+I21=150
+I22=151
+I23=6
+I24=167
+I25=152
+I26=153
+I27=154
+I28=155
+I29=156
+I30=157
+I31=158
+I32=159
+I33=160
+I34=161
+I35=162
+I36=163
+I37=164
+I38=165
+I39=166
+I40=6
+I41=168
+I42=169
+I43=170
+I44=171
+I45=172
+I46=173
+I47=174
+I48=175
+I49=176
+I50=177
+I51=178
+I52=179
+I53=180
+I54=181
+I55=182
+I56=183
+I57=6
+I58=184
+I59=185
+I60=186
+I61=187
+I62=188
+I63=189
+I64=190
+I65=191
+I66=192
+I67=193
+I68=194
+I69=195
+I70=196
+I71=197
+I72=198
+I73=199
+I74=6
+I75=6
+I76=6
+I77=200
+I78=201
+I79=202
+I80=203
+I81=204
+I82=205
+I83=206
+I84=207
+I85=208
+I86=209
+I87=210
+I88=211
+I89=212
+I90=213
+I91=214
+I92=215
+I93=6
+I94=216
+I95=217
+I96=218
+I97=219
+I98=220
+I99=221
+I100=222
+I101=223
+I102=224
+I103=225
+I104=226
+I105=227
+I106=228
+I107=229
+I108=230
+I109=231
+I110=6
+I111=232
+I112=233
+I113=234
+I114=235
+I115=236
+I116=237
+I117=238
+I118=239
+I119=240
+I120=241
+I121=242
+I122=243
+I123=244
+I124=245
+I125=246
+I126=247
+I127=6
+I128=248
+I129=249
+I130=250
+I131=251
+I132=252
+I133=253
+I134=254
+I135=255
+I136=256
+I137=257
+I138=258
+I139=259
+I140=260
+I141=261
+I142=262
+I143=263
+mO=143
+tO=143
+O1=6
+O2=6
+O3=264
+O4=6
+O5=6
+O6=6
+O7=5
+O8=9
+O9=10
+O10=11
+O11=12
+O12=13
+O13=14
+O14=15
+O15=16
+O16=17
+O17=18
+O18=19
+O19=20
+O20=21
+O21=22
+O22=23
+O23=6
+O24=24
+O25=25
+O26=26
+O27=27
+O28=28
+O29=29
+O30=30
+O31=31
+O32=32
+O33=33
+O34=34
+O35=35
+O36=36
+O37=37
+O38=38
+O39=39
+O40=6
+O41=40
+O42=41
+O43=42
+O44=43
+O45=44
+O46=45
+O47=46
+O48=47
+O49=48
+O50=49
+O51=50
+O52=51
+O53=52
+O54=53
+O55=54
+O56=55
+O57=6
+O58=56
+O59=57
+O60=58
+O61=59
+O62=60
+O63=61
+O64=62
+O65=63
+O66=64
+O67=65
+O68=66
+O69=67
+O70=68
+O71=69
+O72=70
+O73=71
+O74=6
+O75=6
+O76=6
+O77=72
+O78=73
+O79=74
+O80=75
+O81=76
+O82=77
+O83=78
+O84=79
+O85=80
+O86=81
+O87=82
+O88=83
+O89=84
+O90=85
+O91=86
+O92=87
+O93=6
+O94=88
+O95=89
+O96=90
+O97=91
+O98=92
+O99=93
+O100=94
+O101=95
+O102=96
+O103=97
+O104=98
+O105=99
+O106=100
+O107=101
+O108=102
+O109=103
+O110=6
+O111=104
+O112=105
+O113=106
+O114=107
+O115=108
+O116=109
+O117=110
+O118=111
+O119=112
+O120=113
+O121=114
+O122=115
+O123=116
+O124=117
+O125=118
+O126=119
+O127=6
+O128=120
+O129=121
+O130=122
+O131=123
+O132=124
+O133=125
+O134=126
+O135=127
+O136=128
+O137=129
+O138=130
+O139=131
+O140=132
+O141=133
+O142=134
+O143=135
+mP=2
+P1=IP_Address
+P2=Port
+MPi=143
+Pi1=2
+Pi2=262
+Pi3=3
+Pi5=4
+Pi7=6
+Pi8=7
+Pi9=8
+Pi10=9
+Pi11=10
+Pi12=11
+Pi13=12
+Pi14=13
+Pi15=14
+Pi16=15
+Pi17=16
+Pi18=17
+Pi19=18
+Pi20=19
+Pi21=20
+Pi22=21
+Pi24=22
+Pi25=23
+Pi26=24
+Pi27=25
+Pi28=26
+Pi29=27
+Pi30=28
+Pi31=29
+Pi32=30
+Pi33=31
+Pi34=32
+Pi35=33
+Pi36=34
+Pi37=35
+Pi38=36
+Pi39=37
+Pi41=38
+Pi42=39
+Pi43=40
+Pi44=41
+Pi45=42
+Pi46=43
+Pi47=44
+Pi48=45
+Pi49=46
+Pi50=47
+Pi51=48
+Pi52=49
+Pi53=50
+Pi54=51
+Pi55=52
+Pi56=53
+Pi58=54
+Pi59=55
+Pi60=56
+Pi61=57
+Pi62=58
+Pi63=59
+Pi64=60
+Pi65=61
+Pi66=62
+Pi67=63
+Pi68=64
+Pi69=65
+Pi70=66
+Pi71=67
+Pi72=68
+Pi73=69
+Pi77=70
+Pi78=71
+Pi79=72
+Pi80=73
+Pi81=74
+Pi82=75
+Pi83=76
+Pi84=77
+Pi85=78
+Pi86=79
+Pi87=80
+Pi88=81
+Pi89=82
+Pi90=83
+Pi91=84
+Pi92=85
+Pi94=86
+Pi95=87
+Pi96=88
+Pi97=89
+Pi98=90
+Pi99=91
+Pi100=92
+Pi101=93
+Pi102=94
+Pi103=95
+Pi104=96
+Pi105=97
+Pi106=98
+Pi107=99
+Pi108=100
+Pi109=101
+Pi111=102
+Pi112=103
+Pi113=104
+Pi114=105
+Pi115=106
+Pi116=107
+Pi117=108
+Pi118=109
+Pi119=110
+Pi120=111
+Pi121=112
+Pi122=113
+Pi123=114
+Pi124=115
+Pi125=116
+Pi126=117
+Pi128=118
+Pi129=119
+Pi130=120
+Pi131=121
+Pi132=122
+Pi133=123
+Pi134=124
+Pi135=125
+Pi136=126
+Pi137=127
+Pi138=128
+Pi139=129
+Pi140=130
+Pi141=131
+Pi142=132
+Pi143=133
+MPo=143
+Po7=134
+Po8=135
+Po9=136
+Po10=137
+Po11=138
+Po12=139
+Po13=140
+Po14=141
+Po15=142
+Po16=143
+Po17=144
+Po18=145
+Po19=146
+Po20=147
+Po21=148
+Po22=149
+Po24=150
+Po25=151
+Po26=152
+Po27=153
+Po28=154
+Po29=155
+Po30=156
+Po31=157
+Po32=158
+Po33=159
+Po34=160
+Po35=161
+Po36=162
+Po37=163
+Po38=164
+Po39=165
+Po41=166
+Po42=167
+Po43=168
+Po44=169
+Po45=170
+Po46=171
+Po47=172
+Po48=173
+Po49=174
+Po50=175
+Po51=176
+Po52=177
+Po53=178
+Po54=179
+Po55=180
+Po56=181
+Po58=182
+Po59=183
+Po60=184
+Po61=185
+Po62=186
+Po63=187
+Po64=188
+Po65=189
+Po66=190
+Po67=191
+Po68=192
+Po69=193
+Po70=194
+Po71=195
+Po72=196
+Po73=197
+Po77=198
+Po78=199
+Po79=200
+Po80=201
+Po81=202
+Po82=203
+Po83=204
+Po84=205
+Po85=206
+Po86=207
+Po87=208
+Po88=209
+Po89=210
+Po90=211
+Po91=212
+Po92=213
+Po94=214
+Po95=215
+Po96=216
+Po97=217
+Po98=218
+Po99=219
+Po100=220
+Po101=221
+Po102=222
+Po103=223
+Po104=224
+Po105=225
+Po106=226
+Po107=227
+Po108=228
+Po109=229
+Po111=230
+Po112=231
+Po113=232
+Po114=233
+Po115=234
+Po116=235
+Po117=236
+Po118=237
+Po119=238
+Po120=239
+Po121=240
+Po122=241
+Po123=242
+Po124=243
+Po125=244
+Po126=245
+Po128=246
+Po129=247
+Po130=248
+Po131=249
+Po132=250
+Po133=251
+Po134=252
+Po135=253
+Po136=254
+Po137=255
+Po138=256
+Po139=257
+Po140=258
+Po141=259
+Po142=260
+Po143=261
+MPp=2
+Pp1=1
+Pp2=5
+]
+[
+ObjTp=Sm
+H=7
+SmC=103
+Nm=Daikin ITC IO v4.0.usp
+ObjVer=1
+PrH=4
+CF=2
+n1I=132
+n2I=1
+n1O=1
+mI=133
+I3=266
+I4=8
+I5=136
+I6=137
+I7=138
+I8=139
+I9=140
+I10=141
+I11=142
+I12=143
+I13=144
+I14=145
+I15=146
+I16=147
+I17=148
+I18=149
+I19=150
+I20=151
+I21=167
+I22=152
+I23=153
+I24=154
+I25=155
+I26=156
+I27=157
+I28=158
+I29=159
+I30=160
+I31=161
+I32=162
+I33=163
+I34=164
+I35=165
+I36=166
+I37=168
+I38=169
+I39=170
+I40=171
+I41=172
+I42=173
+I43=174
+I44=175
+I45=176
+I46=177
+I47=178
+I48=179
+I49=180
+I50=181
+I51=182
+I52=183
+I53=184
+I54=185
+I55=186
+I56=187
+I57=188
+I58=189
+I59=190
+I60=191
+I61=192
+I62=193
+I63=194
+I64=195
+I65=196
+I66=197
+I67=198
+I68=199
+I69=200
+I70=201
+I71=202
+I72=203
+I73=204
+I74=205
+I75=206
+I76=207
+I77=208
+I78=209
+I79=210
+I80=211
+I81=212
+I82=213
+I83=214
+I84=215
+I85=216
+I86=217
+I87=218
+I88=219
+I89=220
+I90=221
+I91=222
+I92=223
+I93=224
+I94=225
+I95=226
+I96=227
+I97=228
+I98=229
+I99=230
+I100=231
+I101=232
+I102=233
+I103=234
+I104=235
+I105=236
+I106=237
+I107=238
+I108=239
+I109=240
+I110=241
+I111=242
+I112=243
+I113=244
+I114=245
+I115=246
+I116=247
+I117=248
+I118=249
+I119=250
+I120=251
+I121=252
+I122=253
+I123=254
+I124=255
+I125=256
+I126=257
+I127=258
+I128=259
+I129=260
+I130=261
+I131=262
+I132=263
+I133=7
+mO=129
+tO=129
+O1=264
+O2=5
+O3=9
+O4=10
+O5=11
+O6=12
+O7=13
+O8=14
+O9=15
+O10=16
+O11=17
+O12=18
+O13=19
+O14=20
+O15=21
+O16=22
+O17=23
+O18=24
+O19=25
+O20=26
+O21=27
+O22=28
+O23=29
+O24=30
+O25=31
+O26=32
+O27=33
+O28=34
+O29=35
+O30=36
+O31=37
+O32=38
+O33=39
+O34=40
+O35=41
+O36=42
+O37=43
+O38=44
+O39=45
+O40=46
+O41=47
+O42=48
+O43=49
+O44=50
+O45=51
+O46=52
+O47=53
+O48=54
+O49=55
+O50=56
+O51=57
+O52=58
+O53=59
+O54=60
+O55=61
+O56=62
+O57=63
+O58=64
+O59=65
+O60=66
+O61=67
+O62=68
+O63=69
+O64=70
+O65=71
+O66=72
+O67=73
+O68=74
+O69=75
+O70=76
+O71=77
+O72=78
+O73=79
+O74=80
+O75=81
+O76=82
+O77=83
+O78=84
+O79=85
+O80=86
+O81=87
+O82=88
+O83=89
+O84=90
+O85=91
+O86=92
+O87=93
+O88=94
+O89=95
+O90=96
+O91=97
+O92=98
+O93=99
+O94=100
+O95=101
+O96=102
+O97=103
+O98=104
+O99=105
+O100=106
+O101=107
+O102=108
+O103=109
+O104=110
+O105=111
+O106=112
+O107=113
+O108=114
+O109=115
+O110=116
+O111=117
+O112=118
+O113=119
+O114=120
+O115=121
+O116=122
+O117=123
+O118=124
+O119=125
+O120=126
+O121=127
+O122=128
+O123=129
+O124=130
+O125=131
+O126=132
+O127=133
+O128=134
+O129=135
+mP=3
+P1=
+P2=#IP_Address
+P3=#Port
+]
+[
+ObjTp=Sm
+H=8
+SmC=3
+ObjVer=1
+PrH=4
+CF=2
+n1I=2
+n1O=1
+mI=2
+I1=265
+I2=4
+mO=1
+tO=1
+O1=266
+]
+[
+ObjTp=Sg
+H=4
+Nm=[Poll_All_Units]
+]
+[
+ObjTp=Sg
+H=5
+Nm=[Unit_1-1-00]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=6
+Nm=[~UNUSED~]
+SgTp=31
+]
+[
+ObjTp=Sg
+H=7
+Nm=Command
+SgTp=4
+]
+[
+ObjTp=Sg
+H=8
+Nm=[Poll_All_Module_Info]
+]
+[
+ObjTp=Sg
+H=9
+Nm=[Unit_1-1-01]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=10
+Nm=[Unit_1-1-02]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=11
+Nm=[Unit_1-1-03]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=12
+Nm=[Unit_1-1-04]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=13
+Nm=[Unit_1-1-05]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=14
+Nm=[Unit_1-1-06]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=15
+Nm=[Unit_1-1-07]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=16
+Nm=[Unit_1-1-08]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=17
+Nm=[Unit_1-1-09]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=18
+Nm=[Unit_1-1-10]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=19
+Nm=[Unit_1-1-11]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=20
+Nm=[Unit_1-1-12]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=21
+Nm=[Unit_1-1-13]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=22
+Nm=[Unit_1-1-14]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=23
+Nm=[Unit_1-1-15]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=24
+Nm=[Unit_1-2-00]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=25
+Nm=[Unit_1-2-01]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=26
+Nm=[Unit_1-2-02]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=27
+Nm=[Unit_1-2-03]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=28
+Nm=[Unit_1-2-04]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=29
+Nm=[Unit_1-2-05]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=30
+Nm=[Unit_1-2-06]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=31
+Nm=[Unit_1-2-07]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=32
+Nm=[Unit_1-2-08]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=33
+Nm=[Unit_1-2-09]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=34
+Nm=[Unit_1-2-10]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=35
+Nm=[Unit_1-2-11]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=36
+Nm=[Unit_1-2-12]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=37
+Nm=[Unit_1-2-13]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=38
+Nm=[Unit_1-2-14]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=39
+Nm=[Unit_1-2-15]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=40
+Nm=[Unit_1-3-00]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=41
+Nm=[Unit_1-3-01]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=42
+Nm=[Unit_1-3-02]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=43
+Nm=[Unit_1-3-03]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=44
+Nm=[Unit_1-3-04]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=45
+Nm=[Unit_1-3-05]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=46
+Nm=[Unit_1-3-06]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=47
+Nm=[Unit_1-3-07]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=48
+Nm=[Unit_1-3-08]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=49
+Nm=[Unit_1-3-09]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=50
+Nm=[Unit_1-3-10]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=51
+Nm=[Unit_1-3-11]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=52
+Nm=[Unit_1-3-12]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=53
+Nm=[Unit_1-3-13]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=54
+Nm=[Unit_1-3-14]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=55
+Nm=[Unit_1-3-15]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=56
+Nm=[Unit_1-4-00]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=57
+Nm=[Unit_1-4-01]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=58
+Nm=[Unit_1-4-02]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=59
+Nm=[Unit_1-4-03]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=60
+Nm=[Unit_1-4-04]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=61
+Nm=[Unit_1-4-05]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=62
+Nm=[Unit_1-4-06]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=63
+Nm=[Unit_1-4-07]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=64
+Nm=[Unit_1-4-08]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=65
+Nm=[Unit_1-4-09]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=66
+Nm=[Unit_1-4-10]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=67
+Nm=[Unit_1-4-11]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=68
+Nm=[Unit_1-4-12]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=69
+Nm=[Unit_1-4-13]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=70
+Nm=[Unit_1-4-14]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=71
+Nm=[Unit_1-4-15]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=72
+Nm=[Unit_2-1-00]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=73
+Nm=[Unit_2-1-01]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=74
+Nm=[Unit_2-1-02]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=75
+Nm=[Unit_2-1-03]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=76
+Nm=[Unit_2-1-04]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=77
+Nm=[Unit_2-1-05]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=78
+Nm=[Unit_2-1-06]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=79
+Nm=[Unit_2-1-07]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=80
+Nm=[Unit_2-1-08]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=81
+Nm=[Unit_2-1-09]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=82
+Nm=[Unit_2-1-10]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=83
+Nm=[Unit_2-1-11]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=84
+Nm=[Unit_2-1-12]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=85
+Nm=[Unit_2-1-13]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=86
+Nm=[Unit_2-1-14]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=87
+Nm=[Unit_2-1-15]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=88
+Nm=[Unit_2-2-00]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=89
+Nm=[Unit_2-2-01]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=90
+Nm=[Unit_2-2-02]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=91
+Nm=[Unit_2-2-03]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=92
+Nm=[Unit_2-2-04]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=93
+Nm=[Unit_2-2-05]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=94
+Nm=[Unit_2-2-06]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=95
+Nm=[Unit_2-2-07]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=96
+Nm=[Unit_2-2-08]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=97
+Nm=[Unit_2-2-09]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=98
+Nm=[Unit_2-2-10]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=99
+Nm=[Unit_2-2-11]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=100
+Nm=[Unit_2-2-12]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=101
+Nm=[Unit_2-2-13]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=102
+Nm=[Unit_2-2-14]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=103
+Nm=[Unit_2-2-15]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=104
+Nm=[Unit_2-3-00]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=105
+Nm=[Unit_2-3-01]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=106
+Nm=[Unit_2-3-02]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=107
+Nm=[Unit_2-3-03]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=108
+Nm=[Unit_2-3-04]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=109
+Nm=[Unit_2-3-05]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=110
+Nm=[Unit_2-3-06]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=111
+Nm=[Unit_2-3-07]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=112
+Nm=[Unit_2-3-08]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=113
+Nm=[Unit_2-3-09]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=114
+Nm=[Unit_2-3-10]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=115
+Nm=[Unit_2-3-11]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=116
+Nm=[Unit_2-3-12]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=117
+Nm=[Unit_2-3-13]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=118
+Nm=[Unit_2-3-14]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=119
+Nm=[Unit_2-3-15]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=120
+Nm=[Unit_2-4-00]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=121
+Nm=[Unit_2-4-01]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=122
+Nm=[Unit_2-4-02]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=123
+Nm=[Unit_2-4-03]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=124
+Nm=[Unit_2-4-04]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=125
+Nm=[Unit_2-4-05]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=126
+Nm=[Unit_2-4-06]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=127
+Nm=[Unit_2-4-07]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=128
+Nm=[Unit_2-4-08]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=129
+Nm=[Unit_2-4-09]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=130
+Nm=[Unit_2-4-10]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=131
+Nm=[Unit_2-4-11]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=132
+Nm=[Unit_2-4-12]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=133
+Nm=[Unit_2-4-13]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=134
+Nm=[Unit_2-4-14]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=135
+Nm=[Unit_2-4-15]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=136
+Nm=[Poll_Unit_1-1-00]
+]
+[
+ObjTp=Sg
+H=137
+Nm=[Poll_Unit_1-1-01]
+]
+[
+ObjTp=Sg
+H=138
+Nm=[Poll_Unit_1-1-02]
+]
+[
+ObjTp=Sg
+H=139
+Nm=[Poll_Unit_1-1-03]
+]
+[
+ObjTp=Sg
+H=140
+Nm=[Poll_Unit_1-1-04]
+]
+[
+ObjTp=Sg
+H=141
+Nm=[Poll_Unit_1-1-05]
+]
+[
+ObjTp=Sg
+H=142
+Nm=[Poll_Unit_1-1-06]
+]
+[
+ObjTp=Sg
+H=143
+Nm=[Poll_Unit_1-1-07]
+]
+[
+ObjTp=Sg
+H=144
+Nm=[Poll_Unit_1-1-08]
+]
+[
+ObjTp=Sg
+H=145
+Nm=[Poll_Unit_1-1-09]
+]
+[
+ObjTp=Sg
+H=146
+Nm=[Poll_Unit_1-1-10]
+]
+[
+ObjTp=Sg
+H=147
+Nm=[Poll_Unit_1-1-11]
+]
+[
+ObjTp=Sg
+H=148
+Nm=[Poll_Unit_1-1-12]
+]
+[
+ObjTp=Sg
+H=149
+Nm=[Poll_Unit_1-1-13]
+]
+[
+ObjTp=Sg
+H=150
+Nm=[Poll_Unit_1-1-14]
+]
+[
+ObjTp=Sg
+H=151
+Nm=[Poll_Unit_1-1-15]
+]
+[
+ObjTp=Sg
+H=152
+Nm=[Poll_Unit_1-2-01]
+]
+[
+ObjTp=Sg
+H=153
+Nm=[Poll_Unit_1-2-02]
+]
+[
+ObjTp=Sg
+H=154
+Nm=[Poll_Unit_1-2-03]
+]
+[
+ObjTp=Sg
+H=155
+Nm=[Poll_Unit_1-2-04]
+]
+[
+ObjTp=Sg
+H=156
+Nm=[Poll_Unit_1-2-05]
+]
+[
+ObjTp=Sg
+H=157
+Nm=[Poll_Unit_1-2-06]
+]
+[
+ObjTp=Sg
+H=158
+Nm=[Poll_Unit_1-2-07]
+]
+[
+ObjTp=Sg
+H=159
+Nm=[Poll_Unit_1-2-08]
+]
+[
+ObjTp=Sg
+H=160
+Nm=[Poll_Unit_1-2-09]
+]
+[
+ObjTp=Sg
+H=161
+Nm=[Poll_Unit_1-2-10]
+]
+[
+ObjTp=Sg
+H=162
+Nm=[Poll_Unit_1-2-11]
+]
+[
+ObjTp=Sg
+H=163
+Nm=[Poll_Unit_1-2-12]
+]
+[
+ObjTp=Sg
+H=164
+Nm=[Poll_Unit_1-2-13]
+]
+[
+ObjTp=Sg
+H=165
+Nm=[Poll_Unit_1-2-14]
+]
+[
+ObjTp=Sg
+H=166
+Nm=[Poll_Unit_1-2-15]
+]
+[
+ObjTp=Sg
+H=167
+Nm=[Poll_Unit_1-2-00]
+]
+[
+ObjTp=Sg
+H=168
+Nm=[Poll_Unit_1-3-00]
+]
+[
+ObjTp=Sg
+H=169
+Nm=[Poll_Unit_1-3-01]
+]
+[
+ObjTp=Sg
+H=170
+Nm=[Poll_Unit_1-3-02]
+]
+[
+ObjTp=Sg
+H=171
+Nm=[Poll_Unit_1-3-03]
+]
+[
+ObjTp=Sg
+H=172
+Nm=[Poll_Unit_1-3-04]
+]
+[
+ObjTp=Sg
+H=173
+Nm=[Poll_Unit_1-3-05]
+]
+[
+ObjTp=Sg
+H=174
+Nm=[Poll_Unit_1-3-06]
+]
+[
+ObjTp=Sg
+H=175
+Nm=[Poll_Unit_1-3-07]
+]
+[
+ObjTp=Sg
+H=176
+Nm=[Poll_Unit_1-3-08]
+]
+[
+ObjTp=Sg
+H=177
+Nm=[Poll_Unit_1-3-09]
+]
+[
+ObjTp=Sg
+H=178
+Nm=[Poll_Unit_1-3-10]
+]
+[
+ObjTp=Sg
+H=179
+Nm=[Poll_Unit_1-3-11]
+]
+[
+ObjTp=Sg
+H=180
+Nm=[Poll_Unit_1-3-12]
+]
+[
+ObjTp=Sg
+H=181
+Nm=[Poll_Unit_1-3-13]
+]
+[
+ObjTp=Sg
+H=182
+Nm=[Poll_Unit_1-3-14]
+]
+[
+ObjTp=Sg
+H=183
+Nm=[Poll_Unit_1-3-15]
+]
+[
+ObjTp=Sg
+H=184
+Nm=[Poll_Unit_1-4-00]
+]
+[
+ObjTp=Sg
+H=185
+Nm=[Poll_Unit_1-4-01]
+]
+[
+ObjTp=Sg
+H=186
+Nm=[Poll_Unit_1-4-02]
+]
+[
+ObjTp=Sg
+H=187
+Nm=[Poll_Unit_1-4-03]
+]
+[
+ObjTp=Sg
+H=188
+Nm=[Poll_Unit_1-4-04]
+]
+[
+ObjTp=Sg
+H=189
+Nm=[Poll_Unit_1-4-05]
+]
+[
+ObjTp=Sg
+H=190
+Nm=[Poll_Unit_1-4-06]
+]
+[
+ObjTp=Sg
+H=191
+Nm=[Poll_Unit_1-4-07]
+]
+[
+ObjTp=Sg
+H=192
+Nm=[Poll_Unit_1-4-08]
+]
+[
+ObjTp=Sg
+H=193
+Nm=[Poll_Unit_1-4-09]
+]
+[
+ObjTp=Sg
+H=194
+Nm=[Poll_Unit_1-4-10]
+]
+[
+ObjTp=Sg
+H=195
+Nm=[Poll_Unit_1-4-11]
+]
+[
+ObjTp=Sg
+H=196
+Nm=[Poll_Unit_1-4-12]
+]
+[
+ObjTp=Sg
+H=197
+Nm=[Poll_Unit_1-4-13]
+]
+[
+ObjTp=Sg
+H=198
+Nm=[Poll_Unit_1-4-14]
+]
+[
+ObjTp=Sg
+H=199
+Nm=[Poll_Unit_1-4-15]
+]
+[
+ObjTp=Sg
+H=200
+Nm=[Poll_Unit_2-1-00]
+]
+[
+ObjTp=Sg
+H=201
+Nm=[Poll_Unit_2-1-01]
+]
+[
+ObjTp=Sg
+H=202
+Nm=[Poll_Unit_2-1-02]
+]
+[
+ObjTp=Sg
+H=203
+Nm=[Poll_Unit_2-1-03]
+]
+[
+ObjTp=Sg
+H=204
+Nm=[Poll_Unit_2-1-04]
+]
+[
+ObjTp=Sg
+H=205
+Nm=[Poll_Unit_2-1-05]
+]
+[
+ObjTp=Sg
+H=206
+Nm=[Poll_Unit_2-1-06]
+]
+[
+ObjTp=Sg
+H=207
+Nm=[Poll_Unit_2-1-07]
+]
+[
+ObjTp=Sg
+H=208
+Nm=[Poll_Unit_2-1-08]
+]
+[
+ObjTp=Sg
+H=209
+Nm=[Poll_Unit_2-1-09]
+]
+[
+ObjTp=Sg
+H=210
+Nm=[Poll_Unit_2-1-10]
+]
+[
+ObjTp=Sg
+H=211
+Nm=[Poll_Unit_2-1-11]
+]
+[
+ObjTp=Sg
+H=212
+Nm=[Poll_Unit_2-1-12]
+]
+[
+ObjTp=Sg
+H=213
+Nm=[Poll_Unit_2-1-13]
+]
+[
+ObjTp=Sg
+H=214
+Nm=[Poll_Unit_2-1-14]
+]
+[
+ObjTp=Sg
+H=215
+Nm=[Poll_Unit_2-1-15]
+]
+[
+ObjTp=Sg
+H=216
+Nm=[Poll_Unit_2-2-00]
+]
+[
+ObjTp=Sg
+H=217
+Nm=[Poll_Unit_2-2-01]
+]
+[
+ObjTp=Sg
+H=218
+Nm=[Poll_Unit_2-2-02]
+]
+[
+ObjTp=Sg
+H=219
+Nm=[Poll_Unit_2-2-03]
+]
+[
+ObjTp=Sg
+H=220
+Nm=[Poll_Unit_2-2-04]
+]
+[
+ObjTp=Sg
+H=221
+Nm=[Poll_Unit_2-2-05]
+]
+[
+ObjTp=Sg
+H=222
+Nm=[Poll_Unit_2-2-06]
+]
+[
+ObjTp=Sg
+H=223
+Nm=[Poll_Unit_2-2-07]
+]
+[
+ObjTp=Sg
+H=224
+Nm=[Poll_Unit_2-2-08]
+]
+[
+ObjTp=Sg
+H=225
+Nm=[Poll_Unit_2-2-09]
+]
+[
+ObjTp=Sg
+H=226
+Nm=[Poll_Unit_2-2-10]
+]
+[
+ObjTp=Sg
+H=227
+Nm=[Poll_Unit_2-2-11]
+]
+[
+ObjTp=Sg
+H=228
+Nm=[Poll_Unit_2-2-12]
+]
+[
+ObjTp=Sg
+H=229
+Nm=[Poll_Unit_2-2-13]
+]
+[
+ObjTp=Sg
+H=230
+Nm=[Poll_Unit_2-2-14]
+]
+[
+ObjTp=Sg
+H=231
+Nm=[Poll_Unit_2-2-15]
+]
+[
+ObjTp=Sg
+H=232
+Nm=[Poll_Unit_2-3-00]
+]
+[
+ObjTp=Sg
+H=233
+Nm=[Poll_Unit_2-3-01]
+]
+[
+ObjTp=Sg
+H=234
+Nm=[Poll_Unit_2-3-02]
+]
+[
+ObjTp=Sg
+H=235
+Nm=[Poll_Unit_2-3-03]
+]
+[
+ObjTp=Sg
+H=236
+Nm=[Poll_Unit_2-3-04]
+]
+[
+ObjTp=Sg
+H=237
+Nm=[Poll_Unit_2-3-05]
+]
+[
+ObjTp=Sg
+H=238
+Nm=[Poll_Unit_2-3-06]
+]
+[
+ObjTp=Sg
+H=239
+Nm=[Poll_Unit_2-3-07]
+]
+[
+ObjTp=Sg
+H=240
+Nm=[Poll_Unit_2-3-08]
+]
+[
+ObjTp=Sg
+H=241
+Nm=[Poll_Unit_2-3-09]
+]
+[
+ObjTp=Sg
+H=242
+Nm=[Poll_Unit_2-3-10]
+]
+[
+ObjTp=Sg
+H=243
+Nm=[Poll_Unit_2-3-11]
+]
+[
+ObjTp=Sg
+H=244
+Nm=[Poll_Unit_2-3-12]
+]
+[
+ObjTp=Sg
+H=245
+Nm=[Poll_Unit_2-3-13]
+]
+[
+ObjTp=Sg
+H=246
+Nm=[Poll_Unit_2-3-14]
+]
+[
+ObjTp=Sg
+H=247
+Nm=[Poll_Unit_2-3-15]
+]
+[
+ObjTp=Sg
+H=248
+Nm=[Poll_Unit_2-4-00]
+]
+[
+ObjTp=Sg
+H=249
+Nm=[Poll_Unit_2-4-01]
+]
+[
+ObjTp=Sg
+H=250
+Nm=[Poll_Unit_2-4-02]
+]
+[
+ObjTp=Sg
+H=251
+Nm=[Poll_Unit_2-4-03]
+]
+[
+ObjTp=Sg
+H=252
+Nm=[Poll_Unit_2-4-04]
+]
+[
+ObjTp=Sg
+H=253
+Nm=[Poll_Unit_2-4-05]
+]
+[
+ObjTp=Sg
+H=254
+Nm=[Poll_Unit_2-4-06]
+]
+[
+ObjTp=Sg
+H=255
+Nm=[Poll_Unit_2-4-07]
+]
+[
+ObjTp=Sg
+H=256
+Nm=[Poll_Unit_2-4-08]
+]
+[
+ObjTp=Sg
+H=257
+Nm=[Poll_Unit_2-4-09]
+]
+[
+ObjTp=Sg
+H=258
+Nm=[Poll_Unit_2-4-10]
+]
+[
+ObjTp=Sg
+H=259
+Nm=[Poll_Unit_2-4-11]
+]
+[
+ObjTp=Sg
+H=260
+Nm=[Poll_Unit_2-4-12]
+]
+[
+ObjTp=Sg
+H=261
+Nm=[Poll_Unit_2-4-13]
+]
+[
+ObjTp=Sg
+H=262
+Nm=[Poll_Unit_2-4-14]
+]
+[
+ObjTp=Sg
+H=263
+Nm=[Poll_Unit_2-4-15]
+]
+[
+ObjTp=Sg
+H=264
+Nm=System_Is_Busy
+]
+[
+ObjTp=Sg
+H=265
+Nm=[Service]
+]
+[
+ObjTp=Sg
+H=266
+Nm=Poll_All_Units
+]
+[
+ObjTp=Dp
+H=1
+Tp=1
+FD1=String parameter that contains the ip address of the Daikin ITC||1
+FD2=IP interface
+SD=IP Address
+NoS=FALSE
+EncFmt=0
+DVLF=1
+Sgn=0
+]
+[
+ObjTp=Dp
+H=2
+Tp=2
+FD1=Pulse to retrieve general information about every Daikin unit in||1
+FD2=the system. This info contains the Short name, Long name, Type and||1
+FD3=Inner type.
+SD=Poll All Module Info
+Trg=1
+]
+[
+ObjTp=Dp
+H=3
+Tp=2
+DT=1
+FD1=Pulse to poll all units.
+SD=Poll All Units
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=4
+Tp=6
+DT=4
+FD1=Serial signal that has to be connected with the serial output "Command"||1
+FD2=of every "Daikin ITC Unit". It is preferred that a Serial Concatenation||1
+FD3=symbol is used as connector between the "Daikin IO v1.0" symbol||1
+FD4=and "Daikin Unit v1.0" symbols.
+SD=Command
+]
+[
+ObjTp=Dp
+H=5
+Tp=1
+FD1=Integer indicating the port used by the Daikin ITC serial interface.
+SD=Port
+NF=1
+DNF=1
+EncFmt=0
+DVLF=1
+Sgn=0
+]
+[
+ObjTp=Dp
+H=6
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-1-00
+SD=Poll Unit 1-1-00
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=7
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-1-01
+SD=Poll Unit 1-1-01
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=8
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-1-02
+SD=Poll Unit 1-1-02
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=9
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-1-03
+SD=Poll Unit 1-1-03
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=10
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-1-04
+SD=Poll Unit 1-1-04
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=11
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-1-05
+SD=Poll Unit 1-1-05
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=12
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-1-06
+SD=Poll Unit 1-1-06
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=13
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-1-07
+SD=Poll Unit 1-1-07
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=14
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-1-08
+SD=Poll Unit 1-1-08
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=15
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-1-09
+SD=Poll Unit 1-1-09
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=16
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-1-10
+SD=Poll Unit 1-1-10
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=17
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-1-11
+SD=Poll Unit 1-1-11
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=18
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-1-12
+SD=Poll Unit 1-1-12
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=19
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-1-13
+SD=Poll Unit 1-1-13
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=20
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-1-14
+SD=Poll Unit 1-1-14
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=21
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-1-15
+SD=Poll Unit 1-1-15
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=22
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-2-00
+SD=Poll Unit 1-2-00
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=23
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-2-01
+SD=Poll Unit 1-2-01
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=24
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-2-02
+SD=Poll Unit 1-2-02
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=25
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-2-03
+SD=Poll Unit 1-2-03
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=26
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-2-04
+SD=Poll Unit 1-2-04
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=27
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-2-05
+SD=Poll Unit 1-2-05
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=28
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-2-06
+SD=Poll Unit 1-2-06
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=29
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-2-07
+SD=Poll Unit 1-2-07
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=30
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-2-08
+SD=Poll Unit 1-2-08
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=31
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-2-09
+SD=Poll Unit 1-2-09
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=32
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-2-10
+SD=Poll Unit 1-2-10
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=33
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-2-11
+SD=Poll Unit 1-2-11
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=34
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-2-12
+SD=Poll Unit 1-2-12
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=35
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-2-13
+SD=Poll Unit 1-2-13
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=36
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-2-14
+SD=Poll Unit 1-2-14
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=37
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-2-15
+SD=Poll Unit 1-2-15
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=38
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-3-00
+SD=Poll Unit 1-3-00
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=39
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-3-01
+SD=Poll Unit 1-3-01
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=40
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-3-02
+SD=Poll Unit 1-3-02
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=41
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-3-03
+SD=Poll Unit 1-3-03
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=42
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-3-04
+SD=Poll Unit 1-3-04
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=43
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-3-05
+SD=Poll Unit 1-3-05
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=44
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-3-06
+SD=Poll Unit 1-3-06
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=45
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-3-07
+SD=Poll Unit 1-3-07
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=46
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-3-08
+SD=Poll Unit 1-3-08
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=47
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-3-09
+SD=Poll Unit 1-3-09
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=48
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-3-10
+SD=Poll Unit 1-3-10
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=49
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-3-11
+SD=Poll Unit 1-3-11
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=50
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-3-12
+SD=Poll Unit 1-3-12
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=51
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-3-13
+SD=Poll Unit 1-3-13
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=52
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-3-14
+SD=Poll Unit 1-3-14
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=53
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-3-15
+SD=Poll Unit 1-3-15
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=54
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-4-00
+SD=Poll Unit 1-4-00
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=55
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-4-01
+SD=Poll Unit 1-4-01
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=56
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-4-02
+SD=Poll Unit 1-4-02
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=57
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-4-03
+SD=Poll Unit 1-4-03
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=58
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-4-04
+SD=Poll Unit 1-4-04
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=59
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-4-05
+SD=Poll Unit 1-4-05
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=60
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-4-06
+SD=Poll Unit 1-4-06
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=61
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-4-07
+SD=Poll Unit 1-4-07
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=62
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-4-08
+SD=Poll Unit 1-4-08
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=63
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-4-09
+SD=Poll Unit 1-4-09
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=64
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-4-10
+SD=Poll Unit 1-4-10
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=65
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-4-11
+SD=Poll Unit 1-4-11
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=66
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-4-12
+SD=Poll Unit 1-4-12
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=67
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-4-13
+SD=Poll Unit 1-4-13
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=68
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-4-14
+SD=Poll Unit 1-4-14
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=69
+Tp=2
+DT=1
+FD1=Pulse to poll unit 1-4-15
+SD=Poll Unit 1-4-15
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=70
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-1-00
+SD=Poll Unit 2-1-00
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=71
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-1-01
+SD=Poll Unit 2-1-01
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=72
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-1-02
+SD=Poll Unit 2-1-02
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=73
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-1-03
+SD=Poll Unit 2-1-03
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=74
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-1-04
+SD=Poll Unit 2-1-04
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=75
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-1-05
+SD=Poll Unit 2-1-05
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=76
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-1-06
+SD=Poll Unit 2-1-06
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=77
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-1-07
+SD=Poll Unit 2-1-07
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=78
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-1-08
+SD=Poll Unit 2-1-08
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=79
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-1-09
+SD=Poll Unit 2-1-09
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=80
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-1-10
+SD=Poll Unit 2-1-10
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=81
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-1-11
+SD=Poll Unit 2-1-11
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=82
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-1-12
+SD=Poll Unit 2-1-12
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=83
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-1-13
+SD=Poll Unit 2-1-13
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=84
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-1-14
+SD=Poll Unit 2-1-14
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=85
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-1-15
+SD=Poll Unit 2-1-15
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=86
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-2-00
+SD=Poll Unit 2-2-00
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=87
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-2-01
+SD=Poll Unit 2-2-01
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=88
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-2-02
+SD=Poll Unit 2-2-02
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=89
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-2-03
+SD=Poll Unit 2-2-03
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=90
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-2-04
+SD=Poll Unit 2-2-04
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=91
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-2-05
+SD=Poll Unit 2-2-05
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=92
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-2-06
+SD=Poll Unit 2-2-06
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=93
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-2-07
+SD=Poll Unit 2-2-07
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=94
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-2-08
+SD=Poll Unit 2-2-08
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=95
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-2-09
+SD=Poll Unit 2-2-09
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=96
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-2-10
+SD=Poll Unit 2-2-10
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=97
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-2-11
+SD=Poll Unit 2-2-11
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=98
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-2-12
+SD=Poll Unit 2-2-12
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=99
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-2-13
+SD=Poll Unit 2-2-13
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=100
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-2-14
+SD=Poll Unit 2-2-14
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=101
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-2-15
+SD=Poll Unit 2-2-15
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=102
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-3-00
+SD=Poll Unit 2-3-00
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=103
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-3-01
+SD=Poll Unit 2-3-01
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=104
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-3-02
+SD=Poll Unit 2-3-02
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=105
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-3-03
+SD=Poll Unit 2-3-03
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=106
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-3-04
+SD=Poll Unit 2-3-04
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=107
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-3-05
+SD=Poll Unit 2-3-05
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=108
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-3-06
+SD=Poll Unit 2-3-06
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=109
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-3-07
+SD=Poll Unit 2-3-07
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=110
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-3-08
+SD=Poll Unit 2-3-08
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=111
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-3-09
+SD=Poll Unit 2-3-09
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=112
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-3-10
+SD=Poll Unit 2-3-10
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=113
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-3-11
+SD=Poll Unit 2-3-11
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=114
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-3-12
+SD=Poll Unit 2-3-12
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=115
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-3-13
+SD=Poll Unit 2-3-13
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=116
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-3-14
+SD=Poll Unit 2-3-14
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=117
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-3-15
+SD=Poll Unit 2-3-15
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=118
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-4-00
+SD=Poll Unit 2-4-00
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=119
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-4-01
+SD=Poll Unit 2-4-01
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=120
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-4-02
+SD=Poll Unit 2-4-02
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=121
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-4-03
+SD=Poll Unit 2-4-03
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=122
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-4-04
+SD=Poll Unit 2-4-04
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=123
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-4-05
+SD=Poll Unit 2-4-05
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=124
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-4-06
+SD=Poll Unit 2-4-06
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=125
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-4-07
+SD=Poll Unit 2-4-07
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=126
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-4-08
+SD=Poll Unit 2-4-08
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=127
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-4-09
+SD=Poll Unit 2-4-09
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=128
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-4-10
+SD=Poll Unit 2-4-10
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=129
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-4-11
+SD=Poll Unit 2-4-11
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=130
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-4-12
+SD=Poll Unit 2-4-12
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=131
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-4-13
+SD=Poll Unit 2-4-13
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=132
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-4-14
+SD=Poll Unit 2-4-14
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=133
+Tp=2
+DT=1
+FD1=Pulse to poll unit 2-4-15
+SD=Poll Unit 2-4-15
+HD=TRUE
+DV=0
+Trg=1
+]
+[
+ObjTp=Dp
+H=134
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-1-00.
+SD=Unit 1-1-00
+]
+[
+ObjTp=Dp
+H=135
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-1-01.
+SD=Unit 1-1-01
+]
+[
+ObjTp=Dp
+H=136
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-1-02.
+SD=Unit 1-1-02
+]
+[
+ObjTp=Dp
+H=137
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-1-03.
+SD=Unit 1-1-03
+]
+[
+ObjTp=Dp
+H=138
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-1-04.
+SD=Unit 1-1-04
+]
+[
+ObjTp=Dp
+H=139
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-1-05.
+SD=Unit 1-1-05
+]
+[
+ObjTp=Dp
+H=140
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-1-06.
+SD=Unit 1-1-06
+]
+[
+ObjTp=Dp
+H=141
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-1-07.
+SD=Unit 1-1-07
+]
+[
+ObjTp=Dp
+H=142
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-1-08.
+SD=Unit 1-1-08
+]
+[
+ObjTp=Dp
+H=143
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-1-09.
+SD=Unit 1-1-09
+]
+[
+ObjTp=Dp
+H=144
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-1-10.
+SD=Unit 1-1-10
+]
+[
+ObjTp=Dp
+H=145
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-1-11.
+SD=Unit 1-1-11
+]
+[
+ObjTp=Dp
+H=146
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-1-12.
+SD=Unit 1-1-12
+]
+[
+ObjTp=Dp
+H=147
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-1-13.
+SD=Unit 1-1-13
+]
+[
+ObjTp=Dp
+H=148
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-1-14.
+SD=Unit 1-1-14
+]
+[
+ObjTp=Dp
+H=149
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-1-15.
+SD=Unit 1-1-15
+]
+[
+ObjTp=Dp
+H=150
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-2-00.
+SD=Unit 1-2-00
+]
+[
+ObjTp=Dp
+H=151
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-2-01.
+SD=Unit 1-2-01
+]
+[
+ObjTp=Dp
+H=152
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-2-02.
+SD=Unit 1-2-02
+]
+[
+ObjTp=Dp
+H=153
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-2-03.
+SD=Unit 1-2-03
+]
+[
+ObjTp=Dp
+H=154
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-2-04.
+SD=Unit 1-2-04
+]
+[
+ObjTp=Dp
+H=155
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-2-05.
+SD=Unit 1-2-05
+]
+[
+ObjTp=Dp
+H=156
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-2-06.
+SD=Unit 1-2-06
+]
+[
+ObjTp=Dp
+H=157
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-2-07.
+SD=Unit 1-2-07
+]
+[
+ObjTp=Dp
+H=158
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-2-08.
+SD=Unit 1-2-08
+]
+[
+ObjTp=Dp
+H=159
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-2-09.
+SD=Unit 1-2-09
+]
+[
+ObjTp=Dp
+H=160
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-2-10.
+SD=Unit 1-2-10
+]
+[
+ObjTp=Dp
+H=161
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-2-11.
+SD=Unit 1-2-11
+]
+[
+ObjTp=Dp
+H=162
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-2-12.
+SD=Unit 1-2-12
+]
+[
+ObjTp=Dp
+H=163
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-2-13.
+SD=Unit 1-2-13
+]
+[
+ObjTp=Dp
+H=164
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-2-14.
+SD=Unit 1-2-14
+]
+[
+ObjTp=Dp
+H=165
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-2-15.
+SD=Unit 1-2-15
+]
+[
+ObjTp=Dp
+H=166
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-3-00.
+SD=Unit 1-3-00
+]
+[
+ObjTp=Dp
+H=167
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-3-01.
+SD=Unit 1-3-01
+]
+[
+ObjTp=Dp
+H=168
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-3-02.
+SD=Unit 1-3-02
+]
+[
+ObjTp=Dp
+H=169
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-3-03.
+SD=Unit 1-3-03
+]
+[
+ObjTp=Dp
+H=170
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-3-04.
+SD=Unit 1-3-04
+]
+[
+ObjTp=Dp
+H=171
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-3-05.
+SD=Unit 1-3-05
+]
+[
+ObjTp=Dp
+H=172
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-3-06.
+SD=Unit 1-3-06
+]
+[
+ObjTp=Dp
+H=173
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-3-07.
+SD=Unit 1-3-07
+]
+[
+ObjTp=Dp
+H=174
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-3-08.
+SD=Unit 1-3-08
+]
+[
+ObjTp=Dp
+H=175
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-3-09.
+SD=Unit 1-3-09
+]
+[
+ObjTp=Dp
+H=176
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-3-10.
+SD=Unit 1-3-10
+]
+[
+ObjTp=Dp
+H=177
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-3-11.
+SD=Unit 1-3-11
+]
+[
+ObjTp=Dp
+H=178
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-3-12.
+SD=Unit 1-3-12
+]
+[
+ObjTp=Dp
+H=179
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-3-13.
+SD=Unit 1-3-13
+]
+[
+ObjTp=Dp
+H=180
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-3-14.
+SD=Unit 1-3-14
+]
+[
+ObjTp=Dp
+H=181
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-3-15.
+SD=Unit 1-3-15
+]
+[
+ObjTp=Dp
+H=182
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-4-00.
+SD=Unit 1-4-00
+]
+[
+ObjTp=Dp
+H=183
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-4-01.
+SD=Unit 1-4-01
+]
+[
+ObjTp=Dp
+H=184
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-4-02.
+SD=Unit 1-4-02
+]
+[
+ObjTp=Dp
+H=185
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-4-03.
+SD=Unit 1-4-03
+]
+[
+ObjTp=Dp
+H=186
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-4-04.
+SD=Unit 1-4-04
+]
+[
+ObjTp=Dp
+H=187
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-4-05.
+SD=Unit 1-4-05
+]
+[
+ObjTp=Dp
+H=188
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-4-06.
+SD=Unit 1-4-06
+]
+[
+ObjTp=Dp
+H=189
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-4-07.
+SD=Unit 1-4-07
+]
+[
+ObjTp=Dp
+H=190
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-4-08.
+SD=Unit 1-4-08
+]
+[
+ObjTp=Dp
+H=191
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-4-09.
+SD=Unit 1-4-09
+]
+[
+ObjTp=Dp
+H=192
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-4-10.
+SD=Unit 1-4-10
+]
+[
+ObjTp=Dp
+H=193
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-4-11.
+SD=Unit 1-4-11
+]
+[
+ObjTp=Dp
+H=194
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-4-12.
+SD=Unit 1-4-12
+]
+[
+ObjTp=Dp
+H=195
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-4-13.
+SD=Unit 1-4-13
+]
+[
+ObjTp=Dp
+H=196
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-4-14.
+SD=Unit 1-4-14
+]
+[
+ObjTp=Dp
+H=197
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 1-4-15.
+SD=Unit 1-4-15
+]
+[
+ObjTp=Dp
+H=198
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-1-00.
+SD=Unit 2-1-00
+]
+[
+ObjTp=Dp
+H=199
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-1-01.
+SD=Unit 2-1-01
+]
+[
+ObjTp=Dp
+H=200
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-1-02.
+SD=Unit 2-1-02
+]
+[
+ObjTp=Dp
+H=201
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-1-03.
+SD=Unit 2-1-03
+]
+[
+ObjTp=Dp
+H=202
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-1-04.
+SD=Unit 2-1-04
+]
+[
+ObjTp=Dp
+H=203
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-1-05.
+SD=Unit 2-1-05
+]
+[
+ObjTp=Dp
+H=204
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-1-06.
+SD=Unit 2-1-06
+]
+[
+ObjTp=Dp
+H=205
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-1-07.
+SD=Unit 2-1-07
+]
+[
+ObjTp=Dp
+H=206
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-1-08.
+SD=Unit 2-1-08
+]
+[
+ObjTp=Dp
+H=207
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-1-09.
+SD=Unit 2-1-09
+]
+[
+ObjTp=Dp
+H=208
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-1-10.
+SD=Unit 2-1-10
+]
+[
+ObjTp=Dp
+H=209
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-1-11.
+SD=Unit 2-1-11
+]
+[
+ObjTp=Dp
+H=210
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-1-12.
+SD=Unit 2-1-12
+]
+[
+ObjTp=Dp
+H=211
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-1-13.
+SD=Unit 2-1-13
+]
+[
+ObjTp=Dp
+H=212
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-1-14.
+SD=Unit 2-1-14
+]
+[
+ObjTp=Dp
+H=213
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-1-15.
+SD=Unit 2-1-15
+]
+[
+ObjTp=Dp
+H=214
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-2-00.
+SD=Unit 2-2-00
+]
+[
+ObjTp=Dp
+H=215
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-2-01.
+SD=Unit 2-2-01
+]
+[
+ObjTp=Dp
+H=216
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-2-02.
+SD=Unit 2-2-02
+]
+[
+ObjTp=Dp
+H=217
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-2-03.
+SD=Unit 2-2-03
+]
+[
+ObjTp=Dp
+H=218
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-2-04.
+SD=Unit 2-2-04
+]
+[
+ObjTp=Dp
+H=219
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-2-05.
+SD=Unit 2-2-05
+]
+[
+ObjTp=Dp
+H=220
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-2-06.
+SD=Unit 2-2-06
+]
+[
+ObjTp=Dp
+H=221
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-2-07.
+SD=Unit 2-2-07
+]
+[
+ObjTp=Dp
+H=222
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-2-08.
+SD=Unit 2-2-08
+]
+[
+ObjTp=Dp
+H=223
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-2-09.
+SD=Unit 2-2-09
+]
+[
+ObjTp=Dp
+H=224
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-2-10.
+SD=Unit 2-2-10
+]
+[
+ObjTp=Dp
+H=225
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-2-11.
+SD=Unit 2-2-11
+]
+[
+ObjTp=Dp
+H=226
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-2-12.
+SD=Unit 2-2-12
+]
+[
+ObjTp=Dp
+H=227
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-2-13.
+SD=Unit 2-2-13
+]
+[
+ObjTp=Dp
+H=228
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-2-14.
+SD=Unit 2-2-14
+]
+[
+ObjTp=Dp
+H=229
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-2-15.
+SD=Unit 2-2-15
+]
+[
+ObjTp=Dp
+H=230
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-3-00.
+SD=Unit 2-3-00
+]
+[
+ObjTp=Dp
+H=231
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-3-01.
+SD=Unit 2-3-01
+]
+[
+ObjTp=Dp
+H=232
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-3-02.
+SD=Unit 2-3-02
+]
+[
+ObjTp=Dp
+H=233
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-3-03.
+SD=Unit 2-3-03
+]
+[
+ObjTp=Dp
+H=234
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-3-04.
+SD=Unit 2-3-04
+]
+[
+ObjTp=Dp
+H=235
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-3-05.
+SD=Unit 2-3-05
+]
+[
+ObjTp=Dp
+H=236
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-3-06.
+SD=Unit 2-3-06
+]
+[
+ObjTp=Dp
+H=237
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-3-07.
+SD=Unit 2-3-07
+]
+[
+ObjTp=Dp
+H=238
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-3-08.
+SD=Unit 2-3-08
+]
+[
+ObjTp=Dp
+H=239
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-3-09.
+SD=Unit 2-3-09
+]
+[
+ObjTp=Dp
+H=240
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-3-10.
+SD=Unit 2-3-10
+]
+[
+ObjTp=Dp
+H=241
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-3-11.
+SD=Unit 2-3-11
+]
+[
+ObjTp=Dp
+H=242
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-3-12.
+SD=Unit 2-3-12
+]
+[
+ObjTp=Dp
+H=243
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-3-13.
+SD=Unit 2-3-13
+]
+[
+ObjTp=Dp
+H=244
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-3-14.
+SD=Unit 2-3-14
+]
+[
+ObjTp=Dp
+H=245
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-3-15.
+SD=Unit 2-3-15
+]
+[
+ObjTp=Dp
+H=246
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-4-00.
+SD=Unit 2-4-00
+]
+[
+ObjTp=Dp
+H=247
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-4-01.
+SD=Unit 2-4-01
+]
+[
+ObjTp=Dp
+H=248
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-4-02.
+SD=Unit 2-4-02
+]
+[
+ObjTp=Dp
+H=249
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-4-03.
+SD=Unit 2-4-03
+]
+[
+ObjTp=Dp
+H=250
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-4-04.
+SD=Unit 2-4-04
+]
+[
+ObjTp=Dp
+H=251
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-4-05.
+SD=Unit 2-4-05
+]
+[
+ObjTp=Dp
+H=252
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-4-06.
+SD=Unit 2-4-06
+]
+[
+ObjTp=Dp
+H=253
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-4-07.
+SD=Unit 2-4-07
+]
+[
+ObjTp=Dp
+H=254
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-4-08.
+SD=Unit 2-4-08
+]
+[
+ObjTp=Dp
+H=255
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-4-09.
+SD=Unit 2-4-09
+]
+[
+ObjTp=Dp
+H=256
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-4-10.
+SD=Unit 2-4-10
+]
+[
+ObjTp=Dp
+H=257
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-4-11.
+SD=Unit 2-4-11
+]
+[
+ObjTp=Dp
+H=258
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-4-12.
+SD=Unit 2-4-12
+]
+[
+ObjTp=Dp
+H=259
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-4-13.
+SD=Unit 2-4-13
+]
+[
+ObjTp=Dp
+H=260
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-4-14.
+SD=Unit 2-4-14
+]
+[
+ObjTp=Dp
+H=261
+Tp=7
+DT=4
+FD1=Serial signal that has to be connected with the Feedback signal||1
+FD2=on the Daikin Unit v 1.0 symbol with address 2-4-15.
+SD=Unit 2-4-15
+]
+[
+ObjTp=Dp
+H=262
+Tp=2
+DT=1
+FD1=Pulse to retrieve general information about every Daikin unit in||1
+FD2=the system. This info contains the Short name, Long name, Type and||1
+FD3=Inner type.
+SD=Poll All Module Info
+HD=TRUE
+DV=0
+Trg=1
+]

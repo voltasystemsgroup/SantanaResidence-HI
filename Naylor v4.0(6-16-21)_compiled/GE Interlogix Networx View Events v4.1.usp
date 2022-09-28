@@ -1,0 +1,713 @@
+/***********************************************************************************
+  SIMPL+ Module Information
+  (Fill in comments below)
+***********************************************************************************/
+/*
+Dealer Name:		Crestron Electronics
+System Name:
+System Number:
+Programmer:			PAC
+Comments:
+*/
+/***********************************************************************************
+  Compiler Directives
+  (Uncomment and declare compiler directives as needed)
+***********************************************************************************/
+#SYMBOL_NAME "GE Interlogix Networx View Events Driver v4.1"
+// #HINT ""
+#DEFINE_CONSTANT	csENDCHAR			"\xFF\x01"
+
+#DEFINE_CONSTANT	ciMAXEVENTS		10
+#DEFINE_CONSTANT	ciLOGUPPER		185
+#DEFINE_CONSTANT	ciLOGLOWER		0
+#DEFINE_CONSTANT	ciTIMEOUT			500
+
+#DEFINE_CONSTANT	ciBYTE5USAGE	1
+#DEFINE_CONSTANT	ciBYTE6USAGE	2
+
+#DEFINE_CONSTANT	ciBYTE5NONE		0
+#DEFINE_CONSTANT	ciBYTE5ZONE		1
+#DEFINE_CONSTANT	ciBYTE5DEVICE	2
+#DEFINE_CONSTANT	ciBYTE5USER		3
+
+#DEFINE_CONSTANT	ciBYTE6NO			0
+#DEFINE_CONSTANT	ciBYTE6YES		1
+
+#CATEGORY "21" // Security
+#DEFAULT_VOLATILE
+
+#HELP_BEGIN
+	For use inside the GE Interlogix Networx View Events v2.0 module only.
+#HELP_END
+/***********************************************************************************
+  DIGITAL, ANALOG and SERIAL INPUTS and OUTPUTS
+  (Uncomment and declare inputs and outputs as needed)
+***********************************************************************************/
+DIGITAL_INPUT show_events, previous_page, next_page;
+ANALOG_INPUT	events_per_page, current_event_pointer;
+BUFFER_INPUT	from_processor_module$[200];
+
+STRING_OUTPUT	to_processor_module$, event_text$[10];
+/***********************************************************************************
+  Global Variables
+  (Uncomment and declare global variables as needed)
+***********************************************************************************/
+INTEGER	iEventsPerPage, iTempEventNum, a, iCurrentLastEvent, iTemp, iFlag1,
+				iCurrentEventPointer, iTempPointer, iStartPointer, iByteUsage[127][2],
+				iTempEventType, iTempNumber, iTempPartition, iTempMonth, iTempDay, iTempHour,
+				iTempMinute, iNextDisplay, iTempEventType1, iTempReport, iNextEnable,
+				iPreviousEnable, iTempEnd, iTempStart;
+STRING	sEventNames[127][30], sTemp[200], sTempText[100];
+/***********************************************************************************
+  Functions
+  (Add any additional functions here)
+  Note:  Functions must be physically placed before the location in
+         the code that calls them.
+***********************************************************************************/
+Function fWait()
+{
+	wait(ciTIMEOUT, wTimeOut)
+	{
+		for(a = iNextDisplay to iEventsPerPage)
+		{
+			event_text$[a] = "";
+		}
+		iNextDisplay = 0;
+	}
+}
+/***********************************************************************************
+  Event Handlers
+  (Uncomment and declare additional event handlers as needed)
+***********************************************************************************/
+PUSH show_events
+{
+	if(iNextDisplay = 0)
+	{
+		call fWait();
+		iTempPointer = iCurrentEventPointer;
+		iStartPointer = iCurrentEventPointer;
+		iPreviousEnable = 0;
+		iNextEnable = 1;
+		iNextDisplay = 1;
+		for(a = 1 to iEventsPerPage)
+		{
+			makestring(to_processor_module$, "\x2A%s%s", chr(iTempPointer), csENDCHAR);
+			processlogic();
+			if(iTempPointer > ciLOGLOWER)
+			{
+				iTempPointer = iTempPointer - 1;
+			}
+			else
+			{
+				iTempPointer = ciLOGUPPER;
+			}
+		}
+		iCurrentLastEvent = iTempPointer;
+	}
+}
+
+PUSH previous_page
+{
+	if(iNextDisplay = 0)
+	{
+		iTemp = iCurrentLastEvent + (iEventsPerPage * 2);
+		if(iTemp > ciLOGUPPER)
+		{
+			iTemp = iTemp - ciLOGUPPER;
+		}
+		if((iTemp - iEventsPerPage) S< ciLOGLOWER)
+		{//last to be displayed will include event 0 and first value
+			iTempEnd = iTemp + ciLOGUPPER + 2 - iEventsPerPage; 
+		}
+		else
+		{
+			iTempEnd = iTemp - iEventsPerPage;
+		}
+		if(iTemp < iEventsPerPage)
+		{
+			iTempStart = iTemp + ciLOGUPPER + 2;
+		}
+		else
+		{
+			iTempStart = iTemp;
+		}
+		if((iTempStart > iStartPointer) && (iTempEnd < iStartPointer))
+		{
+			iTemp = iStartPointer;
+			if(iTemp > ciLOGUPPER)
+			{
+				iTemp = iTemp - ciLOGUPPER;
+			}
+		}
+		if(iTemp > ciLOGUPPER)
+		{
+			iTempPointer = iTemp - ciLOGUPPER;
+		}
+		else
+		{
+			iTempPointer = iTemp;
+		}
+		if(iPreviousEnable = 1)
+		{
+			iNextEnable = 1;
+			iNextDisplay = 1;
+			call fWait();
+			for(a = 1 to iEventsPerPage)
+			{
+				makestring(to_processor_module$, "\x2A%s%s", chr(iTempPointer), csENDCHAR);
+				processlogic();
+				if(iTempPointer > ciLOGLOWER)
+				{
+					iTempPointer = iTempPointer - 1;
+				}
+				else
+				{
+					iTempPointer = ciLOGUPPER;
+				}
+			}
+			iCurrentLastEvent = iTempPointer;
+			if(iTemp = iStartPointer)
+			{
+				iPreviousEnable = 0;
+			}
+		}
+	}
+}
+
+PUSH next_page
+{
+	if(iNextDisplay = 0)
+	{
+		iTemp = iCurrentLastEvent;
+		if((iTemp - iEventsPerPage) S< ciLOGLOWER)
+		{//last to be displayed will include event 0 and first value
+			iTempEnd = iTemp + ciLOGUPPER + 2 - iEventsPerPage;
+		}
+		else
+		{
+			iTempEnd = iTemp - iEventsPerPage;
+		}
+		if(iTemp < iEventsPerPage)
+		{
+			iTempStart = iTemp + ciLOGUPPER + 2;
+		}
+		else
+		{
+			iTempStart = iTemp;
+		}
+		if((iTempStart > iStartPointer) && (iTempEnd < iStartPointer))
+		{
+			iTemp = iStartPointer + iEventsPerPage;
+			if(iTemp > ciLOGUPPER)
+			{
+				iTemp = iTemp - ciLOGUPPER;
+			}
+		}
+		if(iTemp S< ciLOGLOWER)
+		{
+			iTempPointer = ciLOGUPPER;
+		}
+		else
+		{
+			iTempPointer = iTemp;
+		}
+		if(iNextEnable = 1)
+		{
+			iNextDisplay = 1;
+			iPreviousEnable = 1;
+			call fWait();
+			for(a = 1 to iEventsPerPage)
+			{
+				makestring(to_processor_module$, "\x2A%s%s", chr(iTempPointer), csENDCHAR);
+				processlogic();
+				if(iTempPointer > ciLOGLOWER)
+				{
+					iTempPointer = iTempPointer - 1;
+				}
+				else
+				{
+					iTempPointer = ciLOGUPPER;
+				}
+			}
+			iCurrentLastEvent = iTempPointer;
+			if((iTempPointer > 0) && (iTempPointer = iStartPointer))
+			{
+				iNextEnable = 0;
+			}
+			else if((iStartPointer = ciLOGUPPER) && (iTempPointer = 0))
+			{
+				iNextEnable = 0;
+			}
+		}	
+	}
+}
+
+CHANGE events_per_page
+{
+	if((events_per_page <= ciMAXEVENTS) && (events_per_page > 0))
+	{
+		iEventsPerPage = events_per_page;
+	}
+	else
+	{
+		iEventsPerPage = ciMAXEVENTS;
+	}
+}
+
+CHANGE current_event_pointer
+{
+	iCurrentEventPointer = current_event_pointer;
+}
+
+CHANGE from_processor_module$
+{
+	if(iFlag1 = 0)
+	{
+		iFlag1 = 1;
+		while(find(csENDCHAR, from_processor_module$) > 0)
+		{
+			sTemp = remove(csENDCHAR, from_processor_module$);
+			if(find("\x00\x0A", sTemp) > 0)
+			{
+				iTempEventNum = byte(sTemp, 3);
+				iTempEventType1 = byte(sTemp, 5);
+				iTempReport = bit(sTemp, 5, 7);
+				iTempEventType = iTempEventType1 ^ (iTempReport << 7);
+				iTempReport = bit(sTemp, 5, 7);
+				iTempNumber = byte(sTemp, 6) + 1;
+				iTempPartition = byte(sTemp, 7) + 1;
+				iTempMonth = byte(sTemp, 8);
+				iTempDay = byte(sTemp, 9);
+				iTempHour = byte(sTemp, 10);
+				iTempMinute = byte(sTemp, 11);
+				makestring(sTempText, "%s", sEventNames[iTempEventType]);
+				if((iByteUsage[iTempEventType][ciBYTE5USAGE] = ciBYTE5USER) ||
+					(iByteUsage[iTempEventType][ciBYTE5USAGE] = ciBYTE5ZONE))
+				{
+					makestring(sTempText,"%s\x20%d", sTempText, iTempNumber);
+				}
+				makestring(sTempText, "%s\x20%d/%d\x20%d:%02d", sTempText, iTempMonth,
+									iTempDay, iTempHour, iTempMinute);
+				if(iByteUsage[iTempEventType][ciBYTE6USAGE] = ciBYTE6YES)
+				{
+					makestring(sTempText, "%s\x20P%d", sTempText, iTempPartition);
+				}
+				if(iTempReport = 0)
+				{
+					makestring(sTempText, "%s*", sTempText);
+				}
+				if((iNextDisplay <= iEventsPerPage) && (iNextDisplay > 0))
+				{
+					event_text$[iNextDisplay] = sTempText;
+					iNextDisplay = iNextDisplay + 1;
+				}
+				if(iNextDisplay > iEventsPerPage)
+				{
+					iNextDisplay = 0;
+					cancelwait(wTimeOut);
+				}
+				sTempText = "";
+				sTemp = "";
+			}
+		}
+		iFlag1 = 0;
+	}
+}
+/***********************************************************************************
+  Main()
+  Uncomment and place one-time startup code here
+  (This code will get called when the system starts up)
+***********************************************************************************/
+Function Main()
+{
+	iEventsPerPage = ciMAXEVENTS;
+	iTempEventNum = ciLOGLOWER;
+	iCurrentLastEvent = ciLOGLOWER;
+	iCurrentEventPointer = ciLOGUPPER;
+	iNextDisplay = 0;
+	iFlag1 = 0;
+	sEventNames[0] = "Alarm";
+	iByteUsage[0][ciBYTE5USAGE] = ciBYTE5ZONE;
+	iByteUsage[0][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[1] = "Alarm Reset";
+	iByteUsage[1][ciBYTE5USAGE] = ciBYTE5ZONE;
+	iByteUsage[1][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[2] = "Bypass";
+	iByteUsage[2][ciBYTE5USAGE] = ciBYTE5ZONE;
+	iByteUsage[2][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[3] = "Bypass Reset";
+	iByteUsage[3][ciBYTE5USAGE] = ciBYTE5ZONE;
+	iByteUsage[3][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[4] = "Tamper";
+	iByteUsage[4][ciBYTE5USAGE] = ciBYTE5ZONE;
+	iByteUsage[4][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[5] = "Tamper Reset";
+	iByteUsage[5][ciBYTE5USAGE] = ciBYTE5ZONE;
+	iByteUsage[5][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[6] = "Trouble";
+	iByteUsage[6][ciBYTE5USAGE] = ciBYTE5ZONE;
+	iByteUsage[6][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[7] = "Trouble Reset";
+	iByteUsage[7][ciBYTE5USAGE] = ciBYTE5ZONE;
+	iByteUsage[7][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[8] = "TX Low Battery";
+	iByteUsage[8][ciBYTE5USAGE] = ciBYTE5ZONE;
+	iByteUsage[8][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[9] = "TX Low Battery Reset";
+	iByteUsage[9][ciBYTE5USAGE] = ciBYTE5ZONE;
+	iByteUsage[9][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[10] = "Zone Lost";
+	iByteUsage[10][ciBYTE5USAGE] = ciBYTE5ZONE;
+	iByteUsage[10][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[11] = "Zone Lost Reset";
+	iByteUsage[11][ciBYTE5USAGE] = ciBYTE5ZONE;
+	iByteUsage[11][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[12] = "Start of Cross Time";
+	iByteUsage[12][ciBYTE5USAGE] = ciBYTE5ZONE;
+	iByteUsage[12][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[13] = "Spinkler Supervisory";
+	iByteUsage[13][ciBYTE5USAGE] = ciBYTE5ZONE;
+	iByteUsage[13][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[14] = "Spinkler Supervisory Reset";
+	iByteUsage[14][ciBYTE5USAGE] = ciBYTE5ZONE;
+	iByteUsage[14][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[15] = "Zone Inactive";
+	iByteUsage[15][ciBYTE5USAGE] = ciBYTE5ZONE;
+	iByteUsage[15][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[16] = "Zone Inactive Reset";
+	iByteUsage[16][ciBYTE5USAGE] = ciBYTE5ZONE;
+	iByteUsage[16][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[17] = "Special Expansion Event";
+	iByteUsage[17][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[17][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[18] = "Duress";
+	iByteUsage[18][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[18][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[19] = "Manual Fire";
+	iByteUsage[19][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[19][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[20] = "Auxilary 2 Panic";
+	iByteUsage[20][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[20][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[21] = "Silent Panic/B-Alarm";
+	iByteUsage[21][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[21][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[22] = "Panic";
+	iByteUsage[22][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[22][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[23] = "Keypad Tamper";
+	iByteUsage[23][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[23][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[24] = "Control Box Tamper";
+	iByteUsage[24][ciBYTE5USAGE] = ciBYTE5DEVICE;
+	iByteUsage[24][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[25] = "Control Box Tamper Reset";
+	iByteUsage[25][ciBYTE5USAGE] = ciBYTE5DEVICE;
+	iByteUsage[25][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[26] = "AC Fail";
+	iByteUsage[26][ciBYTE5USAGE] = ciBYTE5DEVICE;
+	iByteUsage[26][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[27] = "AC Fail Reset";
+	iByteUsage[27][ciBYTE5USAGE] = ciBYTE5DEVICE;
+	iByteUsage[27][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[28] = "Low Battery";
+	iByteUsage[28][ciBYTE5USAGE] = ciBYTE5DEVICE;
+	iByteUsage[28][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[29] = "Low Battery Reset";
+	iByteUsage[29][ciBYTE5USAGE] = ciBYTE5DEVICE;
+	iByteUsage[29][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[30] = "Over-current";
+	iByteUsage[30][ciBYTE5USAGE] = ciBYTE5DEVICE;
+	iByteUsage[30][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[31] = "Over-current Reset";
+	iByteUsage[31][ciBYTE5USAGE] = ciBYTE5DEVICE;
+	iByteUsage[31][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[32] = "Siren Tamper";
+	iByteUsage[32][ciBYTE5USAGE] = ciBYTE5DEVICE;
+	iByteUsage[32][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[33] = "Siren Tamper Reset";
+	iByteUsage[33][ciBYTE5USAGE] = ciBYTE5DEVICE;
+	iByteUsage[33][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[34] = "Telephone Fault";
+	iByteUsage[34][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[34][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[35] = "Telephone Fault Reset";
+	iByteUsage[35][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[35][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[36] = "Expander Trouble";
+	iByteUsage[36][ciBYTE5USAGE] = ciBYTE5DEVICE;
+	iByteUsage[36][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[37] = "Expander Trouble Reset";
+	iByteUsage[37][ciBYTE5USAGE] = ciBYTE5DEVICE;
+	iByteUsage[37][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[38] = "Fail to Communicate";
+	iByteUsage[38][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[38][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[39] = "Log Full";
+	iByteUsage[39][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[39][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[40] = "Opening";
+	iByteUsage[40][ciBYTE5USAGE] = ciBYTE5USER;
+	iByteUsage[40][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[41] = "Closing";
+	iByteUsage[41][ciBYTE5USAGE] = ciBYTE5USER;
+	iByteUsage[41][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[42] = "Exit Error";
+	iByteUsage[42][ciBYTE5USAGE] = ciBYTE5USER;
+	iByteUsage[42][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[43] = "Recent Closing";
+	iByteUsage[43][ciBYTE5USAGE] = ciBYTE5USER;
+	iByteUsage[43][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[44] = "Auto-Test";
+	iByteUsage[44][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[44][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[45] = "Start Program";
+	iByteUsage[45][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[45][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[46] = "End Program";
+	iByteUsage[46][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[46][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[47] = "Start Download";
+	iByteUsage[47][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[47][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[48] = "End Download";
+	iByteUsage[48][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[48][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[49] = "Cancel";
+	iByteUsage[49][ciBYTE5USAGE] = ciBYTE5USER;
+	iByteUsage[49][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[50] = "Ground Fault";
+	iByteUsage[50][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[50][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[51] = "Ground Fault Reset";
+	iByteUsage[51][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[51][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[52] = "Manual Test";
+	iByteUsage[52][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[52][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[53] = "Closed with Zones Bypassed";
+	iByteUsage[53][ciBYTE5USAGE] = ciBYTE5USER;
+	iByteUsage[53][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[54] = "Start of Listen In";
+	iByteUsage[54][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[54][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[55] = "Technician on Site";
+	iByteUsage[55][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[55][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[56] = "Technician Left";
+	iByteUsage[56][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[56][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[57] = "Control Power Up";
+	iByteUsage[57][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[57][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[58] = "Early to Open";
+	iByteUsage[58][ciBYTE5USAGE] = ciBYTE5USER;
+	iByteUsage[58][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[59] = "Late to Close";
+	iByteUsage[59][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[59][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[60] = "RF Jam";
+	iByteUsage[60][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[60][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[61] = "RF Jam Reset";
+	iByteUsage[61][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[61][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[62] = "Zone Clean-Me";
+	iByteUsage[62][ciBYTE5USAGE] = ciBYTE5ZONE;
+	iByteUsage[62][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[63] = "Zone Clean-Me Reset";
+	iByteUsage[63][ciBYTE5USAGE] = ciBYTE5ZONE;
+	iByteUsage[63][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[64] = "Verified Burglary";
+	iByteUsage[64][ciBYTE5USAGE] = ciBYTE5ZONE;
+	iByteUsage[64][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[65] = "Verified Burglary Reset";
+	iByteUsage[65][ciBYTE5USAGE] = ciBYTE5ZONE;
+	iByteUsage[65][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[66] = "Verified Fire";
+	iByteUsage[66][ciBYTE5USAGE] = ciBYTE5ZONE;
+	iByteUsage[66][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[67] = "Verified Fire Reset";
+	iByteUsage[67][ciBYTE5USAGE] = ciBYTE5ZONE;
+	iByteUsage[67][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[68] = "Opening After Alarm";
+	iByteUsage[68][ciBYTE5USAGE] = ciBYTE5USER;
+	iByteUsage[68][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[69] = "Not Used";
+	iByteUsage[69][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[69][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[70] = "Not Used";
+	iByteUsage[70][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[70][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[71] = "Not Used";
+	iByteUsage[71][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[71][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[72] = "Not Used";
+	iByteUsage[72][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[72][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[73] = "Not Used";
+	iByteUsage[73][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[73][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[74] = "Not Used";
+	iByteUsage[74][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[74][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[75] = "Not Used";
+	iByteUsage[75][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[75][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[76] = "Not Used";
+	iByteUsage[76][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[76][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[77] = "Not Used";
+	iByteUsage[77][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[77][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[78] = "Not Used";
+	iByteUsage[78][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[78][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[79] = "Not Used";
+	iByteUsage[79][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[79][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[80] = "Not Used";
+	iByteUsage[80][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[80][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[81] = "Not Used";
+	iByteUsage[81][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[81][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[82] = "Not Used";
+	iByteUsage[82][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[82][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[83] = "Not Used";
+	iByteUsage[83][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[83][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[84] = "Not Used";
+	iByteUsage[84][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[84][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[85] = "Not Used";
+	iByteUsage[85][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[85][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[86] = "Not Used";
+	iByteUsage[86][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[86][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[87] = "Not Used";
+	iByteUsage[87][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[87][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[88] = "Not Used";
+	iByteUsage[88][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[88][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[89] = "Not Used";
+	iByteUsage[89][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[89][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[90] = "Not Used";
+	iByteUsage[90][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[90][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[91] = "Not Used";
+	iByteUsage[91][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[91][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[92] = "Not Used";
+	iByteUsage[92][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[92][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[93] = "Not Used";
+	iByteUsage[93][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[93][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[94] = "Not Used";
+	iByteUsage[94][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[94][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[95] = "Not Used";
+	iByteUsage[95][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[95][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[96] = "Not Used";
+	iByteUsage[96][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[96][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[97] = "Not Used";
+	iByteUsage[97][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[97][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[98] = "Not Used";
+	iByteUsage[98][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[98][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[99] = "Not Used";
+	iByteUsage[99][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[99][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[100] = "Not Used";
+	iByteUsage[100][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[100][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[101] = "Not Used";
+	iByteUsage[101][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[101][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[102] = "Not Used";
+	iByteUsage[102][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[102][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[103] = "Not Used";
+	iByteUsage[103][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[103][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[104] = "Not Used";
+	iByteUsage[104][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[104][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[105] = "Not Used";
+	iByteUsage[105][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[105][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[106] = "Not Used";
+	iByteUsage[106][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[106][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[107] = "Not Used";
+	iByteUsage[107][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[107][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[108] = "Not Used";
+	iByteUsage[108][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[108][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[109] = "Not Used";
+	iByteUsage[109][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[109][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[110] = "Not Used";
+	iByteUsage[110][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[110][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[111] = "Not Used";
+	iByteUsage[111][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[111][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[112] = "Not Used";
+	iByteUsage[112][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[112][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[113] = "Not Used";
+	iByteUsage[113][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[113][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[114] = "Not Used";
+	iByteUsage[114][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[114][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[115] = "Not Used";
+	iByteUsage[115][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[115][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[116] = "Not Used";
+	iByteUsage[116][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[116][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[117] = "Not Used";
+	iByteUsage[117][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[117][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[118] = "Device Enrolled";
+	iByteUsage[118][ciBYTE5USAGE] = ciBYTE5DEVICE;
+	iByteUsage[118][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[119] = "Output Reset";
+	iByteUsage[119][ciBYTE5USAGE] = ciBYTE5USER;
+	iByteUsage[119][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[120] = "First to Open";
+	iByteUsage[120][ciBYTE5USAGE] = ciBYTE5USER;
+	iByteUsage[120][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[121] = "Late to Close";
+	iByteUsage[121][ciBYTE5USAGE] = ciBYTE5USER;
+	iByteUsage[121][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[122] = "PIN entered with bit 7 set";
+	iByteUsage[122][ciBYTE5USAGE] = ciBYTE5USER;
+	iByteUsage[122][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[123] = "Begin Walk-test";
+	iByteUsage[123][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[123][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[124] = "End Walk-test";
+	iByteUsage[124][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[124][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[125] = "Re-exit";
+	iByteUsage[125][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[125][ciBYTE6USAGE] = ciBYTE6YES;
+	sEventNames[126] = "Output Trip";
+	iByteUsage[126][ciBYTE5USAGE] = ciBYTE5USER;
+	iByteUsage[126][ciBYTE6USAGE] = ciBYTE6NO;
+	sEventNames[127] = "Data Lost";
+	iByteUsage[127][ciBYTE5USAGE] = ciBYTE5NONE;
+	iByteUsage[127][ciBYTE6USAGE] = ciBYTE6NO;
+}

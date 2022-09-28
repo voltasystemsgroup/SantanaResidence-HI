@@ -1,0 +1,89 @@
+[BEGIN]
+  Version=1
+[END]
+[BEGIN]
+  ObjTp=FSgntr
+  Sgntr=UserSPlus
+  RelVrs=1
+  IntStrVrs=1
+  SPlusVrs=4.02.20
+  CrossCplrVrs=1.3
+[END]
+[BEGIN]
+  ObjTp=Hd
+  Cmn1=	For use inside the GE Interlogix Networx Processor module only.
+[END]
+[BEGIN]
+  ObjTp=Symbol
+  Exclusions=1,19,20,21,88,89,310,718,756,854,
+  Exclusions_CDS=6
+  Inclusions_CDS=5
+  Name=GE Interlogix Networx Processor v4.1_Mod
+  SmplCName=GE Interlogix Networx Processor v4.1_mod.usp
+  Code=1
+  SysRev5=3.083
+  SMWRev=2.02.05
+  InputCue1=poll
+  InputSigType1=Digital
+  InputCue2=send
+  InputSigType2=Digital
+  InputCue3=resend
+  InputSigType3=Digital
+  InputCue4=dataLost
+  InputSigType4=Digital
+  OutputCue1=Time_Out
+  OutputSigType1=Digital
+  InputList2Cue1=number_of_zones
+  InputList2SigType1=Analog
+  InputList2Cue2=from_modules$
+  InputList2SigType2=Serial
+  InputList2Cue3=from_device$
+  InputList2SigType3=Serial
+  OutputList2Cue1=to_modules$
+  OutputList2SigType1=Serial
+  OutputList2Cue2=to_device$
+  OutputList2SigType2=Serial
+  OutputList2Cue3=zone_status[#]
+  OutputList2SigType3=Analog
+  ParamCue1=[Reference Name]
+  MinVariableInputs=4
+  MaxVariableInputs=4
+  MinVariableInputsList2=3
+  MaxVariableInputsList2=3
+  MinVariableOutputs=1
+  MaxVariableOutputs=1
+  MinVariableOutputsList2=3
+  MaxVariableOutputsList2=194
+  MinVariableParams=0
+  MaxVariableParams=0
+  Expand=expand_separately
+  Expand2=expand_separately
+  ProgramTree=Logic
+  SymbolTree=21
+  Hint=
+  PdfHelp=
+  HelpID= 
+  Render=4
+  Smpl-C=16
+  CompilerCode=-48
+  CompilerParamCode=27
+  CompilerParamCode5=14
+  NumFixedParams=1
+  Pp1=1
+  MPp=1
+  NVStorage=10
+  ParamSigType1=String
+  SmplCInputCue1=o#
+  SmplCOutputCue1=i#
+  SmplCInputList2Cue1=an#
+  SmplCOutputList2Cue1=ai#
+  SPlus2CompiledName=S2_GE_Interlogix_Networx_Processor_v4_1_mod
+  SymJam=NonExclusive
+  FileName=GE Interlogix Networx Processor v4.1_mod.ush
+[END]
+[BEGIN]
+  ObjTp=Dp
+  H=1
+  Tp=1
+  NoS=False
+[END]

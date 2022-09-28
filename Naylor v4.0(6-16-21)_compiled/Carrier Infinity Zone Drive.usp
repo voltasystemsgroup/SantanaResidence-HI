@@ -1,0 +1,981 @@
+/***********************************************************************************
+  SIMPL+ Module Information
+  (Fill in comments below)
+***********************************************************************************/
+/*
+Dealer Name:	Crestron Electronics
+System Name:
+System Number:
+Programmer:		PAC
+Comments:
+*/
+/***********************************************************************************
+  Compiler Directives
+  (Uncomment and declare compiler directives as needed)
+***********************************************************************************/
+#SYMBOL_NAME "Carrier Infinity Zone Drive"
+// #HINT ""
+#DEFINE_CONSTANT	ciMAXTRIES				5
+
+#DEFINE_CONSTANT	ciFANAUTO					0
+#DEFINE_CONSTANT	ciFANLOW					1
+#DEFINE_CONSTANT	ciFANMEDIUM				2
+#DEFINE_CONSTANT	ciFANHIGH					3
+
+#DEFINE_CONSTANT	ciHEATSPMAX				95
+#DEFINE_CONSTANT	ciHEATSPMIN				50
+
+#DEFINE_CONSTANT	ciCOOLSPMAX				95
+#DEFINE_CONSTANT	ciCOOLSPMIN				50
+
+#DEFINE_CONSTANT	ciOVERRIDETIME		120
+#DEFINE_CONSTANT	ciOVERRIDESTEP		15
+#DEFINE_CONSTANT	ciOVERRIDEMAX			1439
+
+#DEFINE_CONSTANT	csHEATSPNAK				"HTSP:NAK"
+#DEFINE_CONSTANT	csCOOLSPNAK				"CLSP:NAK"
+#DEFINE_CONSTANT	csFANNAK					"FAN:NAK"
+#DEFINE_CONSTANT	csMODENAK					"MODE:NAK"
+#DEFINE_CONSTANT	csHOLDNAK					"HOLD:NAK"
+#DEFINE_CONSTANT	csOVERRIDENAK			"OTMR:NAK"
+
+#DEFINE_CONSTANT	csDEGREESIGN			"\xB0"
+// #CATEGORY "" 
+#CATEGORY "22" // HVAC
+#DEFAULT_VOLATILE
+// #DEFAULT_NONVOLATILE
+#HELP_BEGIN
+	For use inside the Carrier Infinity module only.
+#HELP_END
+/***********************************************************************************
+  DIGITAL, ANALOG and SERIAL INPUTS and OUTPUTS
+  (Uncomment and declare inputs and outputs as needed)
+***********************************************************************************/
+DIGITAL_INPUT	Heat_SP_Up, Heat_SP_Down,
+							Cool_SP_Up, Cool_SP_Down,
+							Fan_Auto, Fan_Low, Fan_Medium, Fan_High,
+							Override_Time_Up, Override_Time_Down,
+							Hold_On, Hold_Off, Hold_Toggle,
+							Send_Heat_SP, Send_Cool_SP, Send_Override,
+							Send_Heat_SP_Again, Send_Cool_SP_Again, Send_Override_Again,
+							Send_Fan_Again, Send_Hold_Again;
+ANALOG_INPUT	System_Number, Zone_Number,
+							Heat_SP_Max, Heat_SP_Min,
+							Cool_SP_Max, Cool_SP_Min,
+							Heat_SP_In, Cool_SP_In;
+BUFFER_INPUT	From_Device$[250];
+
+DIGITAL_OUTPUT 	Resend_Heat_SP, Resend_Cool_SP, Resend_Fan,
+								Resend_Override, Resend_Hold,
+								Heat_SP_Celsius, Cool_SP_Celsius, Room_Negative, Room_Celsius;
+ANALOG_OUTPUT		Fan_In, Hold_In, Override_State_In,
+								Heat_SP, Cool_SP, Room_Temperature, Room_Humidity;
+STRING_OUTPUT		Override_Time$, To_Processor$;
+/***********************************************************************************
+  Global Variables
+  (Uncomment and declare global variables as needed)
+  Note:  Be sure to initialize all declared STRING variables as needed
+         For example, in Function Main: myString = "";
+***********************************************************************************/
+INTEGER	iCurrentHeatSP, iCurrentCoolSP, iCurrentFan, iCurrentOverride, iCurrentHold,
+				iCurrentOverrideState, iRequestedHeatSP, iRequestedCoolSP, iRequestedFan,
+				iRequestedOverride, iRequestedHold, iFlag1, iPointer1, iPointer2,
+				iHeatMax, iHeatMin, iCoolMax, iCoolMin, iHeatCelsius, iCoolCelsius, iTemp,
+				iHeatSPCounter, iCoolSPCounter, iFanCounter, iOverrideTimerCounter,
+				iHoldCounter, iSPTimeSent, iRoomTemperature, iRoomHumidity, iRoomNegative,
+				iRoomCelsius;
+STRING	sTemp[250], sSystemZone[4], sTemp1[10], sSystem[2];
+/***********************************************************************************
+  Functions
+  (Add any additional functions here)
+  Note:  Functions must be physically placed before the location in
+         the code that calls them.
+***********************************************************************************/
+Integer_Function fCelsiusToFahrenheit(INTEGER fiTemperature)
+{
+	INTEGER fiFahrenheit;
+	
+	fiFahrenheit = (((fiTemperature * 9) S/ 5) + 32);
+	if(((fiTemperature * 9) mod 5) >= 5)
+	{
+		fiFahrenheit = fiFahrenheit + 1;
+	}
+	
+	return(fiFahrenheit);
+}
+
+Integer_Function fFahrenheitToCelsius(INTEGER fiTemperature)
+{
+	INTEGER fiCelsius;
+	
+	fiCelsius = (((fiTemperature - 32) * 5) S/ 9);
+	if((((fiTemperature - 32) * 5) mod 9) >= 5)
+	{
+		fiCelsius = fiCelsius + 1;
+	}
+
+	return(fiCelsius);
+}
+/***********************************************************************************
+  Event Handlers
+  (Uncomment and declare additional event handlers as needed)
+***********************************************************************************/
+PUSH Heat_SP_Up
+{
+	if(iRequestedHeatSP < iHeatMax)
+	{
+		iRequestedHeatSP = iRequestedHeatSP + 1;
+		Heat_SP = iRequestedHeatSP;
+		Heat_SP_Celsius = iHeatCelsius;
+	}
+}
+
+PUSH Heat_SP_Down
+{
+	if(iRequestedHeatSP > iHeatMin)
+	{
+		iRequestedHeatSP = iRequestedHeatSP - 1;
+		Heat_SP = iRequestedHeatSP;
+		Heat_SP_Celsius = iHeatCelsius;
+	}
+}
+
+PUSH Send_Heat_SP
+{
+	if(iCurrentHeatSP <> iRequestedHeatSP)
+	{
+		if(iRequestedOverride = ciOVERRIDETIME)
+		{
+			makestring(To_Processor$, "%sHTSP!%d\x0D\x0A%sHTSP?\x0D\x0A%sOTMR?\x0D\x0A%sOVR?\x0D\x0A%sCLSP?\x0D\x0A", sSystemZone, iRequestedHeatSP, sSystemZone, sSystemZone, sSystemZone, sSystemZone);
+			iHeatSPCounter = 1;
+		}
+		else if(iRequestedOverride <> ciOVERRIDETIME)
+		{
+			makestring(To_Processor$, "%sHTSP!%d,%02d:%02d\x0D\x0A%sHTSP?\x0D\x0A%sOTMR?\x0D\x0A%sOVR?\x0D\x0A%sCLSP?\x0D\x0A", sSystemZone, iRequestedHeatSP, (iRequestedOverride/60), (iRequestedOverride mod 60), sSystemZone, sSystemZone, sSystemZone, sSystemZone);
+			iHeatSPCounter = 1;
+			iSPTimeSent = On;
+		}
+	}
+}
+
+PUSH Send_Heat_SP_Again
+{
+	Resend_Heat_SP = Off;
+	if(iCurrentHeatSP <> iRequestedHeatSP)
+	{
+		if(iRequestedOverride = ciOVERRIDETIME)
+		{
+			iHeatSPCounter = iHeatSPCounter + 1;
+			if(iHeatSPCounter > ciMAXTRIES)
+			{
+				iRequestedHeatSP = iCurrentHeatSP;
+				Heat_SP = iRequestedHeatSP;
+				Heat_SP_Celsius = iHeatCelsius;
+			}
+			else
+			{
+				makestring(To_Processor$, "%sHTSP!%d\x0D\x0A%sHTSP?\x0D\x0A%sOTMR?\x0D\x0A%sOVR?\x0D\x0A%sCLSP?\x0D\x0A", sSystemZone, iRequestedHeatSP, sSystemZone, sSystemZone, sSystemZone, sSystemZone);
+			}
+		}
+		else if(iRequestedOverride <> ciOVERRIDETIME)
+		{
+			iHeatSPCounter = iHeatSPCounter + 1;
+			if(iHeatSPCounter > ciMAXTRIES)
+			{
+				iRequestedHeatSP = iCurrentHeatSP;
+				Heat_SP = iRequestedHeatSP;
+				Heat_SP_Celsius = iHeatCelsius;
+			}
+			else
+			{
+				makestring(To_Processor$, "%sHTSP!%d,%02d:%02d\x0D\x0A%sHTSP?\x0D\x0A%sOTMR?\x0D\x0A%sOVR?\x0D\x0A%sCLSP?\x0D\x0A", sSystemZone, iRequestedHeatSP, (iRequestedOverride/60), (iRequestedOverride mod 60), sSystemZone, sSystemZone, sSystemZone, sSystemZone);
+				iSPTimeSent = On;
+			}
+		}
+	}
+}
+
+PUSH Cool_SP_Up
+{
+	if(iRequestedCoolSP < iCoolMax)
+	{
+		iRequestedCoolSP = iRequestedCoolSP + 1;
+		Cool_SP = iRequestedCoolSP;
+		Cool_SP_Celsius = iCoolCelsius;
+	}
+}
+
+PUSH Cool_SP_Down
+{
+	if(iRequestedCoolSP > iCoolMin)
+	{
+		iRequestedCoolSP = iRequestedCoolSP - 1;
+		Cool_SP = iRequestedCoolSP;
+		Cool_SP_Celsius = iCoolCelsius;
+	}
+}
+
+PUSH Send_Cool_SP
+{
+	if(iCurrentCoolSP <> iRequestedCoolSP)
+	{
+		if(iRequestedOverride = ciOVERRIDETIME)
+		{
+			makestring(To_Processor$, "%sCLSP!%d\x0D\x0A%sCLSP?\x0D\x0A%sOTMR?\x0D\x0A%sOVR?\x0D\x0A%sHTSP?\x0D\x0A", sSystemZone, iRequestedCoolSP, sSystemZone, sSystemZone, sSystemZone, sSystemZone);
+			iCoolSPCounter = 1;
+		}
+		else if(iRequestedOverride <> ciOVERRIDETIME)
+		{
+			makestring(To_Processor$, "%sCLSP!%d,%02d:%02d\x0D\x0A%sCLSP?\x0D\x0A%sOTMR?\x0D\x0A%sOVR?\x0D\x0A%sHTSP?\x0D\x0A", sSystemZone, iRequestedCoolSP, (iRequestedOverride/60), (iRequestedOverride mod 60), sSystemZone, sSystemZone, sSystemZone, sSystemZone);
+			iCoolSPCounter = 1;
+			iSPTimeSent = On;
+		}
+	}
+}
+
+PUSH Send_Cool_SP_Again
+{
+	Resend_Cool_SP = Off;
+	if(iCurrentCoolSP <> iRequestedCoolSP)
+	{
+		if(iRequestedOverride = ciOVERRIDETIME)
+		{
+			iCoolSPCounter = iCoolSPCounter + 1;
+			if(iCoolSPCounter > ciMAXTRIES)
+			{
+				iRequestedCoolSP = iCurrentCoolSP;
+				Cool_SP = iRequestedCoolSP;
+				Cool_SP_Celsius = iCoolCelsius;
+			}
+			else
+			{
+				makestring(To_Processor$, "%sCLSP!%d\x0D\x0A%sCLSP?\x0D\x0A%sOTMR?\x0D\x0A%sOVR?\x0D\x0A%sHTSP?\x0D\x0A", sSystemZone, iRequestedCoolSP, sSystemZone, sSystemZone, sSystemZone, sSystemZone);
+			}
+		}
+		else if(iRequestedOverride <> ciOVERRIDETIME)
+		{
+			iCoolSPCounter = iCoolSPCounter + 1;
+			if(iCoolSPCounter > ciMAXTRIES)
+			{
+				iRequestedCoolSP = iCurrentCoolSP;
+				Cool_SP = iRequestedCoolSP;
+				Cool_SP_Celsius = iCoolCelsius;
+			}
+			else
+			{
+				makestring(To_Processor$, "%sCLSP!%d,%02d:%02d\x0D\x0A%sCLSP?\x0D\x0A%sOTMR?\x0D\x0A%sOVR?\x0D\x0A%sHTSP?\x0D\x0A", sSystemZone, iRequestedCoolSP, (iRequestedOverride/60), (iRequestedOverride mod 60), sSystemZone, sSystemZone, sSystemZone, sSystemZone);
+				iSPTimeSent = On;
+			}
+		}
+	}
+}
+
+PUSH Fan_Auto
+{
+	if((iCurrentFan <> ciFANAUTO) && (iRequestedFan = iCurrentFan))
+	{
+		makestring(To_Processor$, "%sFAN!AUTO\x0D\x0A%sFAN?\x0D\x0A", sSystemZone, sSystemZone);
+		iRequestedFan = ciFANAUTO;
+		Fan_In = iRequestedFan;
+		iFanCounter = 1;
+	}
+	else if((iRequestedFan <> ciFANAUTO) && (iCurrentFan <> iRequestedFan))
+	{
+		iRequestedFan = ciFANAUTO;
+		Fan_In = iRequestedFan;
+	}
+}
+
+PUSH Fan_Low
+{
+	if((iCurrentFan <> ciFANLOW) && (iRequestedFan = iCurrentFan))
+	{
+		makestring(To_Processor$, "%sFAN!LOW\x0D\x0A%sFAN?\x0D\x0A", sSystemZone, sSystemZone);
+		iRequestedFan = ciFANLOW;
+		Fan_In = iRequestedFan;
+		iFanCounter = 1;
+	}
+	else if((iRequestedFan <> ciFANLOW) && (iCurrentFan <> iRequestedFan))
+	{
+		iRequestedFan = ciFANLOW;
+		Fan_In = iRequestedFan;
+	}
+}
+
+PUSH Fan_Medium
+{
+	if((iCurrentFan <> ciFANMEDIUM) && (iRequestedFan = iCurrentFan))
+	{
+		makestring(To_Processor$, "%sFAN!MED\x0D\x0A%sFAN?\x0D\x0A", sSystemZone, sSystemZone);
+		iRequestedFan = ciFANMEDIUM;
+		Fan_In = iRequestedFan;
+		iFanCounter = 1;
+	}
+	else if((iRequestedFan <> ciFANMEDIUM) && (iCurrentFan <> iRequestedFan))
+	{
+		iRequestedFan = ciFANMEDIUM;
+		Fan_In = iRequestedFan;
+	}
+}
+
+PUSH Fan_High
+{
+	if((iCurrentFan <> ciFANHIGH) && (iRequestedFan = iCurrentFan))
+	{
+		makestring(To_Processor$, "%sFAN!HIGH\x0D\x0A%sFAN?\x0D\x0A", sSystemZone, sSystemZone);
+		iRequestedFan = ciFANHIGH;
+		Fan_In = iRequestedFan;
+		iFanCounter = 1;
+	}
+	else if((iRequestedFan <> ciFANHIGH) && (iCurrentFan <> iRequestedFan))
+	{
+		iRequestedFan = ciFANHIGH;
+		Fan_In = iRequestedFan;
+	}
+}
+
+PUSH Send_Fan_Again
+{
+	Resend_Fan = Off;
+	if(iRequestedFan <> iCurrentFan)
+	{
+		if(iRequestedFan = ciFANAUTO)
+		{
+			iFanCounter = iFanCounter + 1;
+			if(iFanCounter > ciMAXTRIES)
+			{
+				iRequestedFan = iCurrentFan;
+				Fan_In = iRequestedFan;
+			}
+			else
+			{
+				makestring(To_Processor$, "%sFAN!AUTO\x0D\x0A%sFAN?\x0D\x0A", sSystemZone, sSystemZone);
+			}
+		}
+		else if(iRequestedFan = ciFANLOW)
+		{
+			iFanCounter = iFanCounter + 1;
+			if(iFanCounter > ciMAXTRIES)
+			{
+				iRequestedFan = iCurrentFan;
+				Fan_In = iRequestedFan;
+			}
+			else
+			{
+				makestring(To_Processor$, "%sFAN!LOW\x0D\x0A%sFAN?\x0D\x0A", sSystemZone, sSystemZone);
+			}
+		}
+		else if(iRequestedFan = ciFANMEDIUM)
+		{
+			iFanCounter = iFanCounter + 1;
+			if(iFanCounter > ciMAXTRIES)
+			{
+				iRequestedFan = iCurrentFan;
+				Fan_In = iRequestedFan;
+			}
+			else
+			{
+				makestring(To_Processor$, "%sFAN!MED\x0D\x0A%sFAN?\x0D\x0A", sSystemZone, sSystemZone);
+			}
+		}
+		else if(iRequestedFan = ciFANHIGH)
+		{
+			iFanCounter = iFanCounter + 1;
+			if(iFanCounter > ciMAXTRIES)
+			{
+				iRequestedFan = iCurrentFan;
+				Fan_In = iRequestedFan;
+			}
+			else
+			{
+				makestring(To_Processor$, "%sFAN!HIGH\x0D\x0A%sFAN?\x0D\x0A", sSystemZone, sSystemZone);
+			}
+		}
+	}
+}
+
+PUSH Override_Time_Up
+{
+	if(iRequestedOverride < ciOVERRIDEMAX)
+	{
+		if((iRequestedOverride mod ciOVERRIDESTEP) <> 0)
+		{
+			iRequestedOverride = iRequestedOverride + (ciOVERRIDESTEP - (iRequestedOverride mod ciOVERRIDESTEP));
+		}
+		iRequestedOverride = iRequestedOverride + ciOVERRIDESTEP;
+		if(iRequestedOverride > ciOVERRIDEMAX)
+		{
+			iRequestedOverride = ciOVERRIDEMAX;
+		}
+		makestring(Override_Time$, "%02d:%02d", (iRequestedOverride/60), (iRequestedOverride mod 60));
+	}
+}
+
+PUSH Override_Time_Down
+{
+	if(iRequestedOverride = ciOVERRIDEMAX)
+	{
+		iRequestedOverride = ciOVERRIDEMAX - ciOVERRIDESTEP + 1;
+		makestring(Override_Time$, "%02d:%02d", (iRequestedOverride/60), (iRequestedOverride mod 60));
+	}
+	else if(iRequestedOverride > 0)
+	{
+		iRequestedOverride = iRequestedOverride - ciOVERRIDESTEP;
+		if((iRequestedOverride mod ciOVERRIDESTEP) <> 0)
+		{
+			iRequestedOverride = iRequestedOverride - (iRequestedOverride mod ciOVERRIDESTEP);
+		}
+		if(iRequestedOverride S< 0)
+		{
+			iRequestedOverride = 0;
+		}
+		makestring(Override_Time$, "%02d:%02d", (iRequestedOverride/60), (iRequestedOverride mod 60));
+	}
+}
+
+PUSH Send_Override
+{
+	if(iRequestedOverride <> iCurrentOverride)
+	{
+		iOverrideTimerCounter = 1;
+		makestring(To_Processor$, "%sOTMR!%02d:%02d\x0D\x0A%sOTMR?\x0D\x0A%sOVR?\x0D\x0A", sSystemZone, (iRequestedOverride/60), (iRequestedOverride mod 60), sSystemZone, sSystemZone);
+	}
+}
+
+PUSH Send_Override_Again
+{
+	Resend_Override = Off;
+	if(iRequestedOverride <> iCurrentOverride)
+	{
+		iOverrideTimerCounter = iOverrideTimerCounter + 1;
+		if(iOverrideTimerCounter > ciMAXTRIES)
+		{
+			iRequestedOverride = iCurrentOverride;
+			makestring(Override_Time$, "%02d:%02d", (iRequestedOverride/60), (iRequestedOverride mod 60));
+		}
+		else
+		{
+			makestring(To_Processor$, "%sOTMR!%02d:%02d\x0D\x0A%sOTMR?\x0D\x0A%sOVR?\x0D\x0A", sSystemZone, (iRequestedOverride/60), (iRequestedOverride mod 60), sSystemZone, sSystemZone);
+		}
+	}
+}
+
+PUSH Hold_On
+{
+	if((iCurrentHold <> On) && (iRequestedHold = iCurrentHold))
+	{
+		makestring(To_Processor$, "%sHOLD!ON\x0D\x0A%sHOLD?\x0D\x0A", sSystemZone, sSystemZone);
+		iRequestedHold = On;
+		Hold_In = iRequestedHold;
+		iHoldCounter = 1;
+	}
+	else if((iCurrentHold <> iRequestedHold) && (iRequestedHold <> On))
+	{
+		iRequestedHold = On;
+		Hold_In = iRequestedHold;
+	}
+}
+
+PUSH Hold_Off
+{
+	if((iCurrentHold <> Off) && (iRequestedHold = iCurrentHold))
+	{
+		makestring(To_Processor$, "%sHOLD!OFF\x0D\x0A%sHOLD?\x0D\x0A", sSystemZone, sSystemZone);
+		iRequestedHold = Off;
+		Hold_In = iRequestedHold;
+		iHoldCounter = 1;
+	}
+	else if((iCurrentHold <> iRequestedHold) && (iRequestedHold <> Off))
+	{
+		iRequestedHold = Off;
+		Hold_In = iRequestedHold;
+	}
+}
+
+PUSH Hold_Toggle
+{
+	if((iCurrentHold <> On) && (iRequestedHold = iCurrentHold))
+	{
+		makestring(To_Processor$, "%sHOLD!ON\x0D\x0A%sHOLD?\x0D\x0A", sSystemZone, sSystemZone);
+		iRequestedHold = On;
+		Hold_In = iRequestedHold;
+		iHoldCounter = 1;
+	}
+	else if((iCurrentHold <> iRequestedHold) && (iRequestedHold <> On))
+	{
+		iRequestedHold = On;
+		Hold_In = iRequestedHold;
+	}
+	else if((iCurrentHold <> Off) && (iRequestedHold = iCurrentHold))
+	{
+		makestring(To_Processor$, "%sHOLD!OFF\x0D\x0A%sHOLD?\x0D\x0A", sSystemZone, sSystemZone);
+		iRequestedHold = Off;
+		Hold_In = iRequestedHold;
+		iHoldCounter = 1;
+	}
+	else if((iCurrentHold <> iRequestedHold) && (iRequestedHold <> Off))
+	{
+		iRequestedHold = Off;
+		Hold_In = iRequestedHold;
+	}
+}
+
+PUSH Send_Hold_Again
+{
+	Resend_Hold = Off;
+	if(iRequestedHold <> iCurrentHold)
+	{
+		if(iRequestedHold = On)
+		{
+			iHoldCounter = iHoldCounter + 1;
+			if(iHoldCounter > ciMAXTRIES)
+			{
+				iRequestedHold = iCurrentHold;
+				Hold_In = iRequestedHold;
+			}
+			else
+			{
+				makestring(To_Processor$, "%sHOLD!ON\x0D\x0A%sHOLD?\x0D\x0A", sSystemZone, sSystemZone);
+			}
+		}
+		else if(iRequestedHold = Off)
+		{
+			iHoldCounter = iHoldCounter + 1;
+			if(iHoldCounter > ciMAXTRIES)
+			{
+				iRequestedHold = iCurrentHold;
+				Hold_In = iRequestedHold;
+			}
+			else
+			{
+				makestring(To_Processor$, "%sHOLD!OFF\x0D\x0A%sHOLD?\x0D\x0A", sSystemZone, sSystemZone);
+			}
+		}
+	}
+}
+
+CHANGE Zone_Number
+{
+	makestring(sSystemZone, "S%dZ%d", System_Number, Zone_Number);
+	makestring(sSystem, "S%d", System_Number);
+}
+
+CHANGE Heat_SP_Max
+{
+	if(Heat_SP_Max <= ciHEATSPMAX)
+	{
+		iHeatMax = Heat_SP_MAX;
+	}
+	else
+	{
+		iHeatMax = ciHEATSPMAX;
+	}
+}
+
+CHANGE Heat_SP_Min
+{
+	if(Heat_SP_Min >= ciHEATSPMIN)
+	{
+		iHeatMin = Heat_SP_MIN;
+	}
+	else
+	{
+		iHeatMin = ciHEATSPMIN;
+	}
+}
+
+CHANGE Cool_SP_Max
+{
+	if(Cool_SP_Max <= ciCOOLSPMAX)
+	{
+		iCoolMax = Cool_SP_MAX;
+	}
+	else
+	{
+		iCoolMax = ciCOOLSPMAX;
+	}
+}
+
+CHANGE Cool_SP_Min
+{
+	if(Cool_SP_Min >= ciCOOLSPMIN)
+	{
+		iCoolMin = Cool_SP_MIN;
+	}
+	else
+	{
+		iCoolMin = ciCOOLSPMIN;
+	}
+}
+
+CHANGE Heat_SP_In
+{
+	if((Heat_SP_In >= iHeatMin) && (Heat_SP_In <= iHeatMax))
+	{
+		iRequestedHeatSP = Heat_SP_In;
+		Heat_SP = iRequestedHeatSP;
+	}
+}
+
+CHANGE Cool_SP_In
+{
+	if((Cool_SP_In >= iCoolMin) && (Cool_SP_In <= iCoolMax))
+	{
+		iRequestedCoolSP = Cool_SP_In;
+		Cool_SP = iRequestedCoolSP;
+	}
+}
+
+CHANGE From_Device$
+{
+	if(iFlag1 = 0)
+	{
+		iFlag1 = 1;
+		while(find("\x0D\x0A", From_Device$) > 0)
+		{
+			sTemp = remove("\x0D\x0A", From_Device$);
+			if(find(sSystemZone, sTemp) > 0)
+			{
+				if(find(csFANNAK, sTemp) > 0)
+				{
+					Resend_Fan = On;
+				}
+				else if(find("FAN:AUTO", sTemp) > 0)
+				{
+					if(iRequestedFan = ciFANAUTO) 
+					{
+						iCurrentFan = iRequestedFan;
+						Fan_In = iCurrentFan;
+					}
+					else if(iRequestedFan <> iCurrentFan)
+					{
+						Resend_Fan = On;
+					}
+					else
+					{
+						iCurrentFan = ciFANAUTO;
+						iRequestedFan = iCurrentFan;
+						Fan_In = iCurrentFan;
+					}
+				}
+				else if(find("FAN:LOW", sTemp) > 0)
+				{
+					if(iRequestedFan = ciFANLOW) 
+					{
+						iCurrentFan = iRequestedFan;
+						Fan_In = iCurrentFan;
+					}
+					else if(iRequestedFan <> iCurrentFan)
+					{
+						Resend_Fan = On;
+					}
+					else
+					{
+						iCurrentFan = ciFANLOW;
+						iRequestedFan = iCurrentFan;
+						Fan_In = iCurrentFan;
+					}
+				}
+				else if(find("FAN:MED", sTemp) > 0)
+				{
+					if(iRequestedFan = ciFANMEDIUM) 
+					{
+						iCurrentFan = iRequestedFan;
+						Fan_In = iCurrentFan;
+					}
+					else if(iRequestedFan <> iCurrentFan)
+					{
+						Resend_Fan = On;
+					}
+					else
+					{
+						iCurrentFan = ciFANMEDIUM;
+						iRequestedFan = iCurrentFan;
+						Fan_In = iCurrentFan;
+					}
+				}
+				else if(find("FAN:HIGH", sTemp) > 0)
+				{
+					if(iRequestedFan = ciFANHIGH) 
+					{
+						iCurrentFan = iRequestedFan;
+						Fan_In = iCurrentFan;
+					}
+					else if(iRequestedFan <> iCurrentFan)
+					{
+						Resend_Fan = On;
+					}
+					else
+					{
+						iCurrentFan = ciFANHIGH;
+						iRequestedFan = iCurrentFan;
+						Fan_In = iCurrentFan;
+					}
+				}
+				else if(find(csHOLDNAK, sTemp) > 0)
+				{
+					Resend_Hold = On;
+				}
+				else if(find("HOLD:ON", sTemp) > 0)
+				{
+					if(iRequestedHold = On)
+					{
+						iCurrentHold = iRequestedHold;
+						Hold_In = iCurrentHold;
+					}
+					else if(iRequestedHold <> iCurrentHold)
+					{
+						Resend_Hold = On;
+					}
+					else
+					{
+						iCurrentHold = On;
+						iRequestedHold = iCurrentHold;
+						Hold_In = iCurrentHold;
+					}
+				}
+				else if(find("HOLD:OFF", sTemp) > 0)
+				{
+					if(iRequestedHold = Off)
+					{
+						iCurrentHold = iRequestedHold;
+						Hold_In = iCurrentHold;
+					}
+					else if(iRequestedHold <> iCurrentHold)
+					{
+						Resend_Hold = On;
+					}
+					else
+					{
+						iCurrentHold = Off;
+						iRequestedHold = iCurrentHold;
+						Hold_In = iCurrentHold;
+					}
+				}
+				else if(find("OVR:ON", sTemp) > 0)
+				{
+					iCurrentOverrideState = On;
+					Override_State_In = iCurrentOverrideState;
+				}
+				else if(find("OVR:OFF", sTemp) > 0)
+				{
+					iCurrentOverrideState = Off;
+					Override_State_In = iCurrentOverrideState;
+				}
+				else if(find(csOVERRIDENAK, sTemp) > 0)
+				{
+					Resend_Override = On;
+				}
+				else if(find("OTMR:", Stemp) > 0)
+				{
+					iPointer1 = find("OTMR:", sTemp);
+					iPointer2 = find(":", sTemp, (iPointer1 + 6));
+					iTemp = (atoi(mid(sTemp, iPointer1, iPointer2 - iPointer1)) * 60) + atoi(mid(sTemp, iPointer2, len(sTemp) - iPointer2));
+					if(iRequestedOverride = iTemp)
+					{
+						iCurrentOverride = iRequestedOverride;
+						makestring(Override_Time$, "%02d:%02d", (iCurrentOverride/60), (iCurrentOverride mod 60));
+						iSPTimeSent = Off;
+					}
+					else if(iRequestedOverride <> iCurrentOverride)
+					{
+						Resend_Override = On;
+					}
+					else if(iCurrentOverride <> iTemp)
+					{
+						iCurrentOverride = iTemp;
+						iRequestedOverride = iTemp;
+						makestring(Override_Time$, "%02d:%02d", (iCurrentOverride/60), (iCurrentOverride mod 60));
+						iSPTimeSent = Off;
+					}
+				}
+				else if((find("RT:", sTemp) > 0) && (find("NAK", sTemp) = 0))
+				{
+					iPointer1 = find(":", sTemp);
+					sTemp1 = right(sTemp, (len(sTemp) - iPointer1));
+					sTemp1 = left(sTemp1, len(sTemp1) - 2);
+					if(find("-", sTemp1) > 0)
+					{
+						iRoomNegative = 1;
+						Room_Negative = iRoomNegative;
+					}
+					else
+					{
+						iRoomNegative = 0;
+						Room_Negative = iRoomNegative;
+					}
+					if(find("\xB0C", sTemp1) > 0)
+					{
+						iRoomCelsius = 1;
+						Room_Celsius = iRoomCelsius;
+					}
+					else
+					{
+						iRoomCelsius = 0;
+						Room_Celsius = iRoomCelsius;
+					}
+					if(iRoomTemperature <> atoi(left(sTemp1, len(sTemp1) - 2)))
+					{
+						iRoomTemperature = atoi(left(sTemp1, len(sTemp1) - 2));
+						Room_Temperature = iRoomTemperature;
+					}
+				}
+				else if((find("RH:", sTemp) > 0) && (find("NAK", sTemp) = 0))
+				{
+					iPointer1 = find(":", sTemp);
+					sTemp1 = right(sTemp, (len(sTemp) - iPointer1));
+					sTemp1 = left(sTemp1, len(sTemp1) - 2);
+					if(iRoomHumidity <> atoi(sTemp1))
+					{
+						iRoomHumidity = atoi(sTemp1);
+						Room_Humidity = iRoomHumidity;
+					}
+				}
+				else if(find(csHEATSPNAK, sTemp) > 0)
+				{
+					Resend_Heat_SP = On;
+				}
+				else if(find("HTSP:", sTemp) > 0)
+				{
+					iPointer1 = find(":", sTemp);
+					iPointer2 = find("\x0D\x0A", sTemp);
+					sTemp = mid(sTemp, iPointer1 + 1, iPointer2 - iPointer1 - 1);
+					iPointer2 = find("\xB0", sTemp);
+					sTemp1 = left(sTemp, iPointer2 - 1);
+					iTemp = atoi(sTemp1);
+					if(iRequestedHeatSP = iTemp)
+					{
+						if(find("C", sTemp, 2) > 0)
+						{
+							iHeatCelsius = 1;
+						}
+						else
+						{
+							iHeatCelsius = 0;
+						}
+						iRequestedHeatSP = iTemp;
+						iCurrentHeatSP = iRequestedHeatSP;
+						Heat_SP = iRequestedHeatSP;
+						Heat_SP_Celsius = iHeatCelsius;
+					}
+					else if(iRequestedHeatSP <> iCurrentHeatSP)
+					{
+						Resend_Heat_SP = On;
+					}
+					else if(iCurrentHeatSP <> iTemp)
+					{
+						if((find("C", sTemp, 2) > 0) && (iHeatCelsius = Off))
+						{
+							iHeatCelsius = 1;
+							iHeatMax = fCelsiusToFahrenheit(iHeatMax);
+							iHeatMin = fCelsiusToFahrenheit(iHeatMin);
+						}
+						else if((find("F", sTemp, 2) > 0) && (iHeatCelsius = On))
+						{
+							iHeatCelsius = 0;
+							iHeatMax = fCelsiusToFahrenheit(iHeatMax);
+							iHeatMin = fCelsiusToFahrenheit(iHeatMin);
+						}
+						iRequestedHeatSP = iTemp;
+						iCurrentHeatSP = iRequestedHeatSP;
+						Heat_SP = iRequestedHeatSP;
+						Heat_SP_Celsius = iHeatCelsius;
+					}
+				}
+				else if(find(csCOOLSPNAK, sTemp) > 0)
+				{
+					Resend_Cool_SP = On;
+				}
+				else if(find("CLSP:", sTemp) > 0)
+				{
+					iPointer1 = find(":", sTemp);
+					iPointer2 = find("\x0D\x0A", sTemp);
+					sTemp = mid(sTemp, iPointer1 + 1, iPointer2 - iPointer1 - 1);
+					iPointer2 = find("\xB0", sTemp);
+					sTemp1 = left(sTemp, iPointer2 - 1);
+					iTemp = atoi(sTemp1);
+					if(iRequestedCoolSP = iTemp)
+					{
+						if(find("C", sTemp, 2) > 0)
+						{
+							iCoolCelsius = 1;
+						}
+						else
+						{
+							iCoolCelsius = 0;
+						}
+						iRequestedCoolSP = iTemp;
+						iCurrentCoolSP = iRequestedCoolSP;
+						Cool_SP = iRequestedCoolSP;
+						Cool_SP_Celsius = iCoolCelsius;
+					}
+					else if(iRequestedCoolSP <> iCurrentCoolSP)
+					{
+						Resend_Cool_SP = On;
+					}
+					else if(iCurrentCoolSP <> iTemp)
+					{
+						if((find("C", sTemp, 2) > 0) && (iCoolCelsius = Off))
+						{
+							iCoolCelsius = 1;
+							iCoolMax = fCelsiusToFahrenheit(iCoolMax);
+							iCoolMin = fCelsiusToFahrenheit(iCoolMin);
+						}
+						else if((find("F", sTemp, 2) > 0) && (iCoolCelsius = On))
+						{
+							iCoolCelsius = 0;
+							iCoolMax = fCelsiusToFahrenheit(iCoolMax);
+							iCoolMin = fCelsiusToFahrenheit(iCoolMin);
+						}
+						iRequestedCoolSP = iTemp;
+						iCurrentCoolSP = iRequestedCoolSP;
+						Cool_SP = iRequestedCoolSP;
+						Cool_SP_Celsius = iCoolCelsius;
+					}
+				}
+			}
+			sTemp = "";
+		}
+		iFlag1 = 0;
+	}
+}
+/***********************************************************************************
+  Main()
+  Uncomment and place one-time startup code here
+  (This code will get called when the system starts up)
+***********************************************************************************/
+Function Main()
+{
+	iFlag1 = 0;
+	iHeatMax = ciHEATSPMAX;
+	iHeatMin = ciHEATSPMIN;
+	iCoolMax = ciCOOLSPMAX;
+	iCoolMin = ciCOOLSPMIN;
+	iCurrentHeatSP = 60;
+	iCurrentCoolSP = 70;
+	iCurrentFan = ciFANAUTO;
+	iCurrentOverride = ciOVERRIDETIME;
+	iCurrentHold = Off;
+	iCurrentOverrideState = Off;
+	iRequestedHeatSP = iCurrentHeatSP;
+	iRequestedCoolSP = iCurrentCoolSP;
+	iRequestedFan = iCurrentFan;
+	iRequestedOverride = iCurrentOverride;
+	iRequestedHold = iCurrentHold;
+	Fan_In = iCurrentFan;
+	Hold_In = iCurrentHold;
+	Override_State_In = iCurrentOverrideState;
+	iHeatCelsius = 0;
+	iCoolCelsius = 0;
+	iRoomCelsius = 0;
+	iRoomNegative = 0;
+	iRoomTemperature = 70;
+	Room_Celsius = iRoomCelsius;
+	Room_Negative = iRoomNegative;
+	Room_Temperature = iRoomTemperature;
+	Heat_SP = iRequestedHeatSP;
+	Heat_SP_Celsius = iHeatCelsius;
+	Cool_SP = iRequestedCoolSP;
+	Cool_SP_Celsius = iCoolCelsius;
+	makestring(Override_Time$, "%02d:%02d", (iCurrentOverride/60), (iCurrentOverride mod 60));
+}

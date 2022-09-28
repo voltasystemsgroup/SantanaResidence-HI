@@ -1,0 +1,1366 @@
+/*******************************************************************************************
+  SIMPL+ Module Information
+  (Fill in comments below)
+*******************************************************************************************/
+/*
+Dealer Name:
+System Name:
+System Number:
+Programmer:Christophe Hombrouck
+Comments:
+*/
+
+/*******************************************************************************************
+  Compiler Directives
+  (Uncomment and declare compiler directives as needed)
+*******************************************************************************************/
+// #ENABLE_DYNAMIC
+// #SYMBOL_NAME ""
+// #HINT ""
+// #DEFINE_CONSTANT
+// #CATEGORY "" 
+// #DEFAULT_VOLATILE
+// #PRINT_TO_TRACE
+// #DIGITAL_EXPAND 
+// #ANALOG_SERIAL_EXPAND 
+#OUTPUT_SHIFT 2 
+// #HELP_PDF_FILE ""
+#DEFAULT_NONVOLATILE                   
+#ENABLE_STACK_CHECKING
+#ENABLE_TRACE
+/*
+#HELP_BEGIN
+   (add additional lines of help lines)
+#HELP_END
+*/
+
+/*******************************************************************************************
+  Include Libraries
+  (Uncomment and include additional libraries as needed)
+*******************************************************************************************/
+// #CRESTRON_LIBRARY ""
+// #USER_LIBRARY ""
+
+/*******************************************************************************************
+  DIGITAL, ANALOG and SERIAL INPUTS and OUTPUTS
+  (Uncomment and declare inputs and outputs as needed)
+*******************************************************************************************/
+DIGITAL_INPUT	_SKIP_,_SKIP_,Turn_Unit_On, Turn_Unit_Off, _SKIP_, Set_Operation_Mode_To_Fan, Set_Operation_Mode_To_Heat, Set_Operation_Mode_To_Cool, Set_Operation_Mode_To_Dependent,
+				Set_Operation_Mode_To_Dry, Set_Operation_Mode_To_Auto, _SKIP_, Set_Ventilation_Mode_To_Auto, Set_Ventilation_Mode_To_HeatExchange,
+				Set_Ventilation_Mode_To_Bypass, _SKIP_, Set_Ventilation_Amount_To_Auto_Normal, Set_Ventilation_Amount_To_Low_Normal, Set_Ventilation_Amount_To_High_Normal,
+				Set_Ventilation_Amount_To_Auto_FreshUp, Set_Ventilation_Amount_To_Low_FreshUp, Set_Ventilation_Amount_To_High_FreshUp, _SKIP_, Set_Fan_Speed_To_Low,
+				Set_Fan_Speed_To_Middle, Set_Fan_Speed_To_High, _SKIP_, Set_Fan_Direction_To_0, Set_Fan_Direction_To_1, Set_Fan_Direction_To_2, Set_Fan_Direction_To_3, Set_Fan_Direction_To_4,
+				Set_Fan_Direction_To_Swing, _SKIP_, Reset_Filter_Sign,StopSetPointChange;
+
+ANALOG_INPUT	SetPointInput,MacroSetPointInput; 
+// STRING_INPUT 
+BUFFER_INPUT	Feedback[2000]; 
+
+DIGITAL_OUTPUT	Status_Is_Normal, Status_Is_Error, Status_Is_Unconnected, _SKIP_, UnitState_Is_Unknown,  UnitState_Is_On, UnitState_Is_Off,_SKIP_, Operation_Mode_Is_Unknown,
+				Operation_Mode_Is_Fan, Operation_Mode_Is_Heat, Operation_Mode_Is_Cool, Operation_Mode_Is_Dependent, Operation_Mode_Is_Ventilation,
+				Operation_Mode_Is_Dry, _SKIP_, Operation_Mode_Is_AutoHeat, Operation_Mode_Is_AutoCool, _SKIP_, Ventilation_Mode_Is_Unknown, Ventilation_Mode_Is_Auto,
+				Ventilation_Mode_Is_HeatExchange, Ventilation_Mode_Is_Bypass, _SKIP_, Ventilation_Amount_Is_Unknown, Ventilation_Amount_Is_Auto_Normal,
+				Ventilation_Amount_Is_Low_Normal, Ventilation_Amount_Is_High_Normal, Ventilation_Amount_Is_Auto_FreshUp, Ventilation_Amount_Is_Low_FreshUp,
+				Ventilation_Amount_Is_High_FreshUp, Set_Temp_Is_Enabled, Set_Temp_Is_Disabled, Room_Temp_Is_Enabled, Room_Temp_Is_Disabled, Fan_Speed_Is_Unknown,
+				Fan_Speed_Is_Low, Fan_Speed_Is_Middle, Fan_Speed_Is_High, Fan_Direction_Is_Unknown, Fan_Direction_Is_0, Fan_Direction_Is_1, Fan_Direction_Is_2, Fan_Direction_Is_3, Fan_Direction_Is_4,
+				Fan_Direction_Is_Swing, Filter_Sign_Is_On, Filter_Sign_Is_Off;  
+ANALOG_OUTPUT	Room_Temperature_Analog, Set_Temperature_Analog, _SKIP_, Type, InnerType; 
+STRING_OUTPUT   Short_Name_Text, Long_Name_Text,Malfunction_Code_Text,Command;
+
+/*******************************************************************************************
+  SOCKETS
+  (Uncomment and define socket definitions as needed)
+*******************************************************************************************/
+// TCP_CLIENT
+// TCP_SERVER
+// UDP_SOCKET
+
+/*******************************************************************************************
+  Parameters
+  (Uncomment and declare parameters as needed)
+*******************************************************************************************/
+INTEGER_PARAMETER TimeOut;
+// SIGNED_INTEGER_PARAMETER
+// LONG_INTEGER_PARAMETER
+// SIGNED_LONG_INTEGER_PARAMETER
+STRING_PARAMETER Address[10];
+
+/*******************************************************************************************
+  Parameter Properties
+  (Uncomment and declare parameter properties as needed)
+*******************************************************************************************/
+/*
+#BEGIN_PARAMETER_PROPERTIES parameter_variable, parameter_variable, ...
+   // propValidUnits = // unitString or unitDecimal|unitHex|unitPercent|unitCharacter|unitTime|unitTicks;
+   // propDefaultUnit = // unitString, unitDecimal, unitHex, unitPercent, unitCharacter, unitTime or unitTicks;
+   // propBounds = lower_bound , upper_bound;
+   // propDefaultValue = ;  // or, propDefaultValue = "";
+   // propList = // { "value" , "label" } , { "value" , "label" } , ... ;
+   // propShortDescription = "status_bar_hint_text";
+   // #BEGIN_PROP_FULL_DESCRIPTION  line_1...  line_2...  line_n  #END_PROP_FULL_DESCRIPTION
+   // #BEGIN_PROP_NOTES line_1...  line_2...  line_n  #END_PROP_NOTES
+#END_PARAMETER_PROPERTIES
+*/
+
+/*******************************************************************************************
+  Structure Definitions
+  (Uncomment and define structure definitions as needed)
+  Note:  Be sure to initialize all declared STRING variables as needed
+         For example, in Function Main: struct.myString = "";
+*******************************************************************************************/
+
+STRUCTURE Unit
+{
+	Integer Connected;
+	Integer Type;
+	Integer InnerType;
+	String  ShortName[16];
+	String 	LongName[64];	
+	Integer Status;
+	String MalfunctionCode[2];
+	Integer PowerStat;
+	Integer OperationMode;
+	Integer VentilationMode;
+	Integer VentilationAmount;
+	Integer SetTempEnable;
+	Integer RoomTempEnable;
+	Integer FanSpeed;
+	Integer FanDirection;
+	Integer FilterSign;	
+	Integer Set_Point_B1;
+	Integer Set_Point_B2;
+	Integer Set_Point_B3;
+	Integer Set_Point_B4; 
+	Integer Set_Point;
+	Integer Room_Temp_B1;
+	Integer Room_Temp_B2;
+	Integer Room_Temp_B3;
+	Integer Room_Temp_B4;
+	Integer Room_Temp;
+		
+};
+
+Unit State, NextState,SendState;
+
+
+/*******************************************************************************************
+  Global Variables
+  (Uncomment and declare global variables as needed)
+  Note:  Be sure to initialize all declared STRING variables as needed
+         For example, in Function Main: myString = "";
+*******************************************************************************************/
+   INTEGER Address$,RxOk,sending,AutoOpMode,Changed,SetxOK;
+   INTEGER SetPointByte1,SetPointByte2,SetPointByte3,SetPointByte4,SetPointIn;          
+// LONG_INTEGER
+// SIGNED_INTEGER
+// SIGNED_LONG_INTEGER
+   STRING CommandToBeSend[200],SymbolName[30];
+   String RX_Temp[1000];
+
+/*******************************************************************************************
+  Functions
+  (Add any additional functions here)
+  Note:  Functions must be physically placed before the location in
+         the code that calls them.
+*******************************************************************************************/
+
+Function InitNextState()
+{
+	NextState.Connected = 0x8000;
+	NextState.Type = 0x8000;
+	NextState.InnerType = 0x8000;
+	NextState.ShortName = "";
+	NextState.LongName = "";	
+	NextState.Status = 0x8000;
+	NextState.MalfunctionCode = "";
+	NextState.PowerStat = 0x8000;
+	NextState.OperationMode = 0x8000;
+	NextState.VentilationMode = 0x8000;
+	NextState.VentilationAmount = 0x8000;
+	NextState.SetTempEnable = 0x8000;
+	NextState.RoomTempEnable = 0x8000;
+	NextState.FanSpeed = 0x8000;
+	NextState.FanDirection = 0x8000;
+	NextState.FilterSign = 0x8000;	
+	NextState.Set_Point_B1 = 0x8000;
+	NextState.Set_Point_B2 = 0x8000;
+	NextState.Set_Point_B3 = 0x8000;
+	NextState.Set_Point_B4 = 0x8000;  
+	NextState.Set_Point = 0x8000;
+	NextState.Room_Temp_B1 = 0x8000;
+	NextState.Room_Temp_B2 = 0x8000;
+	NextState.Room_Temp_B3 = 0x8000;
+	NextState.Room_Temp_B4 = 0x8000;
+	NextState.Room_Temp = 0x8000;	
+}
+
+Function CopyStructure(Unit struct1, Unit Struct2)
+{
+	struct1.Connected = struct2.Connected;
+	struct1.Type = struct2.Type;
+	struct1.InnerType = struct2.InnerType;
+	struct1.ShortName = struct2.ShortName;
+	struct1.LongName = struct2.LongName;	
+	struct1.Status = struct2.Status;
+	struct1.MalfunctionCode = struct2.MalfunctionCode;
+	struct1.PowerStat = struct2.PowerStat;
+	struct1.OperationMode = struct2.OperationMode;
+	struct1.VentilationMode = struct2.VentilationMode;
+	struct1.VentilationAmount = struct2.VentilationAmount;
+	struct1.SetTempEnable = struct2.SetTempEnable;
+	struct1.RoomTempEnable = struct2.RoomTempEnable;
+	struct1.FanSpeed = struct2.FanSpeed;;
+	struct1.FanDirection = struct2.FanDirection;
+	struct1.FilterSign = struct2.FilterSign;	
+	struct1.Set_Point_B1 = struct2.Set_Point_B1;
+	struct1.Set_Point_B2 = struct2.Set_Point_B2;
+	struct1.Set_Point_B3 = struct2.Set_Point_B3;
+	struct1.Set_Point_B4 = struct2.Set_Point_B4;
+	struct1.Set_Point = struct2.Set_Point;
+	struct1.Room_Temp_B1 = struct2.Room_Temp_B1;
+	struct1.Room_Temp_B2 = struct2.Room_Temp_B2;
+	struct1.Room_Temp_B3 = struct2.Room_Temp_B3;
+	struct1.Room_Temp_B4 = struct2.Room_Temp_B4;
+	struct1.Room_Temp = struct2.Room_Temp;	
+}
+
+Function ConvertSetPointInput(Integer value)
+{
+	Integer temp,temp1;
+	if(value >= 320)
+	{   
+		NextState.Set_Point_B1 = 0;
+		NextState.Set_Point_B2 = 0;
+		NextState.Set_Point_B3 = 0;
+		NextState.Set_Point_B4 = 0x42;	 	
+	}
+	else if(value >= 140 && value < 320)
+	{
+		NextState.Set_Point_B4 = 0x41;
+		temp1 = value/10;
+		temp1 = ((temp1-14)*8)+112;
+		temp = value mod 10;
+		Switch(temp)
+		{
+		 	case(0):
+		 	{
+		 	 	NextState.Set_Point_B1 = 0;
+				NextState.Set_Point_B2 = 0;
+				NextState.Set_Point_B3 = temp1;
+		 	}
+		 	case(1):
+		 	{
+		 	 	NextState.Set_Point_B1 = 0xCD;
+				NextState.Set_Point_B2 = 0xCC;
+				NextState.Set_Point_B3 = temp1;
+		 	}
+		 	case(2):
+		 	{
+		 		NextState.Set_Point_B1 = 0x9A;
+				NextState.Set_Point_B2 = 0x91;
+				NextState.Set_Point_B3 = temp1+1;
+		 	}
+		 	case(3):
+		 	{
+		 	 	NextState.Set_Point_B1 = 0x66;
+				NextState.Set_Point_B2 = 0x66;
+				NextState.Set_Point_B3 = temp1+2;
+		 	}
+		 	case(4):
+		 	{
+		 	 	NextState.Set_Point_B1 = 0x33;
+				NextState.Set_Point_B2 = 0x33;
+				NextState.Set_Point_B3 = temp1+3;
+		 	}
+		 	case(5):
+		 	{
+		 	 	NextState.Set_Point_B1 = 0;
+				NextState.Set_Point_B2 = 0;
+				NextState.Set_Point_B3 = temp1+4;
+		 	}
+		 	case(6):
+		 	{
+		 		NextState.Set_Point_B1 = 0xCD;
+				NextState.Set_Point_B2 = 0xCC;
+				NextState.Set_Point_B3 = temp1+4;
+		 	}
+		 	case(7):
+		 	{
+		 	 	NextState.Set_Point_B1 = 0x9A;
+				NextState.Set_Point_B2 = 0x99;
+				NextState.Set_Point_B3 = temp1+5;
+		 	}
+		 	case(8):
+		 	{
+		 	 	NextState.Set_Point_B1 = 0x66;
+				NextState.Set_Point_B2 = 0x66;
+				NextState.Set_Point_B3 = temp1+6;
+		 	}
+		 	case(9):
+		 	{
+		 	 	NextState.Set_Point_B1 = 0x33;
+				NextState.Set_Point_B2 = 0x33;
+				NextState.Set_Point_B3 = temp1+7;
+		 	}
+		}	 	
+	}	
+}
+
+Integer_Function ConvertBytesToFP(Integer B1, Integer B2, Integer B3, Integer B4)
+{
+	Integer Result;
+    Integer temp1;
+	if(B4 = 0x42)
+	{
+	 	Result = 320;
+	}
+	else if(B4 = 0x41)
+	{
+		Result = (((B3 - 112)/8) + 14)*10;
+		temp1 = ((B3 - 112)mod 8); 
+		
+		Switch(temp1)
+		{
+		 	case(0):
+		 	{
+		 	 	if(B1 = 0xCD && B2 = 0xCC)
+		 	 	{
+		 	 	 	Result = Result + 1;
+		 	 	}
+		 	}
+		    case(1):
+		 	{
+		 		Result = Result + 2;		 	
+		 	}
+		 	case(2):
+		 	{
+		 	 	Result = Result + 3;
+		 	}
+		 	case(3):
+		 	{
+		 	 	Result = Result + 4;
+		 	}
+		 	case(4):
+		 	{
+		 		if(B1 = 0x00 && B2 = 0x00)
+		 	 	{
+		 	 	 	Result = Result + 5;
+		 	 	}
+		 	 	else if(B1 = 0xCD && B2 = 0xCC)
+		 	 	{
+		 	 	 	Result = Result + 6;
+		 	 	}	 	
+		 	}
+		 	case(5):
+		 	{
+		 		Result = Result + 7; 	
+		 	}
+		 	case(6):
+		 	{
+		 		Result = Result + 8;
+		 	}
+		 	case(7):
+		 	{
+		 		Result = Result + 9;
+		 	}
+		}	 	
+	}
+	return(Result);
+}
+
+Function OutputState()
+{
+	Integer value;
+	
+	value = State.Status;
+	Switch(value)
+	{
+		case(1):
+		{
+		 	//pulse(100,Status_Is_Normal);
+		 	Status_Is_Normal = 1;
+		 	delay(10);
+		 	Status_Is_Normal = 0;
+		}
+		case(0):
+		{
+		 	//pulse(100,Status_Is_Error);
+		 	Status_Is_Error = 1;
+		 	delay(10);
+		 	Status_Is_Error = 0;
+		}
+		case(65535):
+		{
+		 	//pulse(100,Status_Is_Unconnected);
+		 	Status_Is_Unconnected = 1;
+		 	delay(10);
+		 	Status_Is_Unconnected = 0;
+		}
+		default:
+		{
+			//MakeString(0,"\n Status No case found");
+		}
+	}
+	
+	Malfunction_Code_Text = State.MalfunctionCode;
+	
+	value = State.PowerStat;
+	Switch(value)
+	{
+		case(0):
+		{
+		 	//pulse(100,UnitState_Is_Off);
+		 	UnitState_Is_Off = 1;
+		 	delay(10);
+		 	UnitState_Is_Off = 0;
+		}
+		case(1):
+		{
+		 	//pulse(100,UnitState_Is_On);
+		 	UnitState_Is_On = 1;
+		 	delay(10);
+		 	UnitState_Is_On = 0;
+		}
+		case(2):
+		{
+		 	//pulse(100,UnitState_Is_Unknown);
+		 	UnitState_Is_Unknown = 1;
+		 	delay(10);
+		 	UnitState_Is_Unknown = 0;
+		}
+		default:
+		{
+		 	//MakeString(0,"\n PowerState No case found");
+		}
+	}
+	//delay(15);
+	value = State.OperationMode;
+	Switch(value)
+	{
+		case(4096):
+		{
+		 	//pulse(100,Operation_Mode_Is_Unknown);
+		 	Operation_Mode_Is_Unknown = 1;
+		 	delay(10);
+		 	Operation_Mode_Is_Unknown = 0;
+		}
+		case(1):
+		{
+		 	//pulse(100,Operation_Mode_Is_Fan);
+		 	Operation_Mode_Is_Fan = 1;
+		 	delay(10);
+		 	Operation_Mode_Is_Fan = 0;
+		}
+		case(2):
+		{
+		 	//pulse(100,Operation_Mode_Is_Heat);
+		 	Operation_Mode_Is_Heat = 1;
+		 	delay(10);
+		 	Operation_Mode_Is_Heat = 0;
+		}
+		case(4):
+		{
+		 	//pulse(100,Operation_Mode_Is_Cool);
+		 	Operation_Mode_Is_Cool = 1;
+		 	delay(10);
+		 	Operation_Mode_Is_Cool = 0;
+		}
+		case(16):
+		{
+		 	//pulse(100,Operation_Mode_Is_Dependent);
+		 	Operation_Mode_Is_Dependent = 1;
+		 	delay(10);
+		 	Operation_Mode_Is_Dependent = 0;
+		}
+		case(32):
+		{
+		 	//pulse(100,Operation_Mode_Is_Ventilation);
+		 	Operation_Mode_Is_Ventilation = 1;
+		 	delay(10);
+		 	Operation_Mode_Is_Ventilation = 0;
+		}
+		case(64):
+		{
+		 	//pulse(100,Operation_Mode_Is_Dry);
+		 	Operation_Mode_Is_Dry = 1;
+		 	delay(10);
+		 	Operation_Mode_Is_Dry = 0;
+		}
+		case(256):
+		{
+		 	//pulse(100,Operation_Mode_Is_Auto);
+		 	//Operation_Mode_Is_Auto = 1;
+		 	//delay(10);
+		 	//Operation_Mode_Is_Auto = 0;
+		 	//pulse(100,Operation_Mode_Is_AutoHeat);
+		 	Operation_Mode_Is_AutoHeat = 1;
+		 	delay(10);
+		 	Operation_Mode_Is_AutoHeat = 0;
+		}
+		case(512):
+		{
+		 	if(AutoOpMode)
+	     	{
+	   			
+	   			AutoOpMode = 0;
+	   			//pulse(100,Operation_Mode_Is_Auto);
+	   			//Operation_Mode_Is_Auto = 1;
+			 	//delay(10);
+			 	//Operation_Mode_Is_Auto = 0;	  		
+	     	}
+	     	else
+	     	{
+		 		//pulse(100,Operation_Mode_Is_Auto);
+		 		//Operation_Mode_Is_Auto = 1;
+			 	//delay(10);
+			 	//Operation_Mode_Is_Auto = 0;
+		 		//pulse(100,Operation_Mode_Is_AutoCool);
+		 		Operation_Mode_Is_AutoCool = 1;
+			 	delay(10);
+			 	Operation_Mode_Is_AutoCool = 0;
+		 	}
+		}
+		default:
+		{
+		 	//MakeString(0,"\n Operation Mode No case found");
+		}
+	}
+	
+	value = State.VentilationMode;
+	Switch(value)
+	{
+		case(4096):
+		{
+		 	//pulse(100,Ventilation_Mode_Is_Unknown);
+		 	Ventilation_Mode_Is_Unknown = 1;
+		 	delay(10);
+		 	Ventilation_Mode_Is_Unknown = 0;
+		}
+		case(1):
+		{
+		 	//pulse(100,Ventilation_Mode_Is_Auto);
+		 	Ventilation_Mode_Is_Auto = 1;
+		 	delay(10);
+		 	Ventilation_Mode_Is_Auto = 0;
+		}
+		case(2):
+		{
+		 	//pulse(100,Ventilation_Mode_Is_HeatExchange);
+		 	Ventilation_Mode_Is_HeatExchange = 1;
+		 	delay(10);
+		 	Ventilation_Mode_Is_HeatExchange = 0;
+
+		}
+		case(4):
+		{
+		 	//pulse(100,Ventilation_Mode_Is_Bypass);
+		 	Ventilation_Mode_Is_Bypass = 1;
+		 	delay(10);
+		 	Ventilation_Mode_Is_Bypass = 0;
+		}
+		default:
+		{
+		 	//MakeString(0,"\n Ventilation Mode No case found");
+		}		
+	}
+	//delay(15);
+	value = State.VentilationAmount;
+	Switch(value)
+	{
+		case(4096):
+		{
+		 	//pulse(100,Ventilation_Amount_Is_Unknown);
+		 	Ventilation_Amount_Is_Unknown = 1;
+		 	delay(10);
+		 	Ventilation_Amount_Is_Unknown = 0;
+		}
+		case(1):
+		{
+		 	//pulse(100,Ventilation_Amount_Is_Auto_Normal);
+		 	Ventilation_Amount_Is_Auto_Normal = 1;
+		 	delay(10);
+		 	Ventilation_Amount_Is_Auto_Normal = 0;
+		}
+		case(2):
+		{
+		 	//pulse(100,Ventilation_Amount_Is_Low_Normal);
+		 	Ventilation_Amount_Is_Low_Normal = 1;
+		 	delay(10);
+		 	Ventilation_Amount_Is_Low_Normal = 0;
+		}
+		case(4):
+		{
+		 	//pulse(100,Ventilation_Amount_Is_High_Normal);
+		 	Ventilation_Amount_Is_High_Normal = 1;
+		 	delay(10);
+		 	Ventilation_Amount_Is_High_Normal = 0;
+		}
+		case(8):
+		{
+		 	//pulse(100,Ventilation_Amount_Is_Auto_FreshUp); 
+		 	Ventilation_Amount_Is_Auto_FreshUp = 1;
+		 	delay(10);
+		 	Ventilation_Amount_Is_Auto_FreshUp = 0;
+		}
+		case(16):
+		{
+		 	//pulse(100,Ventilation_Amount_Is_Low_FreshUp);
+		 	Ventilation_Amount_Is_Low_FreshUp = 1;
+		 	delay(10);
+		 	Ventilation_Amount_Is_Low_FreshUp = 0;
+		}
+		case(32):
+		{
+		 	//pulse(100,Ventilation_Amount_Is_High_FreshUp);
+		 	Ventilation_Amount_Is_High_FreshUp = 1;
+		 	delay(10);
+		 	Ventilation_Amount_Is_High_FreshUp = 0;
+		}
+		default:
+		{
+		 	//MakeString(0,"\n Ventilation Amount No case found");
+		}		
+	}
+	
+	if(State.SetTempEnable)
+	{
+		//pulse(100,Set_Temp_Is_Enabled);
+		Set_Temp_Is_Enabled = 1;
+	 	delay(10);
+	 	Set_Temp_Is_Enabled = 0;	 	
+	}  
+	else
+	{
+		//pulse(100,Set_Temp_Is_Disabled);
+		Set_Temp_Is_Disabled = 1;
+	 	delay(10);
+	 	Set_Temp_Is_Disabled = 0;	 	
+	}
+	
+	if(State.RoomTempEnable)
+	{
+		//pulse(100,Room_Temp_Is_Enabled);
+		Room_Temp_Is_Enabled = 1;
+	 	delay(10);
+	 	Room_Temp_Is_Enabled = 0;	 	
+	}  
+	else
+	{
+		//pulse(100,Room_Temp_Is_Disabled);
+		Room_Temp_Is_Disabled = 1;
+	 	delay(10);
+	 	Room_Temp_Is_Disabled = 0;	 	
+	}
+	//delay(15);
+	Room_Temperature_Analog = State.Room_Temp;
+	Set_Temperature_Analog = State.Set_Point;
+	
+    value = State.FanSpeed;
+	Switch(value)
+	{
+		case(255):
+		{
+		 	//pulse(100,Fan_Speed_Is_Unknown);
+		 	Fan_Speed_Is_Unknown = 1;
+		 	delay(10);
+		 	Fan_Speed_Is_Unknown = 0;
+		}
+		case(0):
+		{
+		 	//pulse(100,Fan_Speed_Is_Low);
+		 	Fan_Speed_Is_Low = 1;
+		 	delay(10);
+		 	Fan_Speed_Is_Low = 0;
+		}
+		case(1):
+		{
+		 	//pulse(100,Fan_Speed_Is_Middle);
+		 	Fan_Speed_Is_Middle = 1;
+		 	delay(10);
+		 	Fan_Speed_Is_Middle = 0;
+		}   
+		case(2):
+		{
+		 	//pulse(100,Fan_Speed_Is_High);
+		 	Fan_Speed_Is_High = 1;
+		 	delay(10);
+		 	Fan_Speed_Is_High = 0;
+		}		
+	}
+	
+	value = State.FanDirection;
+	Switch(value)
+	{
+		case(255):
+		{
+		 	//pulse(100,Fan_Direction_Is_Unknown);
+		 	Fan_Direction_Is_Unknown = 1;
+		 	delay(10);
+		 	Fan_Direction_Is_Unknown = 0;
+		}
+		case(0):
+		{
+		 	//pulse(100,Fan_Direction_Is_0);
+		 	Fan_Direction_Is_0 = 1;
+		 	delay(10);
+		 	//Fan_Direction_Is_0 = 0;
+		}
+		case(1):
+		{
+		 	//pulse(100,Fan_Direction_Is_1);
+		 	Fan_Direction_Is_1 = 1;
+		 	delay(10);
+		 	Fan_Direction_Is_1 = 0;
+		}
+		case(2):
+		{
+		 	//pulse(100,Fan_Direction_Is_2);
+		 	Fan_Direction_Is_2 = 1;
+		 	delay(10);
+		 	Fan_Direction_Is_2 = 0;
+		}
+		case(3):
+		{
+		 	//pulse(100,Fan_Direction_Is_3);
+		 	Fan_Direction_Is_3 = 1;
+		 	delay(10);
+		 	Fan_Direction_Is_3 = 0;
+		}
+		case(4):
+		{
+		 	//pulse(100,Fan_Direction_Is_4);
+		 	Fan_Direction_Is_4 = 1;
+		 	delay(10);
+		 	Fan_Direction_Is_4 = 0;
+		}
+		case(7):
+		{
+		 	//pulse(100,Fan_Direction_Is_Swing);
+		 	Fan_Direction_Is_Swing = 1;
+		 	delay(10);
+		 	Fan_Direction_Is_Swing = 0;
+		}		
+	}
+	
+	//delay(15);
+	if(State.FilterSign)
+	{
+	 	//pulse(100,Filter_Sign_Is_On);
+	 	Filter_Sign_Is_On = 1;
+	 	delay(10);
+	 	Filter_Sign_Is_On = 0;
+	}
+	else
+	{
+	 	//pulse(100,Filter_Sign_Is_Off);
+	 	Filter_Sign_Is_Off = 1;
+	 	delay(10);
+	 	Filter_Sign_Is_Off = 0;
+	}
+
+}
+
+Function MergeStates(Unit struct1, Unit Struct2)
+{
+	if(Struct2.Status != 0x8000)
+	{
+		Struct1.Status = Struct2.Status;		
+	}
+	if(Struct2.PowerStat != 0x8000)
+	{
+		Struct1.PowerStat = Struct2.PowerStat;		
+	}
+	if(Struct2.OperationMode != 0x8000)
+	{
+		if(Struct2.OperationMode = 0x0200)
+		{
+			AutoOpMode = 1;	 	
+		}
+		Struct1.OperationMode = Struct2.OperationMode;		
+	}
+	if(Struct2.VentilationMode != 0x8000)
+	{
+		Struct1.VentilationMode = Struct2.VentilationMode;		
+	}
+	if(Struct2.VentilationAmount != 0x8000)
+	{
+		Struct1.VentilationAmount = Struct2.VentilationAmount;		
+	}
+	if(Struct2.SetTempEnable != 0x8000)
+	{
+		Struct1.SetTempEnable = Struct2.SetTempEnable;		
+	}
+	if(Struct2.RoomTempEnable != 0x8000)
+	{
+		Struct1.RoomTempEnable = Struct2.RoomTempEnable;		
+	}
+	if(Struct2.FanSpeed != 0x8000)
+	{
+		Struct1.FanSpeed = Struct2.FanSpeed;		
+	}
+	if(Struct2.FanDirection != 0x8000)
+	{
+		Struct1.FanDirection = Struct2.FanDirection;		
+	}
+	if(Struct2.FilterSign != 0x8000)
+	{
+		Struct1.FilterSign = Struct2.FilterSign;		
+	}
+	if(Struct2.Set_Point_B1 != 0x8000)
+	{
+		Struct1.Set_Point_B1 = Struct2.Set_Point_B1;		
+	}
+	if(Struct2.Set_Point_B2 != 0x8000)
+	{
+		Struct1.Set_Point_B2 = Struct2.Set_Point_B2;		
+	}
+	if(Struct2.Set_Point_B3 != 0x8000)
+	{
+		Struct1.Set_Point_B3 = Struct2.Set_Point_B3;		
+	}
+	if(Struct2.Set_Point_B4 != 0x8000)
+	{
+		Struct1.Set_Point_B4 = Struct2.Set_Point_B4;		
+	}
+	if(Struct2.Set_Point != 0x8000)
+	{
+		Struct1.Set_Point = Struct2.Set_Point;		
+	}		
+	if(Struct2.Room_Temp_B1 != 0x8000)
+	{
+		Struct1.Room_Temp_B1 = Struct2.Room_Temp_B1;		
+	}
+	if(Struct2.Room_Temp_B2 != 0x8000)
+	{
+		Struct1.Room_Temp_B2 = Struct2.Room_Temp_B2;		
+	}
+	if(Struct2.Room_Temp_B3 != 0x8000)
+	{
+		Struct1.Room_Temp_B3 = Struct2.Room_Temp_B3;		
+	}
+	if(Struct2.Room_Temp_B4 != 0x8000)
+	{
+		Struct1.Room_Temp_B4 = Struct2.Room_Temp_B4;		
+	}
+	if(Struct2.Room_Temp != 0x8000)
+	{
+		Struct1.Room_Temp = Struct2.Room_Temp;		
+	}	
+}
+
+Function send()
+{
+	delay(100);
+	CopyStructure(SendState,State);
+	
+	MergeStates(SendState,NextState);
+	InitNextState();
+	Changed = 0;
+	CommandToBeSend = 	chr(low(Address$)) +"\x00\x00\x00" + "\x3F\x00\x00\x00" + chr(low(SendState.PowerStat)) + chr(high(SendState.PowerStat))
+						+ chr(low(SendState.OperationMode)) + chr(high(SendState.OperationMode)) + chr(low(SendState.VentilationMode))
+						+ chr(high(SendState.VentilationMode)) + chr(low(SendState.VentilationAmount)) + chr(high(SendState.VentilationAmount))
+						+ chr(low(SendState.Set_Point_B1)) + chr(low(SendState.Set_Point_B2)) + chr(low(SendState.Set_Point_B3)) 
+						+ chr(low(SendState.Set_Point_B4)) + chr(low(SendState.FanSpeed)) + chr(low(SendState.FanDirection)) 
+						+ chr(low(SendState.FilterSign)) + "\x00";// + "\x0D\x0D\0A";
+	
+	Command = CommandToBeSend;	
+ 	  
+ 	wait(2000, WaitForResponse)
+	{            
+		Print("\n%s: Daikin Unit Message Timeout",Symbolname); 
+		sending = 0;
+		CommandToBeSend = "";
+		AutoOpMode = 0; 		
+	}
+    
+}
+
+String_Function ProcessUpdate(String data)
+{
+
+	Integer value;
+	State.Status = (Byte(data,6)<<8) + Byte(data,5);
+	State.MalfunctionCode = mid(data,7,2);
+	State.PowerStat = (Byte(data,10)<<8) + Byte(data,9);
+	State.OperationMode = (Byte(data,12)<<8) + Byte(data,11);
+	State.VentilationMode = (Byte(data,14)<<8) + Byte(data,13);
+	State.VentilationAmount = (Byte(data,16)<<8) + Byte(data,15);
+	
+	if(bit(data,17,0))
+	{
+		State.SetTempEnable = 1;	 	
+	}  
+	else
+	{
+		State.SetTempEnable = 0;	 	
+	}
+	
+	if(bit(data,17,1))
+	{
+		State.RoomTempEnable = 1;	 	
+	}  
+	else
+	{
+		State.RoomTempEnable = 0;	 	
+	}
+	
+	State.Room_Temp_B1 = Byte(data,21);
+	State.Room_Temp_B2 = Byte(data,22);     
+	State.Room_Temp_B3 = Byte(data,23);
+	State.Room_Temp_B4 = Byte(data,24);
+	
+	State.Room_Temp = ConvertBytesToFP(State.Room_Temp_B1, State.Room_Temp_B2, State.Room_Temp_B3, State.Room_Temp_B4);
+	
+	State.Set_Point_B1 = Byte(data,25);
+	State.Set_Point_B2 = Byte(data,26);
+	State.Set_Point_B3 = Byte(data,27);
+	State.Set_Point_B4 = Byte(data,28);
+	
+	
+	State.Set_Point = ConvertBytesToFP(State.Set_Point_B1, State.Set_Point_B2, State.Set_Point_B3, State.Set_Point_B4);
+	
+	State.FanSpeed = Byte(data,29);
+	State.FanDirection = Byte(data,30);
+	State.FilterSign = Byte(data,31);
+	
+	OutputState();
+}
+
+Function ProcessInfo(String temp)
+{
+	String temp2[100];
+    Integer marker1, marker2, marker3, i;
+	
+	marker1 = find(";:",temp)+2;
+	marker2 = find(";:",temp,marker1);
+	temp2 = mid(temp,marker1,marker2-marker1);
+	while(find("\x00",temp2))
+	{
+		marker3 = find("\x00",temp2);
+		temp2 = left(temp2,marker3-1) + right(temp2,(len(temp2)-marker3));	
+	}
+	State.ShortName = temp2;
+	Short_Name_Text = temp2;
+	
+	marker1 = marker2+2;
+	marker2 = find(";:",temp,marker1);
+	temp2 = mid(temp,marker1,marker2-marker1);
+	while(find("\x00",temp2))
+	{
+		marker3 = find("\x00",temp2);
+		temp2 = left(temp2,marker3-1) + right(temp2,(len(temp2)-marker3));		
+	}
+	State.LongName = temp2;
+	Long_Name_Text = temp2;
+	
+	marker1 = marker2+2;
+	marker2 = find(";:",temp,marker1);
+	temp2 = mid(temp,marker1,marker2-marker1);
+	State.Type = atoi(temp2);
+	Type = atoi(temp2);
+	
+	marker1 = marker2+2;
+	marker2 = find(";:",temp,marker1);
+	temp2 = mid(temp,marker1,marker2-marker1);
+	State.InnerType = atoi(temp2);
+	InnerType = atoi(temp2);
+}
+
+
+/*******************************************************************************************
+  Event Handlers
+  (Uncomment and declare additional event handlers as needed)
+*******************************************************************************************/
+PUSH Turn_Unit_On
+{
+    NextState.PowerStat = 1;
+    Changed = 1;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+PUSH Turn_Unit_Off
+{
+    NextState.PowerStat = 0;
+    Changed = 1;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+PUSH Set_Operation_Mode_To_Fan
+{
+    NextState.OperationMode = 1;
+    Changed = 1;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+PUSH Set_Operation_Mode_To_Heat
+{
+    NextState.OperationMode = 2;
+    Changed = 1;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+PUSH Set_Operation_Mode_To_Cool
+{
+    NextState.OperationMode = 4;
+    Changed = 1;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+PUSH Set_Operation_Mode_To_Dependent
+{
+    NextState.OperationMode = 16;
+    Changed = 1;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+PUSH Set_Operation_Mode_To_Dry
+{
+    NextState.OperationMode = 64;
+    Changed = 1;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+PUSH Set_Operation_Mode_To_Auto
+{
+    NextState.OperationMode = 512;
+    Changed = 1;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+PUSH Set_Ventilation_Mode_To_Auto
+{
+    NextState.VentilationMode = 1;
+    Changed = 1;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+PUSH Set_Ventilation_Mode_To_HeatExchange
+{
+    NextState.VentilationMode = 2;
+    Changed = 1;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+PUSH Set_Ventilation_Mode_To_Bypass
+{
+    NextState.VentilationMode = 4;
+    Changed = 1;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+PUSH Set_Ventilation_Amount_To_Auto_Normal
+{
+    NextState.VentilationAmount = 1;
+    Changed = 1;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+PUSH Set_Ventilation_Amount_To_Low_Normal
+{
+    NextState.VentilationAmount = 2;
+    Changed = 1;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+PUSH Set_Ventilation_Amount_To_High_Normal
+{
+    NextState.VentilationAmount = 4;
+    Changed = 1;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+PUSH Set_Ventilation_Amount_To_Auto_FreshUp
+{
+    NextState.VentilationAmount = 8;
+    Changed = 1;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+PUSH Set_Ventilation_Amount_To_Low_FreshUp
+{
+    NextState.VentilationAmount = 16;
+    Changed = 1;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+PUSH Set_Ventilation_Amount_To_High_FreshUp
+{
+    NextState.VentilationAmount = 32;
+    Changed = 1;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+PUSH Set_Fan_Speed_To_Low
+{
+    NextState.FanSpeed = 0;
+    Changed = 1;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+PUSH Set_Fan_Speed_To_Middle
+{
+    NextState.FanSpeed = 1;
+    Changed = 1;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+PUSH Set_Fan_Speed_To_High
+{
+    NextState.FanSpeed = 2;
+    Changed = 1;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+PUSH Set_Fan_Direction_To_0
+{
+    NextState.FanDirection = 0; 
+    Changed = 1;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+PUSH Set_Fan_Direction_To_1
+{
+    NextState.FanDirection = 1;
+    Changed = 1;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+PUSH Set_Fan_Direction_To_2
+{
+    NextState.FanDirection = 2;
+    Changed = 1;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+PUSH Set_Fan_Direction_To_3
+{
+    NextState.FanDirection = 3;
+    Changed = 1;    
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}                                                                 
+}
+
+PUSH Set_Fan_Direction_To_4
+{
+    NextState.FanDirection = 4;
+    Changed = 1;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+PUSH Set_Fan_Direction_To_Swing
+{
+    NextState.FanDirection = 7;
+    Changed = 1;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+PUSH Reset_Filter_Sign
+{
+    NextState.FilterSign = 1;
+    Changed = 1;
+    if(!sending)
+ 	{    
+ 		sending = 1;
+ 	 	send();
+ 	}
+}
+
+PUSH StopSetPointChange
+{
+	if((SetPointIn = 0) || (MacroSetPointInput = 0) ||(State.Set_Point = SetPointIn))		                        
+	{}
+	else
+	{                                       
+		NextState.Set_Point = SetPointIn;
+		ConvertSetPointInput(SetPointIn);
+		Changed = 1;
+		if(!sending)
+		{
+		 	sending = 1;
+		 	send();
+		}
+	}
+}
+
+CHANGE SetPointInput
+{
+	SetPointIn = SetPointInput;
+}
+
+
+CHANGE Feedback
+{
+    if(RxOK)
+    {
+     	RxOK = 0;
+     	while(find("\x0D\x0D\x0A",Feedback))
+     	{
+     		RX_Temp = remove("\x0D\x0D\x0A",Feedback);
+     		if(find("DATA UPDATE:",RX_Temp))
+     		{
+	     		RX_Temp = right(RX_Temp,len(RX_Temp)-12);
+	     		if(Byte(RX_Temp,1) = Address$)
+	     		{
+	     		 	ProcessUpdate(RX_Temp);
+	     		}
+	     		RX_Temp = "";
+	     	}
+	     	else if(find("CHANGE: OK",RX_Temp))
+     		{
+	     		cancelWait(WaitForResponse);
+     			CopyStructure(State,SendState);
+     			OutputState(); 	
+	     		
+	     		RX_Temp = "";
+	     		if(changed)
+	     		{
+	     			send();
+	     		}
+	     		else
+	     		{
+	     			sending = 0;
+	     		}
+	     	}
+	     	else if(find("INFO:",RX_Temp))
+     		{
+	     		RX_Temp = right(RX_Temp,len(RX_Temp)-5);
+	     		if(Byte(RX_Temp,1) = Address$)
+	     		{
+	     			
+	     			processInfo(RX_Temp);     			 	
+	     		}
+	     		RX_Temp = "";
+	     	}    		 	
+     	}
+     	RxOK = 1;
+    }
+}
+
+/*******************************************************************************************
+  Main()
+  Uncomment and place one-time startup code here
+  (This code will get called when the system starts up)
+*******************************************************************************************/
+
+Function Main()
+{
+	Integer marker1, marker2,result1,result2;
+	Changed = 0;
+	sending = 0;
+	RxOK = 1;
+	SetxOK = 1;
+	AutoOpMode = 0;
+	SetPointByte1 = 0;
+	SetPointByte2 = 0;
+	SetPointByte3 = 0;
+	SetPointByte4 = 0;
+	SetPointIn = 0;
+	Address$ = ((atoi(mid(Address,1,1))-1)*64) + ((atoi(mid(Address,3,1))-1)*16) + (atoi(mid(Address,5,2)));
+	InitNextState();
+	SymbolName = getsymbolreferencename();  
+}
+
+

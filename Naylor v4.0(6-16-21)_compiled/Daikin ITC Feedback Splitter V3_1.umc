@@ -1,0 +1,2901 @@
+[
+Version=1
+]
+[
+ObjTp=FSgntr
+Sgntr=UserMacro
+RelVrs=2.08.44
+IntStrVrs=2
+MinSMWVrs=2.02.05
+MinTIOVrs=0
+SavedBy=SMW2.08.44
+]
+[
+ObjTp=Hd
+S0Nd=1
+S1Nd=2
+SLNd=3
+PrNm=Daikin ITC Feedback Splitter V3_1.umc
+CmVr=2.07.22
+DbVr=18.09.02.001
+OpVr=Not Available
+PgmNm=Niko Brasseur
+Incl=362,378,380,405,407,408,409,478,522,537,554,586,590,611,624,767,830,883,1032,1062,1079,1134,1157,1199,1220,
+McNm=Daikin ITC Feedback Splitter V3_1
+SmVr=531
+DvVr=531
+TpN1=1
+TpN2=2
+TpN3=3
+TpN4=4
+TpN5=5
+PdfHelp=Daikin ITC Feedback Splitter V3_1 Help File.pdf
+APg=1
+StdCmd=0
+FltTmp=1
+FpCS=0
+]
+[
+ObjTp=Bk
+Nm1=\
+Sx1=0
+Sy1=0
+Mx1=0
+]
+[
+ObjTp=Symbol
+Name=Daikin ITC Feedback Splitter V3_1
+Code=1
+SmplCName=Daikin ITC Feedback Splitter V3_1.umc
+Smpl-C=3
+Convertable=True
+CompilerTimePrecision=Single_Or_Double_Precision
+Exclusions=1,19,20,21,88,89,167,168,179,216,225,248,249,266,310,718,756,854,
+SMWRev=2.02.05
+TIORev=0
+S+=1
+HelpID=1055
+PdfHelp=Daikin ITC Feedback Splitter V3_1 Help File.pdf
+APg=1
+StdCmd=0
+FltTmp=1
+FpCS=0
+NumFixedInputs=1
+NumFixedOutputs=137
+MinVariableInputs=0
+MinVariableInputsList2=0
+MinVariableInputsList3=0
+MinVariableOutputs=0
+MinVariableOutputsList2=0
+MinVariableOutputsList3=0
+MinVariableParams=0
+SymbolTree=22
+InputSigType1=Serial
+OutputSigType1=Serial
+OutputSigType2=Serial
+OutputSigType3=Serial
+OutputSigType4=Serial
+OutputSigType5=Serial
+OutputSigType6=Serial
+OutputSigType7=Serial
+OutputSigType8=Serial
+OutputSigType9=Serial
+OutputSigType10=Serial
+OutputSigType11=Serial
+OutputSigType12=Serial
+OutputSigType13=Serial
+OutputSigType14=Serial
+OutputSigType15=Serial
+OutputSigType16=Serial
+OutputSigType17=Digital|Analog|Serial|String
+OutputSigType18=Serial
+OutputSigType19=Serial
+OutputSigType20=Serial
+OutputSigType21=Serial
+OutputSigType22=Serial
+OutputSigType23=Serial
+OutputSigType24=Serial
+OutputSigType25=Serial
+OutputSigType26=Serial
+OutputSigType27=Serial
+OutputSigType28=Serial
+OutputSigType29=Serial
+OutputSigType30=Serial
+OutputSigType31=Serial
+OutputSigType32=Serial
+OutputSigType33=Serial
+OutputSigType34=Digital|Analog|Serial|String
+OutputSigType35=Serial
+OutputSigType36=Serial
+OutputSigType37=Serial
+OutputSigType38=Serial
+OutputSigType39=Serial
+OutputSigType40=Serial
+OutputSigType41=Serial
+OutputSigType42=Serial
+OutputSigType43=Serial
+OutputSigType44=Serial
+OutputSigType45=Serial
+OutputSigType46=Serial
+OutputSigType47=Serial
+OutputSigType48=Serial
+OutputSigType49=Serial
+OutputSigType50=Serial
+OutputSigType51=Digital|Analog|Serial|String
+OutputSigType52=Serial
+OutputSigType53=Serial
+OutputSigType54=Serial
+OutputSigType55=Serial
+OutputSigType56=Serial
+OutputSigType57=Serial
+OutputSigType58=Serial
+OutputSigType59=Serial
+OutputSigType60=Serial
+OutputSigType61=Serial
+OutputSigType62=Serial
+OutputSigType63=Serial
+OutputSigType64=Serial
+OutputSigType65=Serial
+OutputSigType66=Serial
+OutputSigType67=Serial
+OutputSigType68=Digital|Analog|Serial|String
+OutputSigType69=Digital|Analog|Serial|String
+OutputSigType70=Digital|Analog|Serial|String
+OutputSigType71=Serial
+OutputSigType72=Serial
+OutputSigType73=Serial
+OutputSigType74=Serial
+OutputSigType75=Serial
+OutputSigType76=Serial
+OutputSigType77=Serial
+OutputSigType78=Serial
+OutputSigType79=Serial
+OutputSigType80=Serial
+OutputSigType81=Serial
+OutputSigType82=Serial
+OutputSigType83=Serial
+OutputSigType84=Serial
+OutputSigType85=Serial
+OutputSigType86=Serial
+OutputSigType87=Digital|Analog|Serial|String
+OutputSigType88=Serial
+OutputSigType89=Serial
+OutputSigType90=Serial
+OutputSigType91=Serial
+OutputSigType92=Serial
+OutputSigType93=Serial
+OutputSigType94=Serial
+OutputSigType95=Serial
+OutputSigType96=Serial
+OutputSigType97=Serial
+OutputSigType98=Serial
+OutputSigType99=Serial
+OutputSigType100=Serial
+OutputSigType101=Serial
+OutputSigType102=Serial
+OutputSigType103=Serial
+OutputSigType104=Digital|Analog|Serial|String
+OutputSigType105=Serial
+OutputSigType106=Serial
+OutputSigType107=Serial
+OutputSigType108=Serial
+OutputSigType109=Serial
+OutputSigType110=Serial
+OutputSigType111=Serial
+OutputSigType112=Serial
+OutputSigType113=Serial
+OutputSigType114=Serial
+OutputSigType115=Serial
+OutputSigType116=Serial
+OutputSigType117=Serial
+OutputSigType118=Serial
+OutputSigType119=Serial
+OutputSigType120=Serial
+OutputSigType121=Digital|Analog|Serial|String
+OutputSigType122=Serial
+ParamSigType1=Time|Percent|Constant|String|FileName|HexAddress|Any
+InputCue1=To_Units
+OutputCue1=[Unit_1-1-00]
+OutputCue2=[Unit_1-1-01]
+OutputCue3=[Unit_1-1-02]
+OutputCue4=[Unit_1-1-03]
+OutputCue5=[Unit_1-1-04]
+OutputCue6=[Unit_1-1-05]
+OutputCue7=[Unit_1-1-06]
+OutputCue8=[Unit_1-1-07]
+OutputCue9=[Unit_1-1-08]
+OutputCue10=[Unit_1-1-09]
+OutputCue11=[Unit_1-1-10]
+OutputCue12=[Unit_1-1-11]
+OutputCue13=[Unit_1-1-12]
+OutputCue14=[Unit_1-1-13]
+OutputCue15=[Unit_1-1-14]
+OutputCue16=[Unit_1-1-15]
+OutputCue17=[~UNUSED~]
+OutputCue18=[Unit_1-2-00]
+OutputCue19=[Unit_1-2-01]
+OutputCue20=[Unit_1-2-02]
+OutputCue21=[Unit_1-2-03]
+OutputCue22=[Unit_1-2-04]
+OutputCue23=[Unit_1-2-05]
+OutputCue24=[Unit_1-2-06]
+OutputCue25=[Unit_1-2-07]
+OutputCue26=[Unit_1-2-08]
+OutputCue27=[Unit_1-2-09]
+OutputCue28=[Unit_1-2-10]
+OutputCue29=[Unit_1-2-11]
+OutputCue30=[Unit_1-2-12]
+OutputCue31=[Unit_1-2-13]
+OutputCue32=[Unit_1-2-14]
+OutputCue33=[Unit_1-2-15]
+OutputCue34=[~UNUSED~]
+OutputCue35=[Unit_1-3-00]
+OutputCue36=[Unit_1-3-01]
+OutputCue37=[Unit_1-3-02]
+OutputCue38=[Unit_1-3-03]
+OutputCue39=[Unit_1-3-04]
+OutputCue40=[Unit_1-3-05]
+OutputCue41=[Unit_1-3-06]
+OutputCue42=[Unit_1-3-07]
+OutputCue43=[Unit_1-3-08]
+OutputCue44=[Unit_1-3-09]
+OutputCue45=[Unit_1-3-10]
+OutputCue46=[Unit_1-3-11]
+OutputCue47=[Unit_1-3-12]
+OutputCue48=[Unit_1-3-13]
+OutputCue49=[Unit_1-3-14]
+OutputCue50=[Unit_1-3-15]
+OutputCue51=[~UNUSED~]
+OutputCue52=[Unit_1-4-00]
+OutputCue53=[Unit_1-4-01]
+OutputCue54=[Unit_1-4-02]
+OutputCue55=[Unit_1-4-03]
+OutputCue56=[Unit_1-4-04]
+OutputCue57=[Unit_1-4-05]
+OutputCue58=[Unit_1-4-06]
+OutputCue59=[Unit_1-4-07]
+OutputCue60=[Unit_1-4-08]
+OutputCue61=[Unit_1-4-09]
+OutputCue62=[Unit_1-4-10]
+OutputCue63=[Unit_1-4-11]
+OutputCue64=[Unit_1-4-12]
+OutputCue65=[Unit_1-4-13]
+OutputCue66=[Unit_1-4-14]
+OutputCue67=[Unit_1-4-15]
+OutputCue68=[~UNUSED~]
+OutputCue69=[~UNUSED~]
+OutputCue70=[~UNUSED~]
+OutputCue71=[Unit_2-1-00]
+OutputCue72=[Unit_2-1-01]
+OutputCue73=[Unit_2-1-02]
+OutputCue74=[Unit_2-1-03]
+OutputCue75=[Unit_2-1-04]
+OutputCue76=[Unit_2-1-05]
+OutputCue77=[Unit_2-1-06]
+OutputCue78=[Unit_2-1-07]
+OutputCue79=[Unit_2-1-08]
+OutputCue80=[Unit_2-1-09]
+OutputCue81=[Unit_2-1-10]
+OutputCue82=[Unit_2-1-11]
+OutputCue83=[Unit_2-1-12]
+OutputCue84=[Unit_2-1-13]
+OutputCue85=[Unit_2-1-14]
+OutputCue86=[Unit_2-1-15]
+OutputCue87=[~UNUSED~]
+OutputCue88=[Unit_2-2-00]
+OutputCue89=[Unit_2-2-01]
+OutputCue90=[Unit_2-2-02]
+OutputCue91=[Unit_2-2-03]
+OutputCue92=[Unit_2-2-04]
+OutputCue93=[Unit_2-2-05]
+OutputCue94=[Unit_2-2-06]
+OutputCue95=[Unit_2-2-07]
+OutputCue96=[Unit_2-2-08]
+OutputCue97=[Unit_2-2-09]
+OutputCue98=[Unit_2-2-10]
+OutputCue99=[Unit_2-2-11]
+OutputCue100=[Unit_2-2-12]
+OutputCue101=[Unit_2-2-13]
+OutputCue102=[Unit_2-2-14]
+OutputCue103=[Unit_2-2-15]
+OutputCue104=[~UNUSED~]
+OutputCue105=[Unit_2-3-00]
+OutputCue106=[Unit_2-3-01]
+OutputCue107=[Unit_2-3-02]
+OutputCue108=[Unit_2-3-03]
+OutputCue109=[Unit_2-3-04]
+OutputCue110=[Unit_2-3-05]
+OutputCue111=[Unit_2-3-06]
+OutputCue112=[Unit_2-3-07]
+OutputCue113=[Unit_2-3-08]
+OutputCue114=[Unit_2-3-09]
+OutputCue115=[Unit_2-3-10]
+OutputCue116=[Unit_2-3-11]
+OutputCue117=[Unit_2-3-12]
+OutputCue118=[Unit_2-3-13]
+OutputCue119=[Unit_2-3-14]
+OutputCue120=[Unit_2-3-15]
+OutputCue121=[~UNUSED~]
+OutputCue122=[Unit_2-4-00]
+OutputCue123=[Unit_2-4-01]
+OutputCue124=[Unit_2-4-02]
+OutputCue125=[Unit_2-4-03]
+OutputCue126=[Unit_2-4-04]
+OutputCue127=[Unit_2-4-05]
+OutputCue128=[Unit_2-4-06]
+OutputCue129=[Unit_2-4-07]
+OutputCue130=[Unit_2-4-08]
+OutputCue131=[Unit_2-4-09]
+OutputCue132=[Unit_2-4-10]
+OutputCue133=[Unit_2-4-11]
+OutputCue134=[Unit_2-4-12]
+OutputCue135=[Unit_2-4-13]
+OutputCue136=[Unit_2-4-14]
+OutputCue137=[Unit_2-4-15]
+MPi=1
+Pi1=1
+MPo=137
+Po1=2
+Po2=3
+Po3=4
+Po4=5
+Po5=6
+Po6=7
+Po7=8
+Po8=9
+Po9=10
+Po10=11
+Po11=12
+Po12=13
+Po13=14
+Po14=15
+Po15=16
+Po16=17
+Po18=18
+Po19=19
+Po20=20
+Po21=21
+Po22=22
+Po23=23
+Po24=24
+Po25=25
+Po26=26
+Po27=27
+Po28=28
+Po29=29
+Po30=30
+Po31=31
+Po32=32
+Po33=33
+Po35=34
+Po36=35
+Po37=36
+Po38=37
+Po39=38
+Po40=39
+Po41=40
+Po42=41
+Po43=42
+Po44=43
+Po45=44
+Po46=45
+Po47=46
+Po48=47
+Po49=48
+Po50=49
+Po52=50
+Po53=51
+Po54=52
+Po55=53
+Po56=54
+Po57=55
+Po58=56
+Po59=57
+Po60=58
+Po61=59
+Po62=60
+Po63=61
+Po64=62
+Po65=63
+Po66=64
+Po67=65
+Po71=66
+Po72=67
+Po73=68
+Po74=69
+Po75=70
+Po76=71
+Po77=72
+Po78=73
+Po79=74
+Po80=75
+Po81=76
+Po82=77
+Po83=78
+Po84=79
+Po85=80
+Po86=81
+Po88=82
+Po89=83
+Po90=84
+Po91=85
+Po92=86
+Po93=87
+Po94=88
+Po95=89
+Po96=90
+Po97=91
+Po98=92
+Po99=93
+Po100=94
+Po101=95
+Po102=96
+Po103=97
+Po105=98
+Po106=99
+Po107=100
+Po108=101
+Po109=102
+Po110=103
+Po111=104
+Po112=105
+Po113=106
+Po114=107
+Po115=108
+Po116=109
+Po117=110
+Po118=111
+Po119=112
+Po120=113
+Po122=114
+Po123=115
+Po124=116
+Po125=117
+Po126=118
+Po127=119
+Po128=120
+Po129=121
+Po130=122
+Po131=123
+Po132=124
+Po133=125
+Po134=126
+Po135=127
+Po136=128
+Po137=129
+FileName=Daikin ITC Feedback Splitter V3_1.umc
+]
+[
+ObjTp=Sm
+H=1
+SmC=157
+Nm=Central Control Modules
+CF=2
+n1I=1
+n1O=1
+mI=1
+mO=1
+tO=1
+mP=1
+P1=
+]
+[
+ObjTp=Sm
+H=2
+SmC=157
+Nm=Network Modules
+CF=2
+n1I=1
+n1O=1
+mI=1
+mO=1
+tO=1
+mP=1
+P1=
+]
+[
+ObjTp=Sm
+H=3
+SmC=157
+Nm=Ethernet
+CF=2
+n1I=1
+n1O=1
+mI=1
+mO=1
+tO=1
+mP=1
+P1=
+]
+[
+ObjTp=Sm
+H=4
+SmC=156
+Nm=Logic
+CF=2
+mC=1
+C1=8
+]
+[
+ObjTp=Sm
+H=5
+SmC=157
+Nm=DefineArguments
+CF=2
+n1I=1
+n1O=1
+mC=1
+C1=6
+mI=1
+mO=1
+tO=1
+mP=1
+P1=
+]
+[
+ObjTp=Sm
+H=6
+SmC=55
+PrH=5
+CF=2
+n1I=1
+n1O=137
+mI=1
+I1=4
+mO=137
+tO=137
+O1=262
+O2=134
+O3=135
+O4=136
+O5=137
+O6=138
+O7=139
+O8=140
+O9=141
+O10=142
+O11=143
+O12=144
+O13=145
+O14=146
+O15=147
+O16=148
+O17=6
+O18=149
+O19=150
+O20=151
+O21=152
+O22=153
+O23=154
+O24=155
+O25=156
+O26=157
+O27=158
+O28=159
+O29=160
+O30=161
+O31=162
+O32=163
+O33=164
+O34=6
+O35=165
+O36=166
+O37=167
+O38=168
+O39=169
+O40=170
+O41=171
+O42=172
+O43=173
+O44=174
+O45=175
+O46=176
+O47=177
+O48=178
+O49=179
+O50=180
+O51=6
+O52=181
+O53=182
+O54=183
+O55=184
+O56=185
+O57=186
+O58=187
+O59=188
+O60=189
+O61=190
+O62=191
+O63=192
+O64=193
+O65=194
+O66=195
+O67=196
+O68=6
+O69=6
+O70=6
+O71=197
+O72=198
+O73=199
+O74=200
+O75=201
+O76=202
+O77=203
+O78=204
+O79=205
+O80=206
+O81=207
+O82=208
+O83=209
+O84=210
+O85=211
+O86=212
+O87=6
+O88=213
+O89=214
+O90=215
+O91=216
+O92=217
+O93=218
+O94=219
+O95=220
+O96=221
+O97=222
+O98=223
+O99=224
+O100=225
+O101=226
+O102=227
+O103=228
+O104=6
+O105=229
+O106=230
+O107=231
+O108=232
+O109=233
+O110=234
+O111=235
+O112=236
+O113=237
+O114=238
+O115=239
+O116=240
+O117=241
+O118=242
+O119=243
+O120=244
+O121=6
+O122=245
+O123=246
+O124=247
+O125=248
+O126=249
+O127=250
+O128=251
+O129=252
+O130=253
+O131=254
+O132=255
+O133=256
+O134=257
+O135=258
+O136=259
+O137=260
+mP=1
+P1=
+MPi=1
+Pi1=1
+MPo=137
+Po1=2
+Po2=3
+Po3=4
+Po4=5
+Po5=6
+Po6=7
+Po7=8
+Po8=9
+Po9=10
+Po10=11
+Po11=12
+Po12=13
+Po13=14
+Po14=15
+Po15=16
+Po16=17
+Po18=18
+Po19=19
+Po20=20
+Po21=21
+Po22=22
+Po23=23
+Po24=24
+Po25=25
+Po26=26
+Po27=27
+Po28=28
+Po29=29
+Po30=30
+Po31=31
+Po32=32
+Po33=33
+Po35=34
+Po36=35
+Po37=36
+Po38=37
+Po39=38
+Po40=39
+Po41=40
+Po42=41
+Po43=42
+Po44=43
+Po45=44
+Po46=45
+Po47=46
+Po48=47
+Po49=48
+Po50=49
+Po52=50
+Po53=51
+Po54=52
+Po55=53
+Po56=54
+Po57=55
+Po58=56
+Po59=57
+Po60=58
+Po61=59
+Po62=60
+Po63=61
+Po64=62
+Po65=63
+Po66=64
+Po67=65
+Po71=66
+Po72=67
+Po73=68
+Po74=69
+Po75=70
+Po76=71
+Po77=72
+Po78=73
+Po79=74
+Po80=75
+Po81=76
+Po82=77
+Po83=78
+Po84=79
+Po85=80
+Po86=81
+Po88=82
+Po89=83
+Po90=84
+Po91=85
+Po92=86
+Po93=87
+Po94=88
+Po95=89
+Po96=90
+Po97=91
+Po98=92
+Po99=93
+Po100=94
+Po101=95
+Po102=96
+Po103=97
+Po105=98
+Po106=99
+Po107=100
+Po108=101
+Po109=102
+Po110=103
+Po111=104
+Po112=105
+Po113=106
+Po114=107
+Po115=108
+Po116=109
+Po117=110
+Po118=111
+Po119=112
+Po120=113
+Po122=114
+Po123=115
+Po124=116
+Po125=117
+Po126=118
+Po127=119
+Po128=120
+Po129=121
+Po130=122
+Po131=123
+Po132=124
+Po133=125
+Po134=126
+Po135=127
+Po136=128
+Po137=129
+]
+[
+ObjTp=Sm
+H=8
+SmC=103
+Nm=Daikin ITC Feedback Splitter V3.1.usp
+PrH=4
+CF=2
+n2I=1
+mI=1
+I1=4
+mO=128
+tO=128
+O1=262
+O2=134
+O3=135
+O4=136
+O5=137
+O6=138
+O7=139
+O8=140
+O9=141
+O10=142
+O11=143
+O12=144
+O13=145
+O14=146
+O15=147
+O16=148
+O17=149
+O18=150
+O19=151
+O20=152
+O21=153
+O22=154
+O23=155
+O24=156
+O25=157
+O26=158
+O27=159
+O28=160
+O29=161
+O30=162
+O31=163
+O32=164
+O33=165
+O34=166
+O35=167
+O36=168
+O37=169
+O38=170
+O39=171
+O40=172
+O41=173
+O42=174
+O43=175
+O44=176
+O45=177
+O46=178
+O47=179
+O48=180
+O49=181
+O50=182
+O51=183
+O52=184
+O53=185
+O54=186
+O55=187
+O56=188
+O57=189
+O58=190
+O59=191
+O60=192
+O61=193
+O62=194
+O63=195
+O64=196
+O65=197
+O66=198
+O67=199
+O68=200
+O69=201
+O70=202
+O71=203
+O72=204
+O73=205
+O74=206
+O75=207
+O76=208
+O77=209
+O78=210
+O79=211
+O80=212
+O81=213
+O82=214
+O83=215
+O84=216
+O85=217
+O86=218
+O87=219
+O88=220
+O89=221
+O90=222
+O91=223
+O92=224
+O93=225
+O94=226
+O95=227
+O96=228
+O97=229
+O98=230
+O99=231
+O100=232
+O101=233
+O102=234
+O103=235
+O104=236
+O105=237
+O106=238
+O107=239
+O108=240
+O109=241
+O110=242
+O111=243
+O112=244
+O113=245
+O114=246
+O115=247
+O116=248
+O117=249
+O118=250
+O119=251
+O120=252
+O121=253
+O122=254
+O123=255
+O124=256
+O125=257
+O126=258
+O127=259
+O128=260
+mP=1
+P1=
+]
+[
+ObjTp=Sg
+H=4
+Nm=To_Units
+SgTp=4
+]
+[
+ObjTp=Sg
+H=6
+Nm=[~UNUSED~]
+SgTp=31
+]
+[
+ObjTp=Sg
+H=134
+Nm=[Unit_1-1-01]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=135
+Nm=[Unit_1-1-02]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=136
+Nm=[Unit_1-1-03]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=137
+Nm=[Unit_1-1-04]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=138
+Nm=[Unit_1-1-05]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=139
+Nm=[Unit_1-1-06]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=140
+Nm=[Unit_1-1-07]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=141
+Nm=[Unit_1-1-08]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=142
+Nm=[Unit_1-1-09]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=143
+Nm=[Unit_1-1-10]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=144
+Nm=[Unit_1-1-11]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=145
+Nm=[Unit_1-1-12]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=146
+Nm=[Unit_1-1-13]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=147
+Nm=[Unit_1-1-14]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=148
+Nm=[Unit_1-1-15]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=149
+Nm=[Unit_1-2-00]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=150
+Nm=[Unit_1-2-01]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=151
+Nm=[Unit_1-2-02]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=152
+Nm=[Unit_1-2-03]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=153
+Nm=[Unit_1-2-04]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=154
+Nm=[Unit_1-2-05]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=155
+Nm=[Unit_1-2-06]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=156
+Nm=[Unit_1-2-07]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=157
+Nm=[Unit_1-2-08]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=158
+Nm=[Unit_1-2-09]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=159
+Nm=[Unit_1-2-10]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=160
+Nm=[Unit_1-2-11]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=161
+Nm=[Unit_1-2-12]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=162
+Nm=[Unit_1-2-13]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=163
+Nm=[Unit_1-2-14]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=164
+Nm=[Unit_1-2-15]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=165
+Nm=[Unit_1-3-00]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=166
+Nm=[Unit_1-3-01]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=167
+Nm=[Unit_1-3-02]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=168
+Nm=[Unit_1-3-03]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=169
+Nm=[Unit_1-3-04]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=170
+Nm=[Unit_1-3-05]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=171
+Nm=[Unit_1-3-06]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=172
+Nm=[Unit_1-3-07]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=173
+Nm=[Unit_1-3-08]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=174
+Nm=[Unit_1-3-09]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=175
+Nm=[Unit_1-3-10]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=176
+Nm=[Unit_1-3-11]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=177
+Nm=[Unit_1-3-12]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=178
+Nm=[Unit_1-3-13]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=179
+Nm=[Unit_1-3-14]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=180
+Nm=[Unit_1-3-15]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=181
+Nm=[Unit_1-4-00]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=182
+Nm=[Unit_1-4-01]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=183
+Nm=[Unit_1-4-02]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=184
+Nm=[Unit_1-4-03]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=185
+Nm=[Unit_1-4-04]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=186
+Nm=[Unit_1-4-05]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=187
+Nm=[Unit_1-4-06]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=188
+Nm=[Unit_1-4-07]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=189
+Nm=[Unit_1-4-08]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=190
+Nm=[Unit_1-4-09]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=191
+Nm=[Unit_1-4-10]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=192
+Nm=[Unit_1-4-11]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=193
+Nm=[Unit_1-4-12]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=194
+Nm=[Unit_1-4-13]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=195
+Nm=[Unit_1-4-14]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=196
+Nm=[Unit_1-4-15]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=197
+Nm=[Unit_2-1-00]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=198
+Nm=[Unit_2-1-01]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=199
+Nm=[Unit_2-1-02]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=200
+Nm=[Unit_2-1-03]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=201
+Nm=[Unit_2-1-04]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=202
+Nm=[Unit_2-1-05]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=203
+Nm=[Unit_2-1-06]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=204
+Nm=[Unit_2-1-07]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=205
+Nm=[Unit_2-1-08]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=206
+Nm=[Unit_2-1-09]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=207
+Nm=[Unit_2-1-10]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=208
+Nm=[Unit_2-1-11]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=209
+Nm=[Unit_2-1-12]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=210
+Nm=[Unit_2-1-13]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=211
+Nm=[Unit_2-1-14]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=212
+Nm=[Unit_2-1-15]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=213
+Nm=[Unit_2-2-00]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=214
+Nm=[Unit_2-2-01]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=215
+Nm=[Unit_2-2-02]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=216
+Nm=[Unit_2-2-03]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=217
+Nm=[Unit_2-2-04]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=218
+Nm=[Unit_2-2-05]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=219
+Nm=[Unit_2-2-06]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=220
+Nm=[Unit_2-2-07]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=221
+Nm=[Unit_2-2-08]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=222
+Nm=[Unit_2-2-09]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=223
+Nm=[Unit_2-2-10]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=224
+Nm=[Unit_2-2-11]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=225
+Nm=[Unit_2-2-12]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=226
+Nm=[Unit_2-2-13]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=227
+Nm=[Unit_2-2-14]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=228
+Nm=[Unit_2-2-15]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=229
+Nm=[Unit_2-3-00]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=230
+Nm=[Unit_2-3-01]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=231
+Nm=[Unit_2-3-02]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=232
+Nm=[Unit_2-3-03]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=233
+Nm=[Unit_2-3-04]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=234
+Nm=[Unit_2-3-05]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=235
+Nm=[Unit_2-3-06]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=236
+Nm=[Unit_2-3-07]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=237
+Nm=[Unit_2-3-08]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=238
+Nm=[Unit_2-3-09]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=239
+Nm=[Unit_2-3-10]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=240
+Nm=[Unit_2-3-11]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=241
+Nm=[Unit_2-3-12]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=242
+Nm=[Unit_2-3-13]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=243
+Nm=[Unit_2-3-14]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=244
+Nm=[Unit_2-3-15]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=245
+Nm=[Unit_2-4-00]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=246
+Nm=[Unit_2-4-01]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=247
+Nm=[Unit_2-4-02]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=248
+Nm=[Unit_2-4-03]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=249
+Nm=[Unit_2-4-04]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=250
+Nm=[Unit_2-4-05]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=251
+Nm=[Unit_2-4-06]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=252
+Nm=[Unit_2-4-07]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=253
+Nm=[Unit_2-4-08]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=254
+Nm=[Unit_2-4-09]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=255
+Nm=[Unit_2-4-10]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=256
+Nm=[Unit_2-4-11]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=257
+Nm=[Unit_2-4-12]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=258
+Nm=[Unit_2-4-13]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=259
+Nm=[Unit_2-4-14]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=260
+Nm=[Unit_2-4-15]
+SgTp=4
+]
+[
+ObjTp=Sg
+H=262
+Nm=[Unit_1-1-00]
+SgTp=4
+]
+[
+ObjTp=Dp
+H=1
+Tp=6
+DT=4
+FD1=Serial signal to be routed from the To_Units output of the Daikin||1
+FD2=ITC IO module.
+SD=To_Units
+]
+[
+ObjTp=Dp
+H=2
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-1-00
+]
+[
+ObjTp=Dp
+H=3
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-1-01
+]
+[
+ObjTp=Dp
+H=4
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-1-02
+]
+[
+ObjTp=Dp
+H=5
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-1-03
+]
+[
+ObjTp=Dp
+H=6
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-1-05
+]
+[
+ObjTp=Dp
+H=7
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-1-05
+]
+[
+ObjTp=Dp
+H=8
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-1-06
+]
+[
+ObjTp=Dp
+H=9
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-1-07
+]
+[
+ObjTp=Dp
+H=10
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-1-08
+]
+[
+ObjTp=Dp
+H=11
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-1-09
+]
+[
+ObjTp=Dp
+H=12
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-1-10
+]
+[
+ObjTp=Dp
+H=13
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-1-11
+]
+[
+ObjTp=Dp
+H=14
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-1-12
+]
+[
+ObjTp=Dp
+H=15
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-1-13
+]
+[
+ObjTp=Dp
+H=16
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-1-14
+]
+[
+ObjTp=Dp
+H=17
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-1-15
+]
+[
+ObjTp=Dp
+H=18
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-2-00
+]
+[
+ObjTp=Dp
+H=19
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-2-01
+]
+[
+ObjTp=Dp
+H=20
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-2-02
+]
+[
+ObjTp=Dp
+H=21
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-2-03
+]
+[
+ObjTp=Dp
+H=22
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-2-04
+]
+[
+ObjTp=Dp
+H=23
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-2-05
+]
+[
+ObjTp=Dp
+H=24
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-2-06
+]
+[
+ObjTp=Dp
+H=25
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-2-07
+]
+[
+ObjTp=Dp
+H=26
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-2-08
+]
+[
+ObjTp=Dp
+H=27
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-2-09
+]
+[
+ObjTp=Dp
+H=28
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-2-10
+]
+[
+ObjTp=Dp
+H=29
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-2-11
+]
+[
+ObjTp=Dp
+H=30
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-2-12
+]
+[
+ObjTp=Dp
+H=31
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-2-13
+]
+[
+ObjTp=Dp
+H=32
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-2-14
+]
+[
+ObjTp=Dp
+H=33
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-2-15
+]
+[
+ObjTp=Dp
+H=34
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-3-00
+]
+[
+ObjTp=Dp
+H=35
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-3-01
+]
+[
+ObjTp=Dp
+H=36
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-3-02
+]
+[
+ObjTp=Dp
+H=37
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-3-03
+]
+[
+ObjTp=Dp
+H=38
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-3-04
+]
+[
+ObjTp=Dp
+H=39
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-3-05
+]
+[
+ObjTp=Dp
+H=40
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-3-06
+]
+[
+ObjTp=Dp
+H=41
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-3-07
+]
+[
+ObjTp=Dp
+H=42
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-3-08
+]
+[
+ObjTp=Dp
+H=43
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-3-09
+]
+[
+ObjTp=Dp
+H=44
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-3-10
+]
+[
+ObjTp=Dp
+H=45
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-3-11
+]
+[
+ObjTp=Dp
+H=46
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-3-12
+]
+[
+ObjTp=Dp
+H=47
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-3-13
+]
+[
+ObjTp=Dp
+H=48
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-3-14
+]
+[
+ObjTp=Dp
+H=49
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-3-15
+]
+[
+ObjTp=Dp
+H=50
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-4-00
+]
+[
+ObjTp=Dp
+H=51
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-4-01
+]
+[
+ObjTp=Dp
+H=52
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-4-02
+]
+[
+ObjTp=Dp
+H=53
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-4-03
+]
+[
+ObjTp=Dp
+H=54
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-4-04
+]
+[
+ObjTp=Dp
+H=55
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-4-05
+]
+[
+ObjTp=Dp
+H=56
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-4-06
+]
+[
+ObjTp=Dp
+H=57
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-4-07
+]
+[
+ObjTp=Dp
+H=58
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-4-08
+]
+[
+ObjTp=Dp
+H=59
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-4-09
+]
+[
+ObjTp=Dp
+H=60
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-4-10
+]
+[
+ObjTp=Dp
+H=61
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-4-11
+]
+[
+ObjTp=Dp
+H=62
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-4-12
+]
+[
+ObjTp=Dp
+H=63
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-4-13
+]
+[
+ObjTp=Dp
+H=64
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-4-14
+]
+[
+ObjTp=Dp
+H=65
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 1-4-15
+]
+[
+ObjTp=Dp
+H=66
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-1-00
+]
+[
+ObjTp=Dp
+H=67
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-1-01
+]
+[
+ObjTp=Dp
+H=68
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-1-02
+]
+[
+ObjTp=Dp
+H=69
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-1-03
+]
+[
+ObjTp=Dp
+H=70
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-1-04
+]
+[
+ObjTp=Dp
+H=71
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-1-05
+]
+[
+ObjTp=Dp
+H=72
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-1-06
+]
+[
+ObjTp=Dp
+H=73
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-1-07
+]
+[
+ObjTp=Dp
+H=74
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-1-08
+]
+[
+ObjTp=Dp
+H=75
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-1-09
+]
+[
+ObjTp=Dp
+H=76
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-1-10
+]
+[
+ObjTp=Dp
+H=77
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-1-11
+]
+[
+ObjTp=Dp
+H=78
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-1-12
+]
+[
+ObjTp=Dp
+H=79
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-1-13
+]
+[
+ObjTp=Dp
+H=80
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-1-14
+]
+[
+ObjTp=Dp
+H=81
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-1-15
+]
+[
+ObjTp=Dp
+H=82
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-2-00
+]
+[
+ObjTp=Dp
+H=83
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-2-01
+]
+[
+ObjTp=Dp
+H=84
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-2-02
+]
+[
+ObjTp=Dp
+H=85
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-2-03
+]
+[
+ObjTp=Dp
+H=86
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-2-04
+]
+[
+ObjTp=Dp
+H=87
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-2-05
+]
+[
+ObjTp=Dp
+H=88
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-2-06
+]
+[
+ObjTp=Dp
+H=89
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-2-07
+]
+[
+ObjTp=Dp
+H=90
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-2-08
+]
+[
+ObjTp=Dp
+H=91
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-2-09
+]
+[
+ObjTp=Dp
+H=92
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-2-10
+]
+[
+ObjTp=Dp
+H=93
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-2-11
+]
+[
+ObjTp=Dp
+H=94
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-2-12
+]
+[
+ObjTp=Dp
+H=95
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-2-13
+]
+[
+ObjTp=Dp
+H=96
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-2-14
+]
+[
+ObjTp=Dp
+H=97
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-2-15
+]
+[
+ObjTp=Dp
+H=98
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-3-00
+]
+[
+ObjTp=Dp
+H=99
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-3-01
+]
+[
+ObjTp=Dp
+H=100
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-3-02
+]
+[
+ObjTp=Dp
+H=101
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-3-03
+]
+[
+ObjTp=Dp
+H=102
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-3-04
+]
+[
+ObjTp=Dp
+H=103
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-3-05
+]
+[
+ObjTp=Dp
+H=104
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-3-06
+]
+[
+ObjTp=Dp
+H=105
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-3-07
+]
+[
+ObjTp=Dp
+H=106
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-3-08
+]
+[
+ObjTp=Dp
+H=107
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-3-09
+]
+[
+ObjTp=Dp
+H=108
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-3-10
+]
+[
+ObjTp=Dp
+H=109
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-3-11
+]
+[
+ObjTp=Dp
+H=110
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-3-12
+]
+[
+ObjTp=Dp
+H=111
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-3-13
+]
+[
+ObjTp=Dp
+H=112
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-3-14
+]
+[
+ObjTp=Dp
+H=113
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-3-15
+]
+[
+ObjTp=Dp
+H=114
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-4-00
+]
+[
+ObjTp=Dp
+H=115
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-4-01
+]
+[
+ObjTp=Dp
+H=116
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-4-02
+]
+[
+ObjTp=Dp
+H=117
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-4-03
+]
+[
+ObjTp=Dp
+H=118
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-4-04
+]
+[
+ObjTp=Dp
+H=119
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-4-05
+]
+[
+ObjTp=Dp
+H=120
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-4-06
+]
+[
+ObjTp=Dp
+H=121
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-4-07
+]
+[
+ObjTp=Dp
+H=122
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-4-08
+]
+[
+ObjTp=Dp
+H=123
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-4-09
+]
+[
+ObjTp=Dp
+H=124
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-4-10
+]
+[
+ObjTp=Dp
+H=125
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-4-11
+]
+[
+ObjTp=Dp
+H=126
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-4-12
+]
+[
+ObjTp=Dp
+H=127
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-4-13
+]
+[
+ObjTp=Dp
+H=128
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-4-14
+]
+[
+ObjTp=Dp
+H=129
+Tp=7
+DT=4
+FD1=Serial signal to be routed to the To_Units input on the Daikin ITC||1
+FD2=Unit module.
+SD=Unit 2-4-15
+]

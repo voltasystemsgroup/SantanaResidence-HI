@@ -1,0 +1,487 @@
+/*******************************************************************************************
+  Compiler Directives
+  (Uncomment and declare compiler directives as needed)
+*******************************************************************************************/
+// #ENABLE_DYNAMIC
+#SYMBOL_NAME "CoolAutomation_Core_Module2.1"
+#HINT "CoolAutomation_Core_Module2.1"
+#DEFAULT_VOLATILE
+#ENABLE_STACK_CHECKING
+#ENABLE_TRACE
+#PRINT_TO_TRACE
+
+// TCP/IP Client
+DIGITAL_INPUT diStartClient;
+STRING_INPUT siClientIPAddress[256];
+ANALOG_INPUT aiClientPortNumber;
+DIGITAL_INPUT diClientReconnectEnable;
+STRING_INPUT siToCoolAutomationCore[2048];
+DIGITAL_INPUT diOSCPoll;
+DIGITAL_INPUT diOSCQueue;
+DIGITAL_INPUT diDEBUG;
+//
+DIGITAL_OUTPUT doClientConnected; // for main connection
+ANALOG_OUTPUT  aoClientStatus; // for main connection
+//
+DIGITAL_OUTPUT doClientConnected2; // for sub connection
+ANALOG_OUTPUT  aoClientStatus2; // for sub connection
+//
+STRING_OUTPUT soFromCoolAutomationCore;
+DIGITAL_OUTPUT doCelsius_Fb;
+DIGITAL_OUTPUT doFarenheit_Fb;
+DIGITAL_INPUT diCelsius;
+DIGITAL_INPUT diFarenheit;
+DIGITAL_INPUT diOscQuery;
+
+// TCP/IP Client (Must be in the end)
+TCP_CLIENT MyClient[16384];
+TCP_CLIENT MyClient2[1000];
+
+////////////////////////////////////////
+
+string BufferOut2Cm[2048];
+string BufferInFromCm[10000];
+string BufferInProcess[256];
+integer FbDisabled;
+string SubConnectionBuffer[128];
+string AddressHolder[250][6];
+integer AddressCounter;
+integer QueryScan;
+string QueryString$[100];
+string ToModulesBuffer[20000];
+
+integer i;
+integer BufLength;
+integer LouverScanStop;
+
+///////////////////////////////////////
+
+PUSH diCelsius
+{
+	FbDisabled = 1;
+	BufferOut2Cm = BufferOut2Cm + "set deg c\n" + "ls2\n";
+	doFarenheit_Fb = 0;
+	doCelsius_Fb = 1;
+	wait (300);
+	FbDisabled = 0;
+}
+
+PUSH diFarenheit
+{
+	FbDisabled = 1;
+	BufferOut2Cm = BufferOut2Cm + "set deg f\n" + "ls2\n";
+	doCelsius_Fb = 0;
+	doFarenheit_Fb = 1;
+	wait (300);
+	FbDisabled = 0;
+}
+
+PUSH diOSCPoll
+{
+	LouverScanStop = 1;
+	wait (100)
+	{
+		BufferOut2Cm = BufferOut2Cm + "ls2\n";
+		if(diDEBUG)		
+			trace("CoolAutomation: Osc Poll Pulse");
+		wait(100)
+		{
+		    while((len(ToModulesBuffer)>300) && (find("\n",ToModulesBuffer)))
+			{		
+				soFromCoolAutomationCore = remove("\n",ToModulesBuffer,200);
+		    }
+			if((len(ToModulesBuffer)>40) && (len(ToModulesBuffer)<=300) && (find("\n",ToModulesBuffer))) // if more than 1 unit stillremains in the buffer (smaller than 300 from the "while" before)
+			{
+				BufLength = len(ToModulesBuffer);
+				soFromCoolAutomationCore = RemoveByLength(BufLength,ToModulesBuffer);
+				if(len(ToModulesBuffer)=0)
+				{
+					wait(100)
+					{
+						LouverScanStop = 0;
+					}
+				}
+			}
+			if(!(find("\n",ToModulesBuffer)))
+			{
+				ClearBuffer(ToModulesBuffer);
+				wait(100)
+				{
+					LouverScanStop = 0;
+				}
+			}
+			
+		}
+	}
+}
+
+PUSH diOSCQueue
+{
+	string Output$[500];
+	//
+	if((Len(BufferOut2Cm)>0) && (len(BufferOut2Cm)<=500))
+	{
+		if(find("\n",BufferOut2Cm))
+		{
+			try
+			{
+		     	Output$ = remove("\n",BufferOut2Cm);
+				if(doClientConnected)
+				{		
+					if(diDEBUG)
+						trace("CoolAutomation: Sending command out: %s",Output$);
+					SocketSend(MyClient, Output$);
+				}
+			}
+			catch
+			{
+				if(diDEBUG)
+					trace("Exception: %s",GetExceptionMessage());
+			}
+		}
+	}
+}
+
+//////////////////////////////////
+// TCP/IP CONNECTION MANAGEMENT - Main Connection (ls2)
+//////////////////////////////////
+
+PUSH diStartClient
+{
+    SIGNED_INTEGER status;
+   	if(diDEBUG)
+		trace("CoolAutomation: Start TCP Process");
+    status = SocketConnectClient (MyClient, siClientIPAddress, aiClientPortNumber, diClientReconnectEnable);
+    
+	if(diDEBUG)
+	{
+    	if (status < 0)
+
+        	trace("CoolAutomation: Error connecting socket to address %s on port  %d",
+            SiClientIPAddress, aiClientPortNumber);
+    }
+}
+
+RELEASE diStartClient
+
+{
+
+    SIGNED_INTEGER status;
+	AddressCounter = 0;
+    if(diDEBUG)
+		trace("CoolAutomation: End TCP Process");
+
+    status = SocketDisconnectClient (MyClient);
+    if(diDEBUG)
+	{
+		if (status < 0)
+    		trace("CoolAutomation: Error disconnecting socket to address %s on port  %d",
+            SiClientIPAddress, aiClientPortNumber);
+	}
+
+}
+ 
+SOCKETCONNECT MyClient
+
+{
+
+    SIGNED_LONG_INTEGER PortNumber;
+
+    SIGNED_INTEGER LocalStatus;
+
+    STRING RemoteIPAddress[20];
+
+    STRING RequestedAddress[256];
+
+    
+
+    doClientConnected = 1;
+
+    LocalStatus = SocketGetAddressAsRequested(MyClient, RequestedAddress);
+    if(diDEBUG)
+	{
+    	if (LocalStatus < 0)
+        	trace("CoolAutomation: Error getting remote ip address. %d\n", LocalStatus);
+
+    	trace("CoolAutomation: OnConnect: Connect call to %s successful\n", RequestedAddress);
+    }
+    
+
+    PortNumber = SocketGetPortNumber(MyClient);
+    if(diDEBUG)
+	{
+    	if (PortNumber < 0)
+        	trace("CoolAutomation: Error getting client port number. %ld\n", PortNumber);
+    }
+        
+
+    LocalStatus = SocketGetRemoteIPAddress(MyClient, RemoteIPAddress);
+    if(diDEBUG)
+	{
+    	if (LocalStatus < 0)
+        	trace("CoolAutomation: Error getting remote ip address. %d\n", LocalStatus);
+
+    	trace("CoolAutomation: OnConnect: Connected to port %ld on address %s\n",
+        PortNumber, RemoteIPAddress);
+    }
+    SocketSend(MyClient, "\n");
+	wait(100);
+	SocketSend(MyClient, "set echo 0\n");
+}
+
+SOCKETDISCONNECT MyClient
+
+{
+
+    doClientConnected = 0;
+    
+	if(diDEBUG)
+	{
+	    if (diStartClient)
+	        trace("CoolAutomation: Socket disconnected remotely");
+	
+	    Else
+	        trace("CoolAutomation: Local disconnect complete.");
+	}
+}
+
+SOCKETSTATUS MyClient
+
+{
+
+    SIGNED_INTEGER Status;
+
+    
+
+    Status = SocketGetStatus();
+
+    aoClientStatus = Status;
+    if(diDEBUG)
+	{
+	    trace("CoolAutomation: The SocketGetStatus returns:       %d\n", Status);
+	
+	    trace("CoolAutomation: The MyClient.SocketStatus returns: %d\n", MyClient.SocketStatus);
+	}	
+}
+
+CHANGE siToCoolAutomationCore
+
+{
+
+    signed_integer iStatus;    
+
+    if(find(":AddressBroadcast",siToCoolAutomationCore,1))
+	{
+		AddressCounter = AddressCounter + 1;
+		AddressHolder[AddressCounter] = mid(siToCoolAutomationCore,1,6);
+		if(diDEBUG)
+			trace("CoolAutomation: Found address broadcast %s",AddressHolder[AddressCounter]);
+	}
+	else
+	{
+		BufferOut2Cm = BufferOut2Cm + siToCoolAutomationCore;
+	}
+    if(diDEBUG)
+	{
+    	if (iStatus < 0)
+        	trace("CoolAutomation: Error Sending to MyClient: %d\n", iStatus);
+    }
+}
+
+SOCKETRECEIVE MyClient
+{
+
+	if(diDEBUG)
+	{
+	    if (Len(MyClient.SocketRxBuf) < 256)
+	        trace("CoolAutomation: Rx: %s", MyClient.SocketRxBuf);
+	}
+	if(((MyClient.SocketRxBuf<>"ls2\n") || (MyClient.SocketRxBuf<>"OK\n")) && (len(MyClient.SocketRxBuf)>4))
+	{
+				
+    	ToModulesBuffer = ToModulesBuffer + MyClient.SocketRxBuf;
+		BufferInFromCm = MyClient.SocketRxBuf;
+		if((find("\n",BufferInFromCm,1)) && FbDisabled = 0)
+		{
+			BufferInProcess = remove("\n",BufferInFromCm,1);		
+			if(len(BufferInProcess) = 43)
+			{
+				doFarenheit_Fb = 0;
+				doCelsius_Fb = 1;
+			}
+			else if(len(BufferInProcess) = 45)
+			{
+				doCelsius_Fb = 0;
+				doFarenheit_Fb = 1;
+			}
+		}
+	}
+    ClearBuffer(MyClient.SocketRxBuf);
+}
+
+
+//////////////////////////////////
+// TCP/IP CONNECTION MANAGEMENT - Sub Connection (query)
+//////////////////////////////////
+
+PUSH diStartClient
+{
+    SIGNED_INTEGER status;
+   
+	trace("CoolAutomation2: Start TCP Process");
+    status = SocketConnectClient (MyClient2, siClientIPAddress, aiClientPortNumber, diClientReconnectEnable);
+    
+	if(diDEBUG)
+	{
+    	if (status < 0)
+
+        	trace("CoolAutomation2: Error connecting socket to address %s on port  %d",
+            SiClientIPAddress, aiClientPortNumber);
+    }
+}
+
+RELEASE diStartClient
+{
+
+    SIGNED_INTEGER status;
+    if(diDEBUG)
+		trace("CoolAutomation2: End TCP Process");
+
+    status = SocketDisconnectClient (MyClient2);
+    if(diDEBUG)
+	{
+		if (status < 0)
+    		trace("CoolAutomation2: Error disconnecting socket to address %s on port  %d",
+            SiClientIPAddress, aiClientPortNumber);
+	}
+
+}
+ 
+SOCKETCONNECT MyClient2
+
+{
+
+    SIGNED_LONG_INTEGER PortNumber;
+
+    SIGNED_INTEGER LocalStatus;
+
+    STRING RemoteIPAddress[20];
+
+    STRING RequestedAddress[256];
+
+    
+
+    doClientConnected2 = 1;
+
+    LocalStatus = SocketGetAddressAsRequested(MyClient2, RequestedAddress);
+    if(diDEBUG)
+	{
+    	if (LocalStatus < 0)
+        	trace("CoolAutomation2: Error getting remote ip address. %d\n", LocalStatus);
+
+    	trace("CoolAutomation2: OnConnect: Connect call to %s successful\n", RequestedAddress);
+    }
+    
+
+    PortNumber = SocketGetPortNumber(MyClient2);
+    if(diDEBUG)
+	{
+    	if (PortNumber < 0)
+        	trace("CoolAutomation2: Error getting client port number. %ld\n", PortNumber);
+    }
+        
+
+    LocalStatus = SocketGetRemoteIPAddress(MyClient2, RemoteIPAddress);
+    if(diDEBUG)
+	{
+    	if (LocalStatus < 0)
+        	trace("CoolAutomation2: Error getting remote ip address. %d\n", LocalStatus);
+
+    	trace("CoolAutomation2: OnConnect: Connected to port %ld on address %s\n",
+        PortNumber, RemoteIPAddress);
+    }
+    SocketSend(MyClient2, "\n");
+
+}
+
+SOCKETDISCONNECT MyClient2
+{
+
+    doClientConnected2 = 0;
+    
+	if(diDEBUG)
+	{
+	    if (diStartClient)
+	        trace("CoolAutomation2: Socket disconnected remotely");
+	
+	    Else
+	        trace("CoolAutomation2: Local disconnect complete.");
+	}
+}
+
+SOCKETSTATUS MyClient2
+
+{
+
+    SIGNED_INTEGER Status;
+
+    
+
+    Status = SocketGetStatus();
+
+    aoClientStatus2 = Status;
+    if(diDEBUG)
+	{
+	    trace("CoolAutomation2: The SocketGetStatus returns:       %d\n", Status);
+	
+	    trace("CoolAutomation2: The MyClient2.SocketStatus returns: %d\n", MyClient2.SocketStatus);
+	}	
+}
+
+SOCKETRECEIVE MyClient2
+{
+	string TempString$[100];
+	if(diDEBUG)
+	{
+	    if (Len(MyClient2.SocketRxBuf) < 256)
+	        trace("CoolAutomation2: Rx: %s", MyClient2.SocketRxBuf);
+	}
+    SubConnectionBuffer = MyClient2.SocketRxBuf;
+	if(len(QueryString$)>0)
+	{
+		if((len(SubConnectionBuffer)=3) && (SubConnectionBuffer <> ">\n"))
+		{
+			soFromCoolAutomationCore = QueryString$ + mid(SubConnectionBuffer,1,1) + "\n";
+			//
+			if(diDebug)
+			{
+				TempString$ = QueryString$ + SubConnectionBuffer + "\n";
+				trace("CoolAutomation2: Sending %s to SubModule", TempString$);
+			}			
+			ClearBuffer(QueryString$);
+		}
+    }
+    ClearBuffer(MyClient2.SocketRxBuf);
+}
+
+change diOscQuery
+{
+	string StringOut$[100];
+	
+	if((doClientConnected2) && (LouverScanStop=0))
+	{
+		QueryScan = QueryScan + 1;
+		if((len(AddressHolder[QueryScan]) > 0) && (QueryScan<250))
+		{
+			StringOut$ = "query " + AddressHolder[QueryScan] + " s\n";
+			QueryString$ = AddressHolder[QueryScan] + ":Louver=" ;
+			SocketSend(MyClient2, StringOut$);
+			if(diDebug)
+				trace("CoolAutomation2: Sending %s", StringOut$);
+		}
+		else
+			QueryScan = 0;			
+	}
+}
+
+

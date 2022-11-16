@@ -1,0 +1,52 @@
+Crosspoint listing for C:\Users\Mike\Documents\GitHub\SantanaResidence-HI\Naylor v4.0(6-16-21)_compiled\2022.9.28 Santana.SMW
+
+Note:  Crosspoint symbols with EquipID or ControlID set to 0d are not routeable.
+
+Equipment Crosspoint Routing.                                                                       EquipID
+===========================================================================================================
+S-13 in macro S-1.7.23.1 (Module File C:\Program Files (x86)\Crestron\Cresdb\Modules\CEN-I          0
+DOC Hardware Interface v2.0.cmc)                                                                    
+S-1.6 in macro S-1.7.23.2 (Module File C:\Program Files (x86)\Crestron\Cresdb\Modules\CEN-          50050
+IDOCV HW Interface v3.1.cmc)                                                                        
+S-13 in macro S-1.7.24.1 (Module File C:\Program Files (x86)\Crestron\Cresdb\Modules\CEN-I          50060
+DOC Hardware Interface v2.0.cmc)                                                                    
+
+Control Crosspoint Routing.                                                                         ControlID
+=============================================================================================================
+S-1 in macro S-1.7.23.5 (Module File C:\Program Files (x86)\Crestron\Cresdb\Modules\Adagio          50051
+ Large TP iPod GUI Interface v2.0.cmc)                                                              
+S-1 in macro S-1.7.23.7 (Module File C:\Program Files (x86)\Crestron\Cresdb\Modules\Adagio          50052
+ Large TP iPod GUI Interface v2.0.cmc)                                                              
+S-1 in macro S-1.7.23.9 (Module File C:\Program Files (x86)\Crestron\Cresdb\Modules\Adagio          50053
+ Large TP iPod GUI Interface v2.0.cmc)                                                              
+S-1 in macro S-1.7.23.11 (Module File C:\Program Files (x86)\Crestron\Cresdb\Modules\Adagi          50054
+o Large TP iPod GUI Interface v2.0.cmc)                                                             
+S-1 in macro S-1.7.23.13 (Module File C:\Program Files (x86)\Crestron\Cresdb\Modules\Adagi          50055
+o Large TP iPod GUI Interface v2.0.cmc)                                                             
+S-1 in macro S-1.7.23.15 (Module File C:\Program Files (x86)\Crestron\Cresdb\Modules\Adagi          50056
+o Large TP iPod GUI Interface v2.0.cmc)                                                             
+S-1 in macro S-1.7.23.17 (Module File C:\Program Files (x86)\Crestron\Cresdb\Modules\Adagi          50057
+o Large TP iPod GUI Interface v2.0.cmc)                                                             
+S-1 in macro S-1.7.23.19 (Module File C:\Program Files (x86)\Crestron\Cresdb\Modules\Adagi          50058
+o Large TP iPod GUI Interface v2.0.cmc)                                                             
+S-1 in macro S-1.7.23.21 (Module File C:\Program Files (x86)\Crestron\Cresdb\Modules\Adagi          50059
+o Large TP iPod GUI Interface v2.0.cmc)                                                             
+S-1 in macro S-1.7.24.4 (Module File C:\Program Files (x86)\Crestron\Cresdb\Modules\Adagio          50061
+ Large TP iPod GUI Interface v2.0.cmc)                                                              
+S-1 in macro S-1.7.24.6 (Module File C:\Program Files (x86)\Crestron\Cresdb\Modules\Adagio          50062
+ Large TP iPod GUI Interface v2.0.cmc)                                                              
+S-1 in macro S-1.7.24.8 (Module File C:\Program Files (x86)\Crestron\Cresdb\Modules\Adagio          50063
+ Large TP iPod GUI Interface v2.0.cmc)                                                              
+S-1 in macro S-1.7.24.10 (Module File C:\Program Files (x86)\Crestron\Cresdb\Modules\Adagi          50064
+o Large TP iPod GUI Interface v2.0.cmc)                                                             
+S-1 in macro S-1.7.24.12 (Module File C:\Program Files (x86)\Crestron\Cresdb\Modules\Adagi          50065
+o Large TP iPod GUI Interface v2.0.cmc)                                                             
+S-1 in macro S-1.7.24.14 (Module File C:\Program Files (x86)\Crestron\Cresdb\Modules\Adagi          50066
+o Large TP iPod GUI Interface v2.0.cmc)                                                             
+S-1 in macro S-1.7.24.16 (Module File C:\Program Files (x86)\Crestron\Cresdb\Modules\Adagi          50067
+o Large TP iPod GUI Interface v2.0.cmc)                                                             
+S-1 in macro S-1.7.24.18 (Module File C:\Program Files (x86)\Crestron\Cresdb\Modules\Adagi          50068
+o Large TP iPod GUI Interface v2.0.cmc)                                                             
+S-1 in macro S-1.7.24.20 (Module File C:\Program Files (x86)\Crestron\Cresdb\Modules\Adagi          50069
+o Large TP iPod GUI Interface v2.0.cmc)                                                             
+

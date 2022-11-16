@@ -1,0 +1,701 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+ram              0x80000000         0x00500000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+                0x00000000                __DYNAMIC=0x0
+                0x00400000                PROVIDE (__stack, 0x400000)
+                0x00000000                PROVIDE (hardware_init_hook, 0x0)
+                0x00000000                PROVIDE (_hardware_init_hook, 0x0)
+                0x00000000                PROVIDE (software_init_hook, 0x0)
+                0x00000000                PROVIDE (_software_init_hook, 0x0)
+
+.text           0x80000000    0x6c690
+ *(.text)
+ .text          0x80000000      0xab2 S2_NewOld.o
+                0x8000095c                S2_NewOld_main
+                0x8000020c                S2_NewOldEventHandler00000
+                0x80000a76                S2_NewOldEventHandler00001
+                0x80000882                S2_NewOld_EventHandler
+ *fill*         0x80000ab2        0x2
+ .text          0x80000ab4      0x592 S2_timedate_display.o
+                0x80000d14                S2_timedate_displayEventHandler00000
+                0x80000f5a                S2_timedate_display_EventHandler
+                0x80001000                S2_timedate_display_main
+ *fill*         0x80001046        0x2
+ .text          0x80001048      0x836 S2_Knob_List_Acceleration__iPod_.o
+                0x800015c4                S2_Knob_List_Acceleration__iPod__main
+                0x80001508                S2_Knob_List_Acceleration__iPod__EventHandler
+                0x80001298                S2_Knob_List_Acceleration__iPod_EventHandler00000
+ *fill*         0x8000187e        0x2
+ .text          0x80001880     0x1590 S2_Adagio_Now_Playing_Combiner__iPod__v1_2.o
+                0x80002a5c                S2_Adagio_Now_Playing_Combiner__iPod__v1_2_main
+                0x80002dc6                S2_Adagio_Now_Playing_Combiner__iPod__v1_2EventHandler00000
+                0x800029b0                S2_Adagio_Now_Playing_Combiner__iPod__v1_2_EventHandler
+ .text          0x80002e10     0x2700 S2_Now_Playing_Combiner__ISERVER_IDOCV_DSW__v1_0.o
+                0x800054c6                S2_Now_Playing_Combiner__ISERVER_IDOCV_DSW__v1_0EventHandler00000
+                0x800050ae                S2_Now_Playing_Combiner__ISERVER_IDOCV_DSW__v1_0_EventHandler
+                0x8000515a                S2_Now_Playing_Combiner__ISERVER_IDOCV_DSW__v1_0_main
+ .text          0x80005510      0x780 S2_Daikin_F_C_Temp_Conversion_v2.o
+                0x80005b4e                S2_Daikin_F_C_Temp_Conversion_v2_EventHandler
+                0x80005964                S2_Daikin_F_C_Temp_Conversion_v2EventHandler00002
+                0x80005c2a                S2_Daikin_F_C_Temp_Conversion_v2_main
+                0x800056de                S2_Daikin_F_C_Temp_Conversion_v2EventHandler00001
+                0x80005510                S2_Daikin_F_C_Temp_Conversion_v2EventHandler00000
+ .text          0x80005c90     0x10fe S2_Carrier_Infinity_Queue.o
+                0x80006d42                S2_Carrier_Infinity_QueueWTIMEOUT
+                0x80005f72                S2_Carrier_Infinity_QueueEventHandler00001
+                0x80005c90                S2_Carrier_Infinity_QueueEventHandler00000
+                0x800064c0                S2_Carrier_Infinity_QueueEventHandler00002
+                0x80006a50                S2_Carrier_Infinity_Queue_EventHandler
+                0x80006b46                S2_Carrier_Infinity_Queue_main
+ *fill*         0x80006d8e        0x2
+ .text          0x80006d90     0x44ca S2_Carrier_Infinity_Processor_v2.o
+                0x8000843c                S2_Carrier_Infinity_Processor_v2EventHandler00007
+                0x80008ebe                S2_Carrier_Infinity_Processor_v2EventHandler0000B
+                0x80007ad4                S2_Carrier_Infinity_Processor_v2EventHandler00003
+                0x8000787a                S2_Carrier_Infinity_Processor_v2EventHandler00002
+                0x8000b1c8                S2_Carrier_Infinity_Processor_v2EventHandler00009
+                0x8000ac36                S2_Carrier_Infinity_Processor_v2_EventHandler
+                0x80007f88                S2_Carrier_Infinity_Processor_v2EventHandler00005
+                0x8000afbc                S2_Carrier_Infinity_Processor_v2EventHandler00000
+                0x800090c6                S2_Carrier_Infinity_Processor_v2EventHandler0000C
+                0x8000b042                S2_Carrier_Infinity_Processor_v2EventHandler00001
+                0x8000b0b6                S2_Carrier_Infinity_Processor_v2EventHandler00008
+                0x80007d2e                S2_Carrier_Infinity_Processor_v2EventHandler00004
+                0x800081e2                S2_Carrier_Infinity_Processor_v2EventHandler00006
+                0x8000ad54                S2_Carrier_Infinity_Processor_v2_main
+                0x8000af70                S2_Carrier_Infinity_Processor_v2WTIMEOUT
+                0x80008b92                S2_Carrier_Infinity_Processor_v2EventHandler0000A
+ *fill*         0x8000b25a        0x2
+ .text          0x8000b25c     0x678a S2_Carrier_Infinity_Zone_Drive_v2_DT_.o
+                0x8001191e                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler0001B
+                0x8000c420                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler0000C
+                0x80011736                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler00018
+                0x800116a6                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler00017
+                0x8000d94a                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler00015
+                0x8000ce34                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler00010
+                0x80011556                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler00005
+                0x80010d9c                S2_Carrier_Infinity_Zone_Drive_v2_DT__main
+                0x8000c290                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler0000B
+                0x8000cd06                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler0000F
+                0x8000b25c                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler00002
+                0x8000d222                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler00012
+                0x8000bde0                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler00008
+                0x8000c840                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler0000D
+                0x80011316                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler00000
+                0x8000d6c0                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler00014
+                0x8000b81c                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler00006
+                0x8000c100                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler0000A
+                0x8000ca30                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler0000E
+                0x80011496                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler00004
+                0x8000da92                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler0001C
+                0x8000d3b6                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler00013
+                0x8000bf70                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler00009
+                0x80011856                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler0001A
+                0x8000ba5e                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler00007
+                0x80010cc6                S2_Carrier_Infinity_Zone_Drive_v2_DT__EventHandler
+                0x800117c6                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler00019
+                0x80011616                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler00016
+                0x8000d08e                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler00011
+                0x800113d6                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler00001
+                0x8000b49c                S2_Carrier_Infinity_Zone_Drive_v2_DT_EventHandler00003
+ *fill*         0x800119e6        0x2
+ .text          0x800119e8     0x678a S2_Carrier_Infinity_Zone_Drive.o
+                0x80017da2                S2_Carrier_Infinity_Zone_DriveEventHandler00016
+                0x80012a1c                S2_Carrier_Infinity_Zone_DriveEventHandler0000B
+                0x80017aa2                S2_Carrier_Infinity_Zone_DriveEventHandler00000
+                0x8001381a                S2_Carrier_Infinity_Zone_DriveEventHandler00011
+                0x80013b42                S2_Carrier_Infinity_Zone_DriveEventHandler00013
+                0x800180aa                S2_Carrier_Infinity_Zone_DriveEventHandler0001B
+                0x80017e32                S2_Carrier_Infinity_Zone_DriveEventHandler00017
+                0x80011c28                S2_Carrier_Infinity_Zone_DriveEventHandler00003
+                0x80017ec2                S2_Carrier_Infinity_Zone_DriveEventHandler00018
+                0x80013e4c                S2_Carrier_Infinity_Zone_DriveEventHandler00014
+                0x8001288c                S2_Carrier_Infinity_Zone_DriveEventHandler0000A
+                0x800131bc                S2_Carrier_Infinity_Zone_DriveEventHandler0000E
+                0x800121ea                S2_Carrier_Infinity_Zone_DriveEventHandler00007
+                0x80017fe2                S2_Carrier_Infinity_Zone_DriveEventHandler0001A
+                0x800135c0                S2_Carrier_Infinity_Zone_DriveEventHandler00010
+                0x80017452                S2_Carrier_Infinity_Zone_Drive_EventHandler
+                0x80012fcc                S2_Carrier_Infinity_Zone_DriveEventHandler0000D
+                0x800140d6                S2_Carrier_Infinity_Zone_DriveEventHandler00015
+                0x80017f52                S2_Carrier_Infinity_Zone_DriveEventHandler00019
+                0x8001256c                S2_Carrier_Infinity_Zone_DriveEventHandler00008
+                0x800139ae                S2_Carrier_Infinity_Zone_DriveEventHandler00012
+                0x800119e8                S2_Carrier_Infinity_Zone_DriveEventHandler00002
+                0x80013492                S2_Carrier_Infinity_Zone_DriveEventHandler0000F
+                0x800126fc                S2_Carrier_Infinity_Zone_DriveEventHandler00009
+                0x80017c22                S2_Carrier_Infinity_Zone_DriveEventHandler00004
+                0x80012bac                S2_Carrier_Infinity_Zone_DriveEventHandler0000C
+                0x80017528                S2_Carrier_Infinity_Zone_Drive_main
+                0x80017b62                S2_Carrier_Infinity_Zone_DriveEventHandler00001
+                0x8001421e                S2_Carrier_Infinity_Zone_DriveEventHandler0001C
+                0x80017ce2                S2_Carrier_Infinity_Zone_DriveEventHandler00005
+                0x80011fa8                S2_Carrier_Infinity_Zone_DriveEventHandler00006
+ *fill*         0x80018172        0x2
+ .text          0x80018174     0x2bb4 S2_Daikin_ITC_IO_V3_1.o
+                0x80019f02                S2_Daikin_ITC_IO_V3_1WAITTRIGGEROK
+                0x8001a8d4                S2_Daikin_ITC_IO_V3_1_EventHandler
+                0x8001a9d0                S2_Daikin_ITC_IO_V3_1_main
+                0x8001acde                S2_Daikin_ITC_IO_V3_1EventHandler00001
+                0x8001a024                S2_Daikin_ITC_IO_V3_1EventHandler00002
+                0x80019b34                S2_Daikin_ITC_IO_V3_1EventHandler00000
+                0x8001ac26                S2_Daikin_ITC_IO_V3_1__SPLS_TMPVAR__WAITLABEL_0__
+ .text          0x8001ad28      0x23c S2_Daikin_ITC_Feedback_Splitter_V3_1.o
+                0x8001ade4                S2_Daikin_ITC_Feedback_Splitter_V3_1_main
+                0x8001ad28                S2_Daikin_ITC_Feedback_Splitter_V3_1_EventHandler
+                0x8001ae74                S2_Daikin_ITC_Feedback_Splitter_V3_1EventHandler00000
+ .text          0x8001af64     0x58a0 S2_GE_Interlogix_Networx_Processor_v4_1_mod.o
+                0x8001dc2a                S2_GE_Interlogix_Networx_Processor_v4_1_modEventHandler00003
+                0x8001e68c                S2_GE_Interlogix_Networx_Processor_v4_1_modEventHandler00005
+                0x8001f280                S2_GE_Interlogix_Networx_Processor_v4_1_mod_main
+                0x8001f180                S2_GE_Interlogix_Networx_Processor_v4_1_mod_EventHandler
+                0x8001b234                S2_GE_Interlogix_Networx_Processor_v4_1_modEventHandler00000
+                0x80020720                S2_GE_Interlogix_Networx_Processor_v4_1_modEventHandler00004
+                0x8001d9c8                S2_GE_Interlogix_Networx_Processor_v4_1_modEventHandler00002
+                0x800206bc                S2_GE_Interlogix_Networx_Processor_v4_1_modWTIMEOUT
+                0x8001d0e0                S2_GE_Interlogix_Networx_Processor_v4_1_modEventHandler00001
+ .text          0x80020804     0x258c S2_GE_Interlogix_Networx_Password_v4_1.o
+                0x80020804                S2_GE_Interlogix_Networx_Password_v4_1EventHandler00000
+                0x80020eb6                S2_GE_Interlogix_Networx_Password_v4_1EventHandler00002
+                0x80022942                S2_GE_Interlogix_Networx_Password_v4_1_main
+                0x8002136e                S2_GE_Interlogix_Networx_Password_v4_1EventHandler00004
+                0x80022186                S2_GE_Interlogix_Networx_Password_v4_1EventHandler00005
+                0x80022d02                S2_GE_Interlogix_Networx_Password_v4_1EventHandler00003
+                0x8002282e                S2_GE_Interlogix_Networx_Password_v4_1_EventHandler
+                0x80020cc8                S2_GE_Interlogix_Networx_Password_v4_1EventHandler00001
+ .text          0x80022d90      0x708 S2_GE_Interlogix_Networx_Zone_Name_v4_1.o
+                0x8002344e                S2_GE_Interlogix_Networx_Zone_Name_v4_1EventHandler00001
+                0x80023172                S2_GE_Interlogix_Networx_Zone_Name_v4_1_EventHandler
+                0x80022d90                S2_GE_Interlogix_Networx_Zone_Name_v4_1EventHandler00000
+                0x8002324a                S2_GE_Interlogix_Networx_Zone_Name_v4_1_main
+ .text          0x80023498    0x16dbe S2_GE_Interlogix_Networx_View_Events_v4_1.o
+                0x80023972                S2_GE_Interlogix_Networx_View_Events_v4_1EventHandler00001
+                0x8003a168                S2_GE_Interlogix_Networx_View_Events_v4_1EventHandler00003
+                0x80023498                S2_GE_Interlogix_Networx_View_Events_v4_1WTIMEOUT
+                0x80025184                S2_GE_Interlogix_Networx_View_Events_v4_1_main
+                0x80024416                S2_GE_Interlogix_Networx_View_Events_v4_1EventHandler00005
+                0x80023ed4                S2_GE_Interlogix_Networx_View_Events_v4_1EventHandler00002
+                0x80025082                S2_GE_Interlogix_Networx_View_Events_v4_1_EventHandler
+                0x8002363c                S2_GE_Interlogix_Networx_View_Events_v4_1EventHandler00000
+                0x8003a20a                S2_GE_Interlogix_Networx_View_Events_v4_1EventHandler00004
+ *fill*         0x8003a256        0x2
+ .text          0x8003a258     0x5518 S2_GE_Interlogix_Networx_Set_User_v4_1.o
+                0x8003b4c0                S2_GE_Interlogix_Networx_Set_User_v4_1EventHandler00003
+                0x8003f6b4                S2_GE_Interlogix_Networx_Set_User_v4_1EventHandler00009
+                0x8003ba5a                S2_GE_Interlogix_Networx_Set_User_v4_1EventHandler00006
+                0x8003f554                S2_GE_Interlogix_Networx_Set_User_v4_1EventHandler00007
+                0x8003af94                S2_GE_Interlogix_Networx_Set_User_v4_1EventHandler00002
+                0x8003ecc2                S2_GE_Interlogix_Networx_Set_User_v4_1_EventHandler
+                0x8003ee14                S2_GE_Interlogix_Networx_Set_User_v4_1_main
+                0x8003b89e                S2_GE_Interlogix_Networx_Set_User_v4_1EventHandler00005
+                0x8003e1dc                S2_GE_Interlogix_Networx_Set_User_v4_1EventHandler0000B
+                0x8003ad7a                S2_GE_Interlogix_Networx_Set_User_v4_1EventHandler00001
+                0x8003a258                S2_GE_Interlogix_Networx_Set_User_v4_1WTIMEOUT
+                0x8003a84a                S2_GE_Interlogix_Networx_Set_User_v4_1EventHandler00000
+                0x8003b660                S2_GE_Interlogix_Networx_Set_User_v4_1EventHandler00004
+                0x8003bcbc                S2_GE_Interlogix_Networx_Set_User_v4_1EventHandler0000A
+                0x8003f5f8                S2_GE_Interlogix_Networx_Set_User_v4_1EventHandler00008
+ .text          0x8003f770     0x2542 S2_Lutron_Homeworks_Keypad_Emulation.o
+                0x80040fda                S2_Lutron_Homeworks_Keypad_EmulationEventHandler00002
+                0x8003fef2                S2_Lutron_Homeworks_Keypad_EmulationFLASH2_ON
+                0x8003fac0                S2_Lutron_Homeworks_Keypad_EmulationFLASH1_OFF
+                0x80040eb0                S2_Lutron_Homeworks_Keypad_EmulationEventHandler00001
+                0x8003f95a                S2_Lutron_Homeworks_Keypad_Emulation__SPLS_TMPVAR__WAITLABEL_0__
+                0x80041c74                S2_Lutron_Homeworks_Keypad_EmulationWAIT_DT
+                0x80041678                S2_Lutron_Homeworks_Keypad_Emulation_main
+                0x80040c8e                S2_Lutron_Homeworks_Keypad_EmulationEventHandler00000
+                0x80041c00                S2_Lutron_Homeworks_Keypad_Emulation_LUTRONBUTTON_Constructor
+                0x8003fc16                S2_Lutron_Homeworks_Keypad_EmulationFLASH1_ON
+                0x80041c20                S2_Lutron_Homeworks_Keypad_Emulation_LUTRONBUTTON_Destructor
+                0x80041578                S2_Lutron_Homeworks_Keypad_Emulation_EventHandler
+                0x80041c2a                S2_Lutron_Homeworks_Keypad_EmulationWAIT_HELD
+                0x8003fd78                S2_Lutron_Homeworks_Keypad_EmulationFLASH2_OFF
+ *fill*         0x80041cb2        0x2
+ .text          0x80041cb4     0x1ab2 S2_LutronHWI_Lib.o
+                0x800424a6                S2_LutronHWI_Lib__COMPORTTOSTRING
+                0x80043148                S2_LutronHWI_Lib__DECODEDIMMERLEVEL
+                0x80041cb4                S2_LutronHWI_Lib__INTTYPETOSTRING
+                0x80042868                S2_LutronHWI_Lib__BAUDRATETOSTRING
+                0x80043024                S2_LutronHWI_Lib__MODULELOGMESSAGE
+                0x80043592                S2_LutronHWI_Lib_EventHandler
+                0x80042ba4                S2_LutronHWI_Lib__HANDSHAKETOSTRING
+                0x80043612                S2_LutronHWI_Lib__LUTRONCOMSPEC
+                0x80042cde                S2_LutronHWI_Lib__DEBUG_DYNAMICERROR
+                0x80043720                S2_LutronHWI_Lib_main
+                0x800434ae                S2_LutronHWI_Lib__LUTRONTIMETOCENTISECONDS
+                0x8004230a                S2_LutronHWI_Lib__MAKECOMMSPEC
+                0x8004217e                S2_LutronHWI_Lib__STRINGPADTRAILING
+ *fill*         0x80043766        0x2
+ .text          0x80043768     0xafae S2_Lutron_Homeworks_Core_Module.o
+                0x8004dbaa                S2_Lutron_Homeworks_Core_Module_main
+                0x8004ac5c                S2_Lutron_Homeworks_Core_ModuleEventHandler00004
+                0x8004e456                S2_Lutron_Homeworks_Core_ModuleWAIT_TCPCONNECTED
+                0x8004e44c                S2_Lutron_Homeworks_Core_Module_STINTERFACE_Destructor
+                0x8004e608                S2_Lutron_Homeworks_Core_ModuleEventHandler00001
+                0x8004e40a                S2_Lutron_Homeworks_Core_Module_STINTERFACE_Constructor
+                0x8004a604                S2_Lutron_Homeworks_Core_ModuleEventHandler00003
+                0x8004ca26                S2_Lutron_Homeworks_Core_ModuleEventHandler00006
+                0x8004da1a                S2_Lutron_Homeworks_Core_Module_EventHandler
+                0x8004e54e                S2_Lutron_Homeworks_Core_ModuleEventHandler00000
+                0x8004e652                S2_Lutron_Homeworks_Core_ModuleEventHandler00005
+                0x80046926                S2_Lutron_Homeworks_Core_ModuleWAIT_TCPRECONNECT
+                0x8004a062                S2_Lutron_Homeworks_Core_ModuleEventHandler00002
+                0x8004e6be                S2_Lutron_Homeworks_Core_ModuleEventHandler00007
+                0x8004d8e6                S2_Lutron_Homeworks_Core_ModuleWAIT_LOGIN
+ *fill*         0x8004e716        0x2
+ .text          0x8004e718     0x17fc S2_Lutron_Homeworks_Keypad_Monitor.o
+                0x8004fddc                S2_Lutron_Homeworks_Keypad_MonitorEventHandler00000
+                0x8004fe92                S2_Lutron_Homeworks_Keypad_MonitorEventHandler00002
+                0x8004fe38                S2_Lutron_Homeworks_Keypad_MonitorEventHandler00001
+                0x8004f304                S2_Lutron_Homeworks_Keypad_MonitorEventHandler00003
+                0x8004fb9a                S2_Lutron_Homeworks_Keypad_Monitor_main
+                0x8004fa6c                S2_Lutron_Homeworks_Keypad_Monitor_EventHandler
+ .text          0x8004ff14      0xb98 S2_analogsettings.o
+                0x800508d2                S2_analogsettings_main
+                0x8004ff14                S2_analogsettingsEventHandler00000
+                0x800503c4                S2_analogsettingsEventHandler00001
+                0x80050808                S2_analogsettings_EventHandler
+ .text          0x80050aac     0x20ce S2_Integra_DTR_Processor.o
+                0x80050aac                S2_Integra_DTR_ProcessorEventHandler00000
+                0x800528d4                S2_Integra_DTR_ProcessorEventHandler00003
+                0x800529e6                S2_Integra_DTR_ProcessorEventHandler00005
+                0x8005269a                S2_Integra_DTR_ProcessorEventHandler00001
+                0x800527ba                S2_Integra_DTR_ProcessorEventHandler00002
+                0x80052ab0                S2_Integra_DTR_ProcessorEventHandler00006
+                0x80052442                S2_Integra_DTR_Processor_EventHandler
+                0x80052910                S2_Integra_DTR_ProcessorEventHandler00004
+                0x80052558                S2_Integra_DTR_Processor_main
+ *fill*         0x80052b7a        0x2
+ .text          0x80052b7c     0x5064 S2_Integra_DTR_Feedback_v2.o
+                0x80052b7c                S2_Integra_DTR_Feedback_v2EventHandler00000
+                0x8005780e                S2_Integra_DTR_Feedback_v2_main
+                0x80057720                S2_Integra_DTR_Feedback_v2_EventHandler
+                0x800537b8                S2_Integra_DTR_Feedback_v2EventHandler00001
+ .text          0x80057be0     0x2c28 S2_Denon_AVR3805_2805_Processor.o
+                0x8005a25a                S2_Denon_AVR3805_2805_ProcessorEventHandler00003
+                0x800582e8                S2_Denon_AVR3805_2805_ProcessorEventHandler00000
+                0x8005a51c                S2_Denon_AVR3805_2805_Processor_main
+                0x80059f8e                S2_Denon_AVR3805_2805_ProcessorEventHandler00001
+                0x8005a456                S2_Denon_AVR3805_2805_Processor_EventHandler
+                0x8005a0f4                S2_Denon_AVR3805_2805_ProcessorEventHandler00002
+ .text          0x8005a808     0x193e S2_Sharp_LC_52D64U_Processor_v1_0.o
+                0x8005a808                S2_Sharp_LC_52D64U_Processor_v1_0EventHandler00000
+                0x8005abd4                S2_Sharp_LC_52D64U_Processor_v1_0EventHandler00003
+                0x8005afa0                S2_Sharp_LC_52D64U_Processor_v1_0EventHandler00006
+                0x8005c08a                S2_Sharp_LC_52D64U_Processor_v1_0EventHandler0000B
+                0x8005c000                S2_Sharp_LC_52D64U_Processor_v1_0_EventHandler
+                0x8005ae5c                S2_Sharp_LC_52D64U_Processor_v1_0EventHandler00005
+                0x8005b228                S2_Sharp_LC_52D64U_Processor_v1_0EventHandler00008
+                0x8005b6ac                S2_Sharp_LC_52D64U_Processor_v1_0EventHandler0000C
+                0x8005aa90                S2_Sharp_LC_52D64U_Processor_v1_0EventHandler00002
+                0x8005b36c                S2_Sharp_LC_52D64U_Processor_v1_0EventHandler00009
+                0x8005a94c                S2_Sharp_LC_52D64U_Processor_v1_0EventHandler00001
+                0x8005b4b0                S2_Sharp_LC_52D64U_Processor_v1_0EventHandler0000A
+                0x8005b0e4                S2_Sharp_LC_52D64U_Processor_v1_0EventHandler00007
+                0x8005bf5c                S2_Sharp_LC_52D64U_Processor_v1_0_main
+                0x8005ad18                S2_Sharp_LC_52D64U_Processor_v1_0EventHandler00004
+ *fill*         0x8005c146        0x2
+ .text          0x8005c148     0x5836 library.o
+                0x80060334                RotateRightLong
+                0x80060942                IsSystem
+                0x80060298                Seed
+                0x8005db90                Remove
+                0x8005ff14                Ltoa
+                0x8005fc40                Atoi
+                0x8005efa8                InitRampInfoArray
+                0x800606ee                Right
+                0x8006171e                LockInputSema
+                0x800601c2                Mod
+                0x800603aa                Getc
+                0x800600f6                SMuldiv
+                0x80060924                IsHidden
+                0x8005ffda                Min
+                0x80061532                hextosi
+                0x80060ac8                WriteIntegerArray
+                0x8006103e                GetSignedIntArrayElementPtr
+                0x8005f962                CheckStructArray
+                0x80061546                hextosl
+                0x80060c4e                WriteSignedIntegerArray
+                0x8005f62a                InitStringParamArray
+                0x8005e8fc                ReadSignedLongIntegerArray
+                0x8005d81e                GatherToDelimiter
+                0x8005f44e                InitStringArray
+                0x8005ffb4                Max
+                0x8006097e                IsReadOnly
+                0x800600be                SMax
+                0x8005d9c2                GatherByLength
+                0x8005fe4e                Chr
+                0x80060aa0                ReadSignedLongInteger
+                0x8005fecc                Itohex
+                0x8005f8d4                GetStructArrayElement
+                0x8005fbc8                UNS_SetByte
+                0x800606c2                ReverseFindi
+                0x8005eda4                ReadStringArray
+                0x80060e4e                GetIntArrayElementPtr
+                0x800604fe                Lower
+                0x800602b4                RotateLeft
+                0x80061666                ResizeIfAutogrow
+                0x8005f0d4                CheckInputArray
+                0x8005c6b6                ResizeStringArray
+                0x8005fde0                Atosl
+                0x8005fc08                High
+                0x80060264                Rnd
+                0x80060186                UMod
+                0x8006030a                RotateLeftLong
+                0x80061792                FindNumericChar
+                0x80061296                CheckIOArrayBounds2
+                0x800608dc                MakeProgramFilename
+                0x800600da                SMin
+                0x80060432                Left
+                0x80060374                CheckBufferThreshold
+                0x80060a58                ReadSignedInteger
+                0x8005fc32                LowWord
+                0x8005c148                Bit
+                0x80060a08                ReadLongInteger
+                0x8005fa46                Byte
+                0x80060f46                GetLongArrayElementPtr
+                0x80060694                ReverseFind
+                0x800608f2                GetSeries
+                0x8006185e                InitTcpServer
+                0x800604e6                Len
+                0x80061366                InitializeRampInfoInternal
+                0x80060000                Divide
+                0x8005fd4c                Atol
+                0x800608e8                GetModelNumber
+                0x8006122e                CheckIOArrayBounds
+                0x8005f12e                CheckStringInputArray
+                0x80060d10                WriteSignedLongIntegerArray
+                0x8005f81e                GetStringArrayElement
+                0x8005ff58                Ltohex
+                0x8005fe84                Itoa
+                0x800602de                RotateRight
+                0x8005de7e                InternalReverseFind
+                0x800609e8                WriteLongInteger
+                0x8005f352                InitDynamicStringStruct
+                0x8005f244                SetStringArray
+                0x8005e6da                ReadSignedIntegerArray
+                0x8005f188                SetOutputArray
+                0x80060998                WriteInteger
+                0x8005f7b2                InitStructDynamicArray
+                0x8005e108                SetString
+                0x800601fe                Random
+                0x80060a30                WriteSignedInteger
+                0x8005c3ac                Find
+                0x800608fc                GetProgramNumber
+                0x800605d2                Mid
+                0x800617d0                InitTcpClient
+                0x8005d29a                ResizeStructArray
+                0x80061136                GetSignedLongArrayElementPtr
+                0x80061558                hextol
+                0x8005eb1e                ReadString
+                0x8005f4e4                InitDynamicStringArray
+                0x8006163e                UpperChar
+                0x8005fcdc                Atosi
+                0x800609c0                ReadInteger
+                0x80060072                Muldiv
+                0x8005f1f6                SetStringOutputArray
+                0x80060dd4                WriteString
+                0x8005cd0e                ResizeIntegerArray
+                0x8005f09c                InitInOutArray
+                0x8005f6f2                InitNvramStringArray
+                0x8005ff9c                Abs
+                0x80060142                SDivide
+                0x8005e298                ReadIntegerArray
+                0x8005c258                CompareStrings
+                0x80061616                LowerChar
+                0x800618ee                InitUdpSocket
+                0x8006035c                ClearBuffer
+                0x800607aa                Upper
+                0x8005f78e                InitStructArray
+                0x80060880                MakeLower
+                0x80060960                IsVolume
+                0x8005dcea                RemoveByLength
+                0x8005f9de                CheckStringOutputArrayIndex
+                0x80060b8a                WriteLongIntegerArray
+                0x80061412                InitRampInfoStructArray
+                0x8005fc24                HighWord
+                0x8005c520                ResizeString
+                0x80060906                IsDirectory
+                0x8005e4b8                ReadLongIntegerArray
+                0x8005fc16                Low
+                0x8005d6c4                Gather
+                0x800608ae                MakeUpper
+                0x8005f314                InitStringStruct
+                0x800612fe                CheckStringArrayBounds
+                0x80060044                CheckDenominator
+                0x8006151a                hextoi
+                0x8005ec3c                WriteStringArray
+                0x8005fb06                SetByte
+                0x800613bc                InitializeRampInfo
+                0x80061758                UnLockInputSema
+                0x80060a80                WriteSignedLongInteger
+                0x8005f406                InitNvramStringStruct
+ *fill*         0x8006197e        0x2
+                0x80061980                .=ALIGN(0x10)
+ *(.eh_frame)
+                0x80061980                .=ALIGN(0x10)
+ *(.gnu.linkonce.t.*)
+                0x80061980                .=ALIGN(0x4)
+                0x80061980                __CTOR_LIST__=.
+                0x80061980                ___CTOR_LIST__=.
+                0x80061980        0x4 LONG 0x0 (((__CTOR_END__-__CTOR_LIST__)/0x4)-0x2)
+ *(.ctors)
+                0x80061984        0x4 LONG 0x0
+                0x80061988                __CTOR_END__=.
+                0x80061988                __DTOR_LIST__=.
+                0x80061988                ___DTOR_LIST__=.
+                0x80061988        0x4 LONG 0x0 (((__DTOR_END__-__DTOR_LIST__)/0x4)-0x2)
+ *(.dtors)
+                0x8006198c        0x4 LONG 0x0
+                0x80061990                __DTOR_END__=.
+ *(.rodata)
+ .rodata        0x80061990      0x351 S2_NewOld.o
+ .rodata        0x80061ce1      0x359 S2_timedate_display.o
+ .rodata        0x8006203a      0x2ac S2_Knob_List_Acceleration__iPod_.o
+ .rodata        0x800622e6      0x4db S2_Adagio_Now_Playing_Combiner__iPod__v1_2.o
+ .rodata        0x800627c1      0x757 S2_Now_Playing_Combiner__ISERVER_IDOCV_DSW__v1_0.o
+ .rodata        0x80062f18      0x22f S2_Daikin_F_C_Temp_Conversion_v2.o
+ .rodata        0x80063147      0x327 S2_Carrier_Infinity_Queue.o
+ .rodata        0x8006346e      0x5e2 S2_Carrier_Infinity_Processor_v2.o
+ .rodata        0x80063a50      0x7e0 S2_Carrier_Infinity_Zone_Drive_v2_DT_.o
+ .rodata        0x80064230      0x7e0 S2_Carrier_Infinity_Zone_Drive.o
+ .rodata        0x80064a10      0x5c3 S2_Daikin_ITC_IO_V3_1.o
+ .rodata        0x80064fd3      0x247 S2_Daikin_ITC_Feedback_Splitter_V3_1.o
+ .rodata        0x8006521a      0x5cf S2_GE_Interlogix_Networx_Processor_v4_1_mod.o
+ .rodata        0x800657e9      0x373 S2_GE_Interlogix_Networx_Password_v4_1.o
+ .rodata        0x80065b5c      0x2de S2_GE_Interlogix_Networx_Zone_Name_v4_1.o
+ .rodata        0x80065e3a     0x10a8 S2_GE_Interlogix_Networx_View_Events_v4_1.o
+ .rodata        0x80066ee2      0x418 S2_GE_Interlogix_Networx_Set_User_v4_1.o
+ .rodata        0x800672fa      0x439 S2_Lutron_Homeworks_Keypad_Emulation.o
+ .rodata        0x80067733      0x62b S2_LutronHWI_Lib.o
+ .rodata        0x80067d5e     0x2207 S2_Lutron_Homeworks_Core_Module.o
+ .rodata        0x80069f65      0x456 S2_Lutron_Homeworks_Keypad_Monitor.o
+ .rodata        0x8006a3bb      0x33e S2_analogsettings.o
+ .rodata        0x8006a6f9      0x35a S2_Integra_DTR_Processor.o
+ .rodata        0x8006aa53      0x74d S2_Integra_DTR_Feedback_v2.o
+ .rodata        0x8006b1a0      0x55e S2_Denon_AVR3805_2805_Processor.o
+ .rodata        0x8006b6fe      0x324 S2_Sharp_LC_52D64U_Processor_v1_0.o
+ .rodata        0x8006ba22      0xc54 library.o
+ *(.gcc_except_table)
+                0x8006c676                .=ALIGN(0x2)
+                0x8006c676                __INIT_SECTION__=.
+                0x8006c676        0x4 LONG 0x4e560000
+ *(.init)
+                0x8006c67a        0x2 SHORT 0x4e5e
+                0x8006c67c        0x2 SHORT 0x4e75
+                0x8006c67e                __FINI_SECTION__=.
+                0x8006c67e        0x4 LONG 0x4e560000
+ *(.fini)
+                0x8006c682        0x2 SHORT 0x4e5e
+                0x8006c684        0x2 SHORT 0x4e75
+ *(.lit)
+ *fill*         0x8006c686        0xa
+                0x8006c690                .=ALIGN(0x10)
+                0x8006c690                _etext=.
+                0x8006c690                etext=.
+
+.data           0x8006c690        0x0
+                0x8006c690                copy_start=.
+ *(.shdata)
+ *(.data)
+ *(.gnu.linkonce.d.*)
+                0x8006c690                .=ALIGN(0x10)
+                0x8006c690                _edata=.
+                0x8006c690                copy_end=.
+
+.got
+ *(.got.plt)
+ *(.got)
+
+EntryList       0x8006c690     0x1ba0
+ *(EntryList)
+ EntryList      0x8006c690      0x110 S2_NewOld.o
+                0x8006c690                S2_NewOld_Entry
+ EntryList      0x8006c7a0      0x110 S2_timedate_display.o
+                0x8006c7a0                S2_timedate_display_Entry
+ EntryList      0x8006c8b0      0x110 S2_Knob_List_Acceleration__iPod_.o
+                0x8006c8b0                S2_Knob_List_Acceleration__iPod__Entry
+ EntryList      0x8006c9c0      0x110 S2_Adagio_Now_Playing_Combiner__iPod__v1_2.o
+                0x8006c9c0                S2_Adagio_Now_Playing_Combiner__iPod__v1_2_Entry
+ EntryList      0x8006cad0      0x110 S2_Now_Playing_Combiner__ISERVER_IDOCV_DSW__v1_0.o
+                0x8006cad0                S2_Now_Playing_Combiner__ISERVER_IDOCV_DSW__v1_0_Entry
+ EntryList      0x8006cbe0      0x110 S2_Daikin_F_C_Temp_Conversion_v2.o
+                0x8006cbe0                S2_Daikin_F_C_Temp_Conversion_v2_Entry
+ EntryList      0x8006ccf0      0x110 S2_Carrier_Infinity_Queue.o
+                0x8006ccf0                S2_Carrier_Infinity_Queue_Entry
+ EntryList      0x8006ce00      0x110 S2_Carrier_Infinity_Processor_v2.o
+                0x8006ce00                S2_Carrier_Infinity_Processor_v2_Entry
+ EntryList      0x8006cf10      0x110 S2_Carrier_Infinity_Zone_Drive_v2_DT_.o
+                0x8006cf10                S2_Carrier_Infinity_Zone_Drive_v2_DT__Entry
+ EntryList      0x8006d020      0x110 S2_Carrier_Infinity_Zone_Drive.o
+                0x8006d020                S2_Carrier_Infinity_Zone_Drive_Entry
+ EntryList      0x8006d130      0x110 S2_Daikin_ITC_IO_V3_1.o
+                0x8006d130                S2_Daikin_ITC_IO_V3_1_Entry
+ EntryList      0x8006d240      0x110 S2_Daikin_ITC_Feedback_Splitter_V3_1.o
+                0x8006d240                S2_Daikin_ITC_Feedback_Splitter_V3_1_Entry
+ EntryList      0x8006d350      0x110 S2_GE_Interlogix_Networx_Processor_v4_1_mod.o
+                0x8006d350                S2_GE_Interlogix_Networx_Processor_v4_1_mod_Entry
+ EntryList      0x8006d460      0x110 S2_GE_Interlogix_Networx_Password_v4_1.o
+                0x8006d460                S2_GE_Interlogix_Networx_Password_v4_1_Entry
+ EntryList      0x8006d570      0x110 S2_GE_Interlogix_Networx_Zone_Name_v4_1.o
+                0x8006d570                S2_GE_Interlogix_Networx_Zone_Name_v4_1_Entry
+ EntryList      0x8006d680      0x110 S2_GE_Interlogix_Networx_View_Events_v4_1.o
+                0x8006d680                S2_GE_Interlogix_Networx_View_Events_v4_1_Entry
+ EntryList      0x8006d790      0x110 S2_GE_Interlogix_Networx_Set_User_v4_1.o
+                0x8006d790                S2_GE_Interlogix_Networx_Set_User_v4_1_Entry
+ EntryList      0x8006d8a0      0x110 S2_Lutron_Homeworks_Keypad_Emulation.o
+                0x8006d8a0                S2_Lutron_Homeworks_Keypad_Emulation_Entry
+ EntryList      0x8006d9b0      0x110 S2_LutronHWI_Lib.o
+                0x8006d9b0                S2_LutronHWI_Lib_Entry
+ EntryList      0x8006dac0      0x110 S2_Lutron_Homeworks_Core_Module.o
+                0x8006dac0                S2_Lutron_Homeworks_Core_Module_Entry
+ EntryList      0x8006dbd0      0x110 S2_Lutron_Homeworks_Keypad_Monitor.o
+                0x8006dbd0                S2_Lutron_Homeworks_Keypad_Monitor_Entry
+ EntryList      0x8006dce0      0x110 S2_analogsettings.o
+                0x8006dce0                S2_analogsettings_Entry
+ EntryList      0x8006ddf0      0x110 S2_Integra_DTR_Processor.o
+                0x8006ddf0                S2_Integra_DTR_Processor_Entry
+ EntryList      0x8006df00      0x110 S2_Integra_DTR_Feedback_v2.o
+                0x8006df00                S2_Integra_DTR_Feedback_v2_Entry
+ EntryList      0x8006e010      0x110 S2_Denon_AVR3805_2805_Processor.o
+                0x8006e010                S2_Denon_AVR3805_2805_Processor_Entry
+ EntryList      0x8006e120      0x110 S2_Sharp_LC_52D64U_Processor_v1_0.o
+                0x8006e120                S2_Sharp_LC_52D64U_Processor_v1_0_Entry
+                0x8006e230                .=ALIGN(0x4)
+
+FunctionList    0x8006e230        0x4
+ *(FunctionList)
+ FunctionList   0x8006e230        0x4 globals.o
+                0x8006e230                g_pFunctions
+                0x8006e234                .=ALIGN(0x4)
+
+.bss            0x8006e234        0x0
+                0x8006e234                .=ALIGN(0x4)
+                0x8006e234                __bss_start=.
+ *(.shbss)
+ *(.bss)
+ *(COMMON)
+                0x8006e238                _end=ALIGN(0x8)
+                0x8006e238                __end=_end
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges
+ *(.debug_aranges)
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info
+ *(.debug_info)
+
+.debug_abbrev
+ *(.debug_abbrev)
+
+.debug_line
+ *(.debug_line)
+
+.debug_frame
+ *(.debug_frame)
+
+.debug_str
+ *(.debug_str)
+
+.debug_loc
+ *(.debug_loc)
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+LOAD S2_NewOld.o
+LOAD S2_timedate_display.o
+LOAD S2_Knob_List_Acceleration__iPod_.o
+LOAD S2_Adagio_Now_Playing_Combiner__iPod__v1_2.o
+LOAD S2_Now_Playing_Combiner__ISERVER_IDOCV_DSW__v1_0.o
+LOAD S2_Daikin_F_C_Temp_Conversion_v2.o
+LOAD S2_Carrier_Infinity_Queue.o
+LOAD S2_Carrier_Infinity_Processor_v2.o
+LOAD S2_Carrier_Infinity_Zone_Drive_v2_DT_.o
+LOAD S2_Carrier_Infinity_Zone_Drive.o
+LOAD S2_Daikin_ITC_IO_V3_1.o
+LOAD S2_Daikin_ITC_Feedback_Splitter_V3_1.o
+LOAD S2_GE_Interlogix_Networx_Processor_v4_1_mod.o
+LOAD S2_GE_Interlogix_Networx_Password_v4_1.o
+LOAD S2_GE_Interlogix_Networx_Zone_Name_v4_1.o
+LOAD S2_GE_Interlogix_Networx_View_Events_v4_1.o
+LOAD S2_GE_Interlogix_Networx_Set_User_v4_1.o
+LOAD S2_Lutron_Homeworks_Keypad_Emulation.o
+LOAD S2_LutronHWI_Lib.o
+LOAD S2_Lutron_Homeworks_Core_Module.o
+LOAD S2_Lutron_Homeworks_Keypad_Monitor.o
+LOAD S2_analogsettings.o
+LOAD S2_Integra_DTR_Processor.o
+LOAD S2_Integra_DTR_Feedback_v2.o
+LOAD S2_Denon_AVR3805_2805_Processor.o
+LOAD S2_Sharp_LC_52D64U_Processor_v1_0.o
+LOAD globals.o
+LOAD library.o
+OUTPUT(_S2_2022_9_28_Santana.spl elf32-m68k)
+
+.comment        0x8006e234      0x428
+ .comment       0x8006e234       0x26 S2_NewOld.o
+ .comment       0x8006e25a       0x26 S2_timedate_display.o
+ .comment       0x8006e280       0x26 S2_Knob_List_Acceleration__iPod_.o
+ .comment       0x8006e2a6       0x26 S2_Adagio_Now_Playing_Combiner__iPod__v1_2.o
+ .comment       0x8006e2cc       0x26 S2_Now_Playing_Combiner__ISERVER_IDOCV_DSW__v1_0.o
+ .comment       0x8006e2f2       0x26 S2_Daikin_F_C_Temp_Conversion_v2.o
+ .comment       0x8006e318       0x26 S2_Carrier_Infinity_Queue.o
+ .comment       0x8006e33e       0x26 S2_Carrier_Infinity_Processor_v2.o
+ .comment       0x8006e364       0x26 S2_Carrier_Infinity_Zone_Drive_v2_DT_.o
+ .comment       0x8006e38a       0x26 S2_Carrier_Infinity_Zone_Drive.o
+ .comment       0x8006e3b0       0x26 S2_Daikin_ITC_IO_V3_1.o
+ .comment       0x8006e3d6       0x26 S2_Daikin_ITC_Feedback_Splitter_V3_1.o
+ .comment       0x8006e3fc       0x26 S2_GE_Interlogix_Networx_Processor_v4_1_mod.o
+ .comment       0x8006e422       0x26 S2_GE_Interlogix_Networx_Password_v4_1.o
+ .comment       0x8006e448       0x26 S2_GE_Interlogix_Networx_Zone_Name_v4_1.o
+ .comment       0x8006e46e       0x26 S2_GE_Interlogix_Networx_View_Events_v4_1.o
+ .comment       0x8006e494       0x26 S2_GE_Interlogix_Networx_Set_User_v4_1.o
+ .comment       0x8006e4ba       0x26 S2_Lutron_Homeworks_Keypad_Emulation.o
+ .comment       0x8006e4e0       0x26 S2_LutronHWI_Lib.o
+ .comment       0x8006e506       0x26 S2_Lutron_Homeworks_Core_Module.o
+ .comment       0x8006e52c       0x26 S2_Lutron_Homeworks_Keypad_Monitor.o
+ .comment       0x8006e552       0x26 S2_analogsettings.o
+ .comment       0x8006e578       0x26 S2_Integra_DTR_Processor.o
+ .comment       0x8006e59e       0x26 S2_Integra_DTR_Feedback_v2.o
+ .comment       0x8006e5c4       0x26 S2_Denon_AVR3805_2805_Processor.o
+ .comment       0x8006e5ea       0x26 S2_Sharp_LC_52D64U_Processor_v1_0.o
+ .comment       0x8006e610       0x26 globals.o
+ .comment       0x8006e636       0x26 library.o

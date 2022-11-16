@@ -1,0 +1,39 @@
+<Device Model="PRO2">
+   <Network Type="Ethernet" Id="08">
+      <Device Model="CEN-IPOD,CEN-IDOC" DeviceId="03" Name="Covered Lanai iDock"/>
+      <Device Model="CEN-IPOD,CEN-IDOC" DeviceId="04" Name="Master Den iDock"/>
+      <Device Model="iPhone" DeviceId="0F" Name="Crestron Mobile"/>
+      <Device Model="TPMC-4X,TPMC-4XG," DeviceId="14" Name="Living RM RF"/>
+   </Network>
+   <Network Type="Cresnet" Id="09">
+      <Device Model="CslaveMC2E" DeviceId="03" Name="MC2E Remote Cresnet Processing"/>
+      <Device Model="CHV-TSTATA,CHV-THSTATA," DeviceId="05" Name="UPPER LIVING AREA"/>
+      <Device Model="TPS-6L," DeviceId="06" Name="Kitchen TP"/>
+      <Device Model="TPS-6L," DeviceId="07" Name="Master Entry TP"/>
+      <Device Model="TPS-6L," DeviceId="08" Name="Rec Suite TP"/>
+      <Device Model="CNRFGW" DeviceId="10" Name="CNRFGWA">
+         <Network Type="RF"/>
+      </Device>
+      <Device Model="CNRFGW" DeviceId="16" Name="CNRFGWA-418">
+         <Network Type="RF"/>
+      </Device>
+      <Device Model="CNRFGW" DeviceId="24" Name="CNRFGWA">
+         <Network Type="RF"/>
+      </Device>
+      <Device Model="CHV-TSTATA,CHV-THSTATA," DeviceId="2A" Name="Crestron CHV-THSTAT"/>
+      <Device Model="CNAMPX-16X60" DeviceId="3D" Name="CNAMPX-16x60 #1"/>
+      <Device Model="CNAMPX-16X60" DeviceId="3E" Name="CNAMPX-16x60 #2"/>
+      <Device Model="CNAMPX-16X60" DeviceId="3F" Name="CNAMPX-16x60 #3"/>
+      <Device Model="CNX-PAD8A" DeviceId="44" Name="CNX-PAD8A #1"/>
+      <Device Model="CNX-PAD8A" DeviceId="45" Name="CNX-PAD8A #2"/>
+      <Device Model="CNX-PAD8A" DeviceId="46" Name="CNX-PAD8A #3"/>
+      <Device Model="CEN-RFGW-EX" DeviceId="4F" Name="CEN-RFGW-EX (Cresnet) Rec Suite">
+         <Network Type="RF">
+            <Device Model="MTX-3" DeviceId="0A" Name="MTX-3 REC SUITE"/>
+         </Network>
+      </Device>
+      <Device Model="C2N-DBF12" DeviceId="71" Name="Garage KP"/>
+      <Device Model="C2N-DBF12" DeviceId="72" Name="Rec Bath KP"/>
+      <Device Model="C2N-DBF12" DeviceId="73" Name="Laundry KP"/>
+   </Network>
+</Device>

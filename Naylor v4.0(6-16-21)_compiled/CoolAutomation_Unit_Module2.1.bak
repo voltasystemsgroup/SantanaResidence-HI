@@ -1,0 +1,799 @@
+#SYMBOL_NAME "CoolAutomation_Unit_Module2.1"
+#HINT "CoolAutomation_Unit_Module2.1"
+#DEFAULT_VOLATILE
+#ENABLE_STACK_CHECKING
+#ENABLE_TRACE
+#PRINT_TO_TRACE
+
+STRING_INPUT LINE$[2];
+STRING_INPUT UNIT$[10];
+STRING_INPUT FromCoreModule$[10000];
+//
+DIGITAL_INPUT Power_On;
+DIGITAL_INPUT Power_Off;
+DIGITAL_INPUT Power_Toggle;
+//
+DIGITAL_INPUT Fan_Speed_Very_Low;
+DIGITAL_INPUT Fan_Speed_Low;
+DIGITAL_INPUT Fan_Speed_Medium;
+DIGITAL_INPUT Fan_Speed_High;
+DIGITAL_INPUT Fan_Speed_Top;
+DIGITAL_INPUT Fan_Speed_Auto;
+//
+DIGITAL_INPUT Mode_Cool;
+DIGITAL_INPUT Mode_Heat;
+DIGITAL_INPUT Mode_Fan;
+DIGITAL_INPUT Mode_Dry;
+DIGITAL_INPUT Mode_Auto;
+//
+DIGITAL_INPUT Temp_Up;
+DIGITAL_INPUT Temp_Dn;
+//
+ANALOG_INPUT aiSet_Temp;
+STRING_INPUT siSet_Temp$[5];
+//
+ANALOG_INPUT aiFeed_Temp;
+STRING_INPUT siFeed_Temp$[5];
+//
+DIGITAL_INPUT Louver_Auto;
+DIGITAL_INPUT Louver_Horizontal;
+DIGITAL_INPUT Louver_Vertical;
+DIGITAL_INPUT Louver_30_deg;
+DIGITAL_INPUT Louver_45_deg;
+DIGITAL_INPUT Louver_60_Deg;
+DIGITAL_INPUT Louver_Stop;
+//
+DIGITAL_INPUT ResetFilterSign;
+//
+DIGITAL_INPUT diDebug;
+STRING_OUTPUT ToCoreModule$;
+DIGITAL_OUTPUT Power_On_Fb;
+DIGITAL_OUTPUT Power_Off_Fb;
+//
+DIGITAL_OUTPUT Fan_Speed_Very_Low_Fb;
+DIGITAL_OUTPUT Fan_Speed_Low_Fb;
+DIGITAL_OUTPUT Fan_Speed_Med_Fb;
+DIGITAL_OUTPUT Fan_Speed_High_Fb;
+DIGITAL_OUTPUT Fan_Speed_Top_Fb;
+DIGITAL_OUTPUT Fan_Speed_Auto_Fb;
+//
+DIGITAL_OUTPUT Mode_Cool_Fb;
+DIGITAL_OUTPUT Mode_Heat_Fb;
+DIGITAL_OUTPUT Mode_Fan_Fb;
+DIGITAL_OUTPUT Mode_Dry_Fb;
+DIGITAL_OUTPUT Mode_Auto_Fb;
+//
+DIGITAL_OUTPUT Filter_Sign_Fb;
+//
+DIGITAL_OUTPUT Demand_Fb;
+//
+STRING_OUTPUT Set_temp_fb$;
+ANALOG_OUTPUT Set_temp_fb;
+//
+STRING_OUTPUT Room_temp_fb$;
+ANALOG_OUTPUT Room_temp_fb;
+//
+STRING_OUTPUT Indoor_Failure_Code$;
+//
+DIGITAL_OUTPUT Louver_Auto_Fb;
+DIGITAL_OUTPUT Louver_Horizontal_Fb;
+DIGITAL_OUTPUT Louver_Vertical_Fb;
+DIGITAL_OUTPUT Louver_30_deg_Fb;
+DIGITAL_OUTPUT Louver_45_deg_Fb;
+DIGITAL_OUTPUT Louver_60_Deg_Fb;
+DIGITAL_OUTPUT Louver_Stop_Fb;
+DIGITAL_OUTPUT Louver_Not_Supported_Fb;
+
+
+//////////////////////
+// VARIABLES
+//////////////////////
+
+string CompleteUnit[13];
+string InBuffer[10000];
+integer Set_Temp;
+integer FbDisabled;
+integer SystemInCelsius;
+integer Celsius_Array[25];
+integer iStartUp;
+//
+string SetTempHolder$[6];
+string RoomTempHolder$[6];
+string IndoorFailureCodeHolder$[12];
+//
+string FromModuleProcess[1000];
+integer DisableTime;
+      
+///////////////////////////////////////
+
+function fuFanFbOff(integer i)
+{
+	if(i <> 1)
+    	Fan_Speed_Very_Low_Fb = 0;
+	if(i <> 2)
+    	Fan_Speed_Low_Fb = 0;
+	if(i <> 3)
+    	Fan_Speed_Med_Fb = 0;
+	if(i <> 4)
+    	Fan_Speed_High_Fb = 0;
+	if(i <> 5)
+    	Fan_Speed_Top_Fb = 0;
+	if(i <> 6)
+    	Fan_Speed_Auto_Fb = 0;
+}	
+
+function fuModeFbOff(integer i)
+{
+	if(i <> 1)
+    	Mode_Cool_Fb = 0;
+	if(i <> 2)
+    	Mode_Heat_Fb = 0;
+	if(i <> 3)
+    	Mode_Fan_Fb = 0;
+	if(i <> 4)
+    	Mode_Dry_Fb = 0;
+	if(i <> 5)
+    	Mode_Auto_Fb = 0;
+}
+
+function fuLouverFbOff(integer i)
+{
+	if(i<>1)
+		Louver_Auto_Fb = 0;
+	if(i<>2)
+		Louver_Horizontal_Fb = 0;
+	if(i<>3)
+		Louver_Vertical_Fb = 0;
+	if(i<>4)
+		Louver_30_deg_Fb = 0;
+	if(i<>5)
+		Louver_45_deg_Fb = 0;
+	if(i<>6)
+		Louver_60_Deg_Fb = 0;
+	if(i<>7)
+		Louver_Stop_Fb = 0;	
+	if(i<>8)
+		Louver_Not_Supported_Fb = 0;
+		
+}		
+
+//////////////////////////////////////
+ 
+push Power_Toggle
+{
+	CancelAllWait();
+	FbDisabled = 1;
+	if(Power_Off_Fb)
+	{
+		ToCoreModule$ = "on " + CompleteUnit + "\n";
+        Power_Off_Fb = 0;
+		Power_On_Fb = 1;
+	}
+	else
+	{
+		ToCoreModule$ = "off " + CompleteUnit + "\n";
+		Power_On_Fb = 0;
+		Power_Off_Fb = 1;
+	}
+	wait (DisableTime,waitDisableTime1)
+	FbDisabled = 0;
+}
+
+push Power_On
+{
+	CancelAllWait();
+	FbDisabled = 1;
+	ToCoreModule$ = "on " + CompleteUnit + "\n";
+    Power_Off_Fb = 0;
+	Power_On_Fb = 1;
+	wait(DisableTime,waitDisableTime2)
+	FbDisabled = 0;
+}	
+
+push Power_Off
+{
+	CancelAllWait();
+	FbDisabled = 1;
+	ToCoreModule$ = "off " + CompleteUnit + "\n";
+	Power_On_Fb = 0;
+	Power_Off_Fb = 1;
+	wait (DisableTime,waitDisableTime3)
+	FbDisabled = 0;
+}
+
+push Fan_Speed_Very_Low
+{
+	CancelAllWait();
+	FbDisabled = 1;
+ 	ToCoreModule$ = "fspeed " + CompleteUnit + " v\n";
+	fuFanFbOff(1);
+	Fan_Speed_Very_Low_Fb = 1;
+	wait (DisableTime,waitDisableTime4)
+	FbDisabled = 0;
+}
+
+push Fan_Speed_Low
+{
+	CancelAllWait();
+	FbDisabled = 1;
+ 	ToCoreModule$ = "fspeed " + CompleteUnit + " l\n";
+	fuFanFbOff(2);
+	Fan_Speed_Low_Fb = 1;
+	wait (DisableTime,waitDisableTime5)
+	FbDisabled = 0;
+}
+
+push Fan_Speed_Medium
+{
+	CancelAllWait();
+	FbDisabled = 1;
+ 	ToCoreModule$ = "fspeed " + CompleteUnit + " m\n";
+	fuFanFbOff(3);
+	Fan_Speed_Med_Fb = 1;
+	wait (DisableTime,waitDisableTime6)
+	FbDisabled = 0;
+}
+
+push Fan_Speed_High
+{
+	CancelAllWait();
+	FbDisabled = 1;
+ 	ToCoreModule$ = "fspeed " + CompleteUnit + " h\n";
+	fuFanFbOff(4);
+	Fan_Speed_High_Fb = 1;
+	wait (DisableTime,waitDisableTime7)
+	FbDisabled = 0;
+}
+
+push Fan_Speed_Top
+{
+	CancelAllWait();
+	FbDisabled = 1;
+ 	ToCoreModule$ = "fspeed " + CompleteUnit + " t\n";
+	fuFanFbOff(5);
+	Fan_Speed_Top_Fb = 1;
+	wait (DisableTime,waitDisableTime8)
+	FbDisabled = 1;
+}
+
+push Fan_Speed_Auto
+{
+	CancelAllWait();
+	FbDisabled = 1;
+ 	ToCoreModule$ = "fspeed " + CompleteUnit + " a\n";
+	fuFanFbOff(6);
+	Fan_Speed_Auto_Fb = 1;
+	wait (DisableTime,waitDisableTime9)
+	FbDisabled = 0;
+}
+
+push Mode_Cool
+{
+	CancelAllWait();
+	FbDisabled = 1;
+	ToCoreModule$ = "cool " + CompleteUnit + "\n";
+	fuModeFbOff(1);
+	Mode_Cool_Fb = 1;
+	wait (DisableTime,waitDisableTime10)
+	FbDisabled = 0;
+}
+
+push Mode_Heat
+{
+	CancelAllWait();
+	FbDisabled = 1;
+	ToCoreModule$ = "heat " + CompleteUnit + "\n";
+	fuModeFbOff(2);
+	Mode_Heat_Fb = 1;
+	wait (DisableTime,waitDisableTime11)
+	FbDisabled = 0;
+}
+
+push Mode_Fan
+{
+	CancelAllWait();
+	FbDisabled = 1;
+	ToCoreModule$ = "fan " + CompleteUnit + "\n";
+	fuModeFbOff(3);
+	Mode_Fan_Fb = 1;
+	wait (DisableTime,waitDisableTime12)
+	FbDisabled = 0;
+}
+
+push Mode_Dry
+{
+	CancelAllWait();
+	FbDisabled = 1;
+	ToCoreModule$ = "dry " + CompleteUnit + "\n";
+	fuModeFbOff(4);
+	Mode_Dry_Fb = 1;
+	wait (DisableTime,waitDisableTime13)
+	FbDisabled = 0;
+}
+
+push Mode_Auto
+{
+	CancelAllWait();
+	FbDisabled = 1;
+	ToCoreModule$ = "auto " + CompleteUnit + "\n";
+	fuModeFbOff(5);
+	Mode_Auto_Fb = 1;
+	wait (DisableTime,waitDisableTime14)
+	FbDisabled = 0;
+}
+
+push Temp_Up
+{
+	CancelAllWait();
+	FbDisabled = 1;
+	Set_Temp = Set_Temp + 1;
+	//
+	Set_temp_fb$ = itoa(Set_Temp) + ".0";
+	Set_temp_fb =  Set_Temp;
+	//
+	wait(DisableTime,Temperture_Up)
+	{
+		ToCoreModule$ = "temp " + CompleteUnit + " " +itoa(Set_Temp) +".0\n";
+		FbDisabled = 0;
+	}
+}  
+
+push Temp_Dn
+{
+	CancelAllWait();
+	FbDisabled = 1;
+	Set_Temp = Set_Temp - 1;
+	//
+	Set_temp_fb$ = itoa(Set_Temp) + ".0";
+	Set_temp_fb =  Set_Temp;
+	//
+	wait(DisableTime,Temperture_Dn)
+	{
+		ToCoreModule$ = "temp " + CompleteUnit + " " +itoa(Set_Temp) +".0\n";
+		FbDisabled = 0;
+	}
+}
+
+change aiSet_Temp
+{
+	ToCoreModule$ = "temp " + CompleteUnit + " " +itoa(aiSet_Temp) +".0\n";
+}	
+
+change siSet_Temp$
+{
+    ToCoreModule$ = "temp " + CompleteUnit + " " +siSet_Temp$ +"\n";
+}	
+
+change aiFeed_Temp
+{
+	ToCoreModule$ = "feed " + CompleteUnit + " " +itoa(aiFeed_Temp) +".0\n";
+}	
+
+change siFeed_Temp$
+{
+    ToCoreModule$ = "feed " + CompleteUnit + " " +siFeed_Temp$ +"\n";
+}
+
+push Louver_Auto
+{
+	ToCoreModule$ = "swing " + CompleteUnit + " a\n";
+	fuLouverFbOff(1);
+	Louver_Auto_Fb = 1;
+}
+
+push Louver_Horizontal
+{
+	ToCoreModule$ = "swing " + CompleteUnit + " h\n";
+	fuLouverFbOff(2);
+	Louver_Horizontal_Fb = 1;
+}
+
+push Louver_Vertical
+{
+	ToCoreModule$ = "swing " + CompleteUnit + " v\n";
+	fuLouverFbOff(3);
+	Louver_Vertical_Fb = 1;
+}
+
+push Louver_30_deg
+{
+	ToCoreModule$ = "swing " + CompleteUnit + " 3\n";
+	fuLouverFbOff(4);
+	Louver_30_deg_Fb = 1;
+}
+  	
+push Louver_45_deg
+{
+	ToCoreModule$ = "swing " + CompleteUnit + " 4\n";
+	fuLouverFbOff(5);
+	Louver_45_deg_Fb = 1;
+}
+
+push Louver_60_Deg
+{
+	ToCoreModule$ = "swing " + CompleteUnit + " 6\n";
+	fuLouverFbOff(6);
+	Louver_60_Deg_Fb = 1;
+}
+
+push Louver_Stop
+{
+	ToCoreModule$ = "swing " + CompleteUnit + " -\n";
+	fuLouverFbOff(7);
+	Louver_Stop_Fb = 1;
+}
+
+push ResetFilterSign
+{
+	CancelAllWait();
+	FbDisabled = 1;
+    ToCoreModule$ = "filt " + CompleteUnit + "\n";
+	Filter_Sign_Fb = 0;
+	wait (DisableTime,waitDisableTime15)
+	FbDisabled = 0;
+}
+
+/////////////////////////////////////
+
+
+change FromCoreModule$
+{
+	integer iStartLocation;
+	integer iEndLocation;
+	string RoomTempCalc[5];
+	string SetTempCalc[5];
+	string Trash[25];
+	integer TempLength;
+	string CompleteUnitAndLouver[100];
+	string LouverPosition[1];
+	//
+	
+	if(iStartUp = 0)
+	{
+		DisableTime = 450;
+		if((len(LINE$)=2) && (len(UNIT$)<=4))
+		{
+			CompleteUnit = LINE$ + "." + UNIT$;
+			CompleteUnitAndLouver = LINE$ + "." + UNIT$ + ":Louver=";
+			ToCoreModule$ = CompleteUnit + ":AddressBroadcast\n";
+			iStartUp = 1;
+			if(diDEBUG)
+			{		
+				trace("Created Unit %s",CompleteUnit);
+				trace("Created Louver %s",CompleteUnitAndLouver);
+			}
+		}
+		else
+		{
+			FbDisabled = 1;
+			iStartUp = 1;
+			trace("Error Creating Unit %s:%s, Not a legal address",LINE$,UNIT$);
+			trace("Feedback for this unit is disabled");
+		}	
+	}
+	///////////////////////
+	///////////////////////
+	if((find(CompleteUnit,FromCoreModule$)) && (FbDisabled = 0) && (len(FromCoreModule$)>=17))
+	{
+		ClearBuffer(InBuffer);
+		FromModuleProcess = FromCoreModule$;
+		iStartLocation = find(CompleteUnit,FromModuleProcess);
+		iEndLocation = find("\n",FromModuleProcess,iStartLocation);
+		if(iEndLocation > iStartLocation)
+		{
+			
+			InBuffer = mid(FromModuleProcess,iStartLocation,iEndLocation-iStartLocation+2);
+			if(diDEBUG)
+			{
+				trace("start location is %d, end location is %d",iStartLocation,iEndLocation);
+				trace("buffer=%s",InBuffer);
+				trace("length=%d",len(InBuffer));
+			}
+		}		
+		//	
+		if(len(InBuffer)=17)
+		{		
+			LouverPosition = mid(InBuffer,15,1);
+			if(LouverPosition = "a")
+			{
+				fuLouverFbOff(1);
+				Louver_Auto_Fb = 1;
+			}
+			else if(LouverPosition = "h")
+			{
+				fuLouverFbOff(2);
+				Louver_Horizontal_Fb = 1;
+			}
+			else if(LouverPosition = "v")
+			{
+				fuLouverFbOff(3);
+				Louver_Vertical_Fb = 1;
+			}
+			else if(LouverPosition = "3")
+			{
+				fuLouverFbOff(4);
+				Louver_30_deg_Fb = 1;
+			}
+			else if(LouverPosition = "4")
+			{
+				fuLouverFbOff(5);
+				Louver_45_deg_Fb = 1;
+			}
+			else if(LouverPosition = "6")
+			{
+				fuLouverFbOff(6);
+				Louver_60_Deg_Fb = 1;
+			}
+			else if(LouverPosition = "-")
+			{
+				fuLouverFbOff(7);
+				Louver_Stop_Fb = 1;
+			}
+			else if(LouverPosition = "0")
+			{
+				fuLouverFbOff(8);
+				Louver_Not_Supported_Fb = 1;
+			}			
+		}
+		else if(find(CompleteUnit,InBuffer))
+	    {
+			if(len(InBuffer) = 43) // celsius
+			{
+				SystemInCelsius = 1;
+	        	if(mid(InBuffer,8,3) = "ON ")
+				{
+					Power_Off_Fb = 0;
+					Power_On_Fb = 1;
+				}
+				else if(mid(InBuffer,8,3) = "OFF")
+				{
+					Power_On_Fb = 0;
+					Power_Off_Fb = 1;
+				}
+				//
+				if(mid(InBuffer,24,4) = "VLow")
+				{
+					fuFanFbOff(1);
+	                Fan_Speed_Very_Low_Fb = 1;
+				}
+	               else if(mid(InBuffer,24,4) = "Low ")
+				{
+					fuFanFbOff(2);
+	                Fan_Speed_Low_Fb = 1;
+				}
+	               else if(mid(InBuffer,24,4) = "Med ")
+				{
+					fuFanFbOff(3);
+	                Fan_Speed_Med_Fb = 1;
+				}
+	               else if(mid(InBuffer,24,4) = "High")
+				{
+					fuFanFbOff(4);
+	                Fan_Speed_High_Fb = 1;
+				}
+	               else if(mid(InBuffer,24,4) = "Top ")
+				{
+					fuFanFbOff(5);
+	                Fan_Speed_Top_Fb = 1;
+				}
+	               else if(mid(InBuffer,24,4) = "Auto")
+				{
+					fuFanFbOff(6);
+	                Fan_Speed_Auto_Fb = 1;
+				}
+	               //
+				if(mid(InBuffer,29,4) = "Cool")
+				{
+					fuModeFbOff(1);
+	                Mode_Cool_Fb = 1;
+				}
+	               else if(mid(InBuffer,29,4) = "Heat")
+				{
+					fuModeFbOff(2);
+	                Mode_Heat_Fb = 1;
+				}
+	               else if(mid(InBuffer,29,4) = "Fan ")
+				{
+					fuModeFbOff(3);
+	                Mode_Fan_Fb = 1;
+				}
+	               else if(mid(InBuffer,29,4) = "Dry ")
+				{
+					fuModeFbOff(4);
+	                Mode_Dry_Fb = 1;
+				}
+	               else if(mid(InBuffer,29,4) = "Auto")
+				{
+					fuModeFbOff(5);
+	                Mode_Auto_Fb = 1;
+				}
+				//
+	            if(mid(InBuffer,39,1) = "-")
+				{
+					Filter_Sign_Fb = 0;
+	            }
+				else 
+				{
+					Filter_Sign_Fb = 1;
+	            }
+				//
+	            if(mid(InBuffer,41,1) = "0")
+				{
+					Demand_Fb = 0;
+	            }
+				else 
+				{
+					Demand_Fb = 1;
+	            }
+				//
+				// remove leading zeros
+				SetTempCalc = mid(InBuffer,12,4);
+				if(mid(SetTempCalc,1,1) = "0")
+					Trash = remove("0",SetTempCalc,1);
+				//
+				TempLength = len(SetTempCalc);
+				if(SetTempCalc <> SetTempHolder$) // if there was a change in temperture
+				{
+					SetTempHolder$ = SetTempCalc;			
+					Set_temp_fb$ = SetTempCalc;
+					if(atoi(mid(SetTempCalc,TempLength,1)) > 5) // round up
+	                	Set_temp_fb = atoi(SetTempCalc) + 1;
+					else
+						Set_temp_fb = atoi(SetTempCalc);
+					Set_Temp = Set_temp_fb;
+				}
+				//
+				// remove leading zeros
+				RoomTempCalc = mid(InBuffer,18,4);
+				if(mid(RoomTempCalc,1,1) = "0")
+					Trash = remove("0",RoomTempCalc,1);
+				//
+				if(RoomTempCalc <> RoomTempHolder$)
+				{
+					RoomTempHolder$ = RoomTempCalc;
+	                Room_temp_fb$ = RoomTempCalc;
+	                Room_temp_fb = atoi(mid(InBuffer,18,4));
+				}
+				//
+				if(mid(InBuffer,34,4) <> IndoorFailureCodeHolder$)
+				{ 
+	               	Indoor_Failure_Code$ = mid(InBuffer,34,4);
+					IndoorFailureCodeHolder$ = mid(InBuffer,34,4);
+				}			
+			}
+	        else if(len(InBuffer) = 45) // Fareheit
+			{
+				SystemInCelsius = 0;
+	        	if(mid(InBuffer,8,3) = "ON ")
+				{
+					Power_Off_Fb = 0;
+					Power_On_Fb = 1;
+				}
+				else if(mid(InBuffer,8,3) = "OFF")
+				{
+					Power_On_Fb = 0;
+					Power_Off_Fb = 1;
+				}
+				//
+				if(mid(InBuffer,26,4) = "VLow")
+				{
+					fuFanFbOff(1);
+	                Fan_Speed_Very_Low_Fb = 1;
+				}
+	               else if(mid(InBuffer,26,4) = "Low ")
+				{
+					fuFanFbOff(2);
+	                Fan_Speed_Low_Fb = 1;
+				}
+	               else if(mid(InBuffer,26,4) = "Med ")
+				{
+					fuFanFbOff(3);
+	                Fan_Speed_Med_Fb = 1;
+				}
+	               else if(mid(InBuffer,26,4) = "High")
+				{
+					fuFanFbOff(4);
+	                Fan_Speed_High_Fb = 1;
+				}
+	               else if(mid(InBuffer,26,4) = "Top ")
+				{
+					fuFanFbOff(5);
+	                Fan_Speed_Top_Fb = 1;
+				}
+	               else if(mid(InBuffer,26,4) = "Auto")
+				{
+					fuFanFbOff(6);
+	                Fan_Speed_Auto_Fb = 1;
+				}
+	               //
+				if(mid(InBuffer,31,4) = "Cool")
+				{
+					fuModeFbOff(1);
+	                Mode_Cool_Fb = 1;
+				}
+	               else if(mid(InBuffer,31,4) = "Heat")
+				{
+					fuModeFbOff(2);
+	                Mode_Heat_Fb = 1;
+				}
+	               else if(mid(InBuffer,31,4) = "Fan ")
+				{
+					fuModeFbOff(3);
+	                Mode_Fan_Fb = 1;
+				}
+	               else if(mid(InBuffer,31,4) = "Dry ")
+				{
+					fuModeFbOff(4);
+	                Mode_Dry_Fb = 1;
+				}
+	               else if(mid(InBuffer,31,4) = "Auto")
+				{
+					fuModeFbOff(5);
+	                Mode_Auto_Fb = 1;
+				}
+				//
+	            if(mid(InBuffer,41,1) = "-")
+				{
+					Filter_Sign_Fb = 0;
+	            }
+				else 
+				{
+					Filter_Sign_Fb = 1;
+	            }
+				//
+	            if(mid(InBuffer,43,1) = "0")
+				{
+					Demand_Fb = 0;
+	            }
+				else 
+				{
+					Demand_Fb = 1;
+	            }
+	            //
+				// remove leading zeros
+				SetTempCalc = mid(InBuffer,12,5);
+				if(mid(SetTempCalc,1,1) = "0")
+					Trash = remove("0",SetTempCalc,1);
+				//
+				TempLength = len(SetTempCalc);
+				if(SetTempCalc <> SetTempHolder$)
+				{
+					SetTempHolder$ = SetTempCalc;
+					Set_temp_fb$ = SetTempCalc;
+					if(atoi(mid(SetTempCalc,TempLength,1)) > 5) // round up
+	                	Set_temp_fb = atoi(SetTempCalc) + 1;
+					else
+						Set_temp_fb = atoi(SetTempCalc);
+					Set_Temp = Set_temp_fb;
+				}
+				//
+				// remove leading zeros
+				RoomTempCalc = mid(InBuffer,19,5);
+				if(mid(RoomTempCalc,1,1) = "0")
+					Trash = remove("0",RoomTempCalc,1);
+				if(mid(RoomTempCalc,1,1) = "0")
+					Trash = remove("0",RoomTempCalc,1);
+				//
+	            if(RoomTempCalc <> RoomTempHolder$)
+				{
+					RoomTempHolder$ = RoomTempCalc;
+	                Room_temp_fb$ = RoomTempCalc;
+	                Room_temp_fb = atoi(mid(InBuffer,19,5));
+				}
+				//
+				if(mid(InBuffer,36,4) <> IndoorFailureCodeHolder$)
+				{
+	               	Indoor_Failure_Code$ = mid(InBuffer,36,4);
+					IndoorFailureCodeHolder$ = mid(InBuffer,36,4);
+				}		
+			}
+			else
+			{
+				if(diDEBUG)
+				{
+					trace("Unrecognized response from LS2!");
+				}
+			}
+		}			
+	}
+}
